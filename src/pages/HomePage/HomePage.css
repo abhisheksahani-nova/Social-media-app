@@ -1,0 +1,15 @@
+.small-gap {
+  gap: 0.5rem;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
+.justify-cont-right {
+  justify-content: right;
+}

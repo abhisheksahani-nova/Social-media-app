@@ -14,7 +14,7 @@ function Post() {
           <div>
             <h5>Tanay Pratap</h5>
             <small>@tanaypratap</small>
-            <small>. 1m</small>
+            <small>. &nbsp;1m</small>
           </div>
           <i class="fa-solid fa-ellipsis"></i>
         </div>

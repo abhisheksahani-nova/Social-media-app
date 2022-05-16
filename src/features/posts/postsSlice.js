@@ -5,27 +5,20 @@ const initialState = {
   posts: [],
 };
 
-// const createNewPost = async (post, token) => {
-//   try {
-//     const response = await axios.post(
-//       "/api/posts",
-//       { post },
-//       {
-//         headers: { authorization: token },
-//       }
-//     );
-//     console.log(response);
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const getPosts = createAsyncThunk("post/getPosts", async () => {
+  try {
+    const response = await axios.get("/api/posts");
+    console.log("response", response);
+    return response.data.posts;
+  } catch (err) {
+    console.log(error);
+  }
+});
 
-export const asyncCreateNewPost = createAsyncThunk(
+export const createNewPost = createAsyncThunk(
   "post/createNewPost",
   async (data, thunkAPI) => {
     const { postData, token } = data;
-    console.log(data, token);
 
     try {
       const response = await axios.post(
@@ -36,7 +29,45 @@ export const asyncCreateNewPost = createAsyncThunk(
         }
       );
       console.log("response", response);
-      return response.data;
+      return response.data.posts;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async (data, thunkAPI) => {
+    const { token } = data;
+
+    try {
+      const response = await axios.delete(`/api/posts/${id}`, {
+        headers: { authorization: token },
+      });
+      console.log("response", response);
+      return response.data.posts;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const editPost = createAsyncThunk(
+  "post/editPost",
+  async (data, thunkAPI) => {
+    const { postData, token } = data;
+
+    try {
+      const response = await axios.post(
+        `/api/posts/edit/${id}`,
+        { postData },
+        {
+          headers: { authorization: token },
+        }
+      );
+      console.log("response", response);
+      return response.data.posts;
     } catch (err) {
       console.log(error);
     }
@@ -44,14 +75,23 @@ export const asyncCreateNewPost = createAsyncThunk(
 );
 
 const postSlice = createSlice({
-  name: "posts",
+  name: "post",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(asyncCreateNewPost.fulfilled, (state, action) => {
-      console.log(action);
-      state.posts.push(action.payload);
-    });
+    builder
+      .addCase(createNewPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      })
+      .addCase(getPosts.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      })
+      .addCase(editPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      });
   },
 });
 

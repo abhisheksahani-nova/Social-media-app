@@ -3,7 +3,7 @@ import "./HomePage.css";
 import { Navbar, Sidebar, Post, FollowContainer } from "../../components/index";
 import CreatePostBox from "./CreatePostBox/CreatePostBox";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncCreateNewPost } from "../../features/posts/postsSlice";
+import { createNewPost } from "../../features/posts/postsSlice";
 
 function HomePage() {
   const posts = useSelector((state) => state.posts);
@@ -19,7 +19,7 @@ function HomePage() {
 
   useEffect(() => {
     if (token) {
-      dispatch(asyncCreateNewPost({ postData, token }));
+      dispatch(createNewPost({ postData, token }));
     }
   }, [token]);
 

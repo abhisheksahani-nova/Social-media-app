@@ -6,7 +6,7 @@ function Signup() {
   const [userSignupData, setUserSignupData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
@@ -18,7 +18,7 @@ function Signup() {
 
   function handleSignup() {
     const userData = {
-      email: userSignupData.email,
+      username: userSignupData.username,
       password: userSignupData.password,
     };
 
@@ -30,7 +30,7 @@ function Signup() {
           "username",
           `${userSignupData.firstName} ${userSignupData.lastName}`
         );
-        localStorage.setItem("email", userSignupData.email);
+        localStorage.setItem("username", userSignupData.username);
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -82,15 +82,15 @@ function Signup() {
 
           <div className="inp-container mb-1">
             <label className="inp-label d-block inp-label-required login_inp_label_resize inherit-clr">
-              Email address
+              Username
             </label>
             <input
               className={`inp login_inp_resize ecommerce-login-inp`}
               id="inp-email"
-              placeholder="Enter your email address"
-              value={userSignupData.email}
+              placeholder="Enter your username"
+              value={userSignupData.username}
               onChange={(e) =>
-                setUserSignupData({ ...userSignupData, email: e.target.value })
+                setUserSignupData({ ...userSignupData, username: e.target.value })
               }
             />
 

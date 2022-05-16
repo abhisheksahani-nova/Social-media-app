@@ -6,20 +6,17 @@ function Sidebar() {
     <div className="videolib-drawer-container viewport-height-100">
       <ul className="videolib-list">
         <li className="videolib-list-item sidebar-list">
-          <i className="fa-solid fa-lightbulb videolib-drawer-icon"></i> Notes
+          <i className="fa-solid fa-house videolib-drawer-icon"></i> Home
         </li>
         <li className="videolib-list-item sidebar-list">
-          <i className="fa-solid fa-tag videolib-drawer-icon"></i> Labels
+          <i className="fa-solid fa-compass videolib-drawer-icon"></i> Explore
         </li>
         <li className="videolib-list-item sidebar-list">
-          <i className="fa-solid fa-box-archive videolib-drawer-icon"></i> Archive
+          <i className="fa-solid fa-bookmark videolib-drawer-icon"></i>{" "}
+          Bookmarks
         </li>
         <li className="videolib-list-item sidebar-list">
-          <i className="fa-solid fa-trash-can videolib-drawer-icon"></i> Trash
-        </li>
-        <li className="videolib-list-item sidebar-list">
-          <i className="fa-solid fa-pencil videolib-drawer-icon"></i>
-          Edit labels
+          <i className="fa-solid fa-user videolib-drawer-icon"></i> Profile
         </li>
       </ul>
     </div>

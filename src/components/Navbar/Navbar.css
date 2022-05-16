@@ -2,3 +2,16 @@
   background-color: white;
   height: 4rem;
 }
+
+.nav-custom-sty {
+  color: var(--custom-sec-clr);
+  font-size: 1rem;
+}
+
+.font-clr {
+  color: var(--custom-sec-clr);
+}
+
+.btn-custom-sty {
+  background-color: var(--custom-sec-clr);
+}

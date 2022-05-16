@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="nav-bar navbar-container mb-0">
       <div className="nav-innerContainer font-clr">
-        <h2 className="nav-heading mr-4 font-resize">Social Cloud.</h2>
+        <h2 className="nav-heading mr-4 nav-custom-sty">Social Cloud.</h2>
       </div>
 
       <div className="nav-innerContainer font-clr width-auto">
@@ -18,9 +18,9 @@ function Navbar() {
       <div className="nav-innerContainer nav-icon-container width-reset inherit-clr mr-1">
         <div className="flex-col-center">
           <a className="font-clr" href="/">
-            <i className="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-moon"></i>
           </a>
-          <small>Wishlist</small>
+          <small>Theme</small>
         </div>
 
         <div className="flex-col-center">
@@ -31,10 +31,7 @@ function Navbar() {
         </div>
 
         <div className="flex-col-center">
-          <a className="font-clr nav-icon" href="/">
-            <i className="fa-solid fa-cart-shopping"></i>
-          </a>
-          <small>Cart</small>
+          <button className="btn btn-custom-sty">Login</button>
         </div>
       </div>
     </nav>

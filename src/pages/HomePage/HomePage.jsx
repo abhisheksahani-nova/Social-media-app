@@ -7,7 +7,7 @@ function HomePage() {
   return (
     <div>
       <Navbar />
-      <section class="d-flex gap-4">
+      <section className="d-flex gap-4">
         <Sidebar />
         <div>
           <CreatePostBox />

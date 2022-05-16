@@ -93,3 +93,8 @@
 .justify-cont-right {
   justify-content: right;
 }
+
+.btn-custom-small {
+  padding: 0.5rem 1rem;
+  outline: none;
+}

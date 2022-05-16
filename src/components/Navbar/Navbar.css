@@ -1,6 +1,7 @@
 .navbar-container {
-  background-color: white;
+  background-color: var(--light-bg-clr);
   height: 4rem;
+  border-bottom: 1px solid var(--custom-pri-clr);
 }
 
 .nav-custom-sty {

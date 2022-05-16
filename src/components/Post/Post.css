@@ -1,0 +1,14 @@
+.user-post-container {
+  width: 35rem;
+  background-color: var(--light-bg-clr);
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.user-post-footer-icon {
+  font-size: 0.92rem;
+}

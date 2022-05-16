@@ -1,0 +1,7 @@
+:root {
+  --social-bg-clr: #f3f2ef;
+}
+
+body {
+  background-color: var(--social-bg-clr);
+}

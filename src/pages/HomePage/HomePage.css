@@ -1,0 +1,27 @@
+.small-gap {
+  gap: 0.5rem;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
+.justify-cont-right {
+  justify-content: right;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.f-weight-500 {
+  font-weight: 500;
+}
+
+.font-size-small {
+  font-size: 0.7rem;
+}

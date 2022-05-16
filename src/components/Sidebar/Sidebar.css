@@ -1,0 +1,62 @@
+.videolib-drawer-container {
+  width: 18%;
+  background-color: var(--light-bg-clr);
+}
+
+.viewport-height-100 {
+  height: 100vh;
+}
+
+.video-drawer-header-container {
+  height: 11%;
+  padding: 1rem 0 0 1rem;
+}
+
+.videolib-drawer-title {
+  margin: 0;
+}
+
+.videolib-drawer-subtitle {
+  margin: 0;
+}
+
+.videolib-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0.2rem 0 0.2rem;
+}
+
+.videolib-list-item {
+  margin: 1.5rem 1.3rem;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  letter-spacing: 0.025rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--gray-shade3);
+}
+
+.videolib-drawer-icon {
+  font-size: 1.3rem;
+  margin-right: 2rem;
+}
+
+.videolib-list-container {
+  border-bottom: 1px solid var(--custom-pri-clr);
+}
+
+.videolib-drawer-label {
+  margin: 0;
+  padding: 1rem 0 0 1rem;
+}
+
+.sidebar-list {
+  padding: 1rem 1rem 1rem 2rem;
+  margin: 0;
+}
+
+.sidebar-list:hover {
+  background-color: var(--custom-pri-clr);
+  border-radius: 0 20px 20px 0;
+}

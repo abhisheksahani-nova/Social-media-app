@@ -1,0 +1,23 @@
+.follow-unfollow-container {
+  background-color: var(--light-bg-clr);
+  width: 22rem;
+  height: max-content;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.border-none {
+  border: none;
+}
+
+.follow-list-container {
+  width: 100%;
+}
+
+.justify-cont-between {
+  justify-content: space-between;
+}
+
+.follow-btn-link {
+  color: var(--info-dark-clr);
+}

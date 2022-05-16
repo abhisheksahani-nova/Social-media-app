@@ -1,0 +1,100 @@
+.create-note-container {
+  width: 38rem;
+  border: 1px solid var(--gray-shade5);
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--light-bg-clr);
+}
+
+.title-inp-container {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-title-inp {
+  width: 95%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.create-note-textarea {
+  width: 95%;
+  resize: none;
+  height: max-content;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.note-footer {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-note-footer-icons-container {
+  width: 6rem;
+}
+
+.note-priority-dropdown {
+  border: 1px solid var(--gray-shade5);
+  outline: none;
+  width: 4.5rem;
+  border-radius: 3px;
+}
+
+.note-label-priority-container {
+  width: 6rem;
+}
+
+.create-note-btn-container {
+  width: 8.5rem;
+}
+
+.pri-outline-btn {
+  background-color: var(--light-clr);
+  color: var(--note-pri-clr);
+  border: 1px solid var(--note-pri-clr);
+}
+
+.pri-outline-btn:hover {
+  background-color: var(--note-pri-clr);
+  color: var(--light-clr);
+}
+
+.btn-small-size {
+  padding: 0.5rem 0.7rem;
+}
+
+.pri-btn-style {
+  background-color: var(--note-pri-clr);
+  padding: 0.7rem;
+  outline: none;
+}
+
+.create-post-input {
+  border: 1px solid var(--gray-shade5);
+  border-radius: 21px;
+}
+
+.small-gap {
+  gap: 0.5rem;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
+.justify-cont-right {
+  justify-content: right;
+}
+
+.btn-custom-small {
+  padding: 0.5rem 1rem;
+  outline: none;
+}

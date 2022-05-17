@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Post.css";
 import { PostDropdown } from "../index";
 
-function Post({ post }) {
+function Post({ post, setIsPostEdit, setEditPostId }) {
   const { _id, content, username, name } = post;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -13,7 +13,14 @@ function Post({ post }) {
         src="https://semantic-ui.com/images/avatar2/large/kristy.png"
         alt="avatar"
       />
-      {isDropdownOpen && <PostDropdown setIsDropdownOpen={setIsDropdownOpen} id={_id} />}
+      {isDropdownOpen && (
+        <PostDropdown
+          setIsDropdownOpen={setIsDropdownOpen}
+          id={_id}
+          setIsPostEdit={setIsPostEdit}
+          setEditPostId={setEditPostId}
+        />
+      )}
       <div className="width-100">
         <div className="d-flex justify-cont-between mb-1">
           <div>

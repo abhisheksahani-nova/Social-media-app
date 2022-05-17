@@ -8,7 +8,6 @@ const initialState = {
 export const getPosts = createAsyncThunk("post/getPosts", async () => {
   try {
     const response = await axios.get("/api/posts");
-    console.log("response", response);
     return response.data.posts;
   } catch (err) {
     console.log(error);
@@ -17,7 +16,7 @@ export const getPosts = createAsyncThunk("post/getPosts", async () => {
 
 export const createNewPost = createAsyncThunk(
   "post/createNewPost",
-  async (data, thunkAPI) => {
+  async (data) => {
     const { postData, token } = data;
 
     try {
@@ -28,7 +27,6 @@ export const createNewPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log("response", response);
       return response.data.posts;
     } catch (err) {
       console.log(error);
@@ -36,44 +34,36 @@ export const createNewPost = createAsyncThunk(
   }
 );
 
-export const deletePost = createAsyncThunk(
-  "post/deletePost",
-  async (data) => {
-    const { id ,token } = data;
+export const deletePost = createAsyncThunk("post/deletePost", async (data) => {
+  const { id, token } = data;
 
-    try {
-      const response = await axios.delete(`/api/posts/${id}`, {
+  try {
+    const response = await axios.delete(`/api/posts/${id}`, {
+      headers: { authorization: token },
+    });
+    return response.data.posts;
+  } catch (err) {
+    console.log(error);
+    return err;
+  }
+});
+
+export const editPost = createAsyncThunk("post/editPost", async (data) => {
+  const { postData, editPostId, token } = data;
+
+  try {
+    const response = await axios.post(
+      `/api/posts/edit/${editPostId}`,
+      { postData },
+      {
         headers: { authorization: token },
-      });
-      console.log("response", response);
-      return response.data.posts;
-    } catch (err) {
-      console.log(error);
-      return err;
-    }
+      }
+    );
+    return response.data.posts;
+  } catch (err) {
+    console.log(error);
   }
-);
-
-export const editPost = createAsyncThunk(
-  "post/editPost",
-  async (data, thunkAPI) => {
-    const { postData, token } = data;
-
-    try {
-      const response = await axios.post(
-        `/api/posts/edit/${id}`,
-        { postData },
-        {
-          headers: { authorization: token },
-        }
-      );
-      console.log("response", response);
-      return response.data.posts;
-    } catch (err) {
-      console.log(error);
-    }
-  }
-);
+});
 
 const postSlice = createSlice({
   name: "post",

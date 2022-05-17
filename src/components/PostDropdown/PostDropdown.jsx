@@ -1,14 +1,20 @@
 import React from "react";
 import "./PostDropdown.css";
-import { deletePost } from "../../features/posts/postsSlice";
+import { deletePost } from "../../features/posts/postsSlice.js";
 import { useDispatch } from "react-redux";
 
-function PostDropdown({ setIsDropdownOpen, id }) {
+function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
   function handleDeletePost(id, token) {
     dispatch(deletePost({ id, token }));
+    setIsDropdownOpen((prev) => !prev);
+  }
+
+  function handleEditPost(id) {
+    setIsPostEdit((prev) => !prev);
+    setEditPostId(id);
     setIsDropdownOpen((prev) => !prev);
   }
 
@@ -28,7 +34,9 @@ function PostDropdown({ setIsDropdownOpen, id }) {
         </li>
 
         <li className="d-flex playlist-li-item mt-small cursor-p j-space-between">
-          <small className="break-word">Edit post</small>
+          <small className="break-word" onClick={() => handleEditPost(id)}>
+            Edit post
+          </small>
           <i class="fa-solid fa-pencil post-dropdown-icon"></i>
         </li>
 

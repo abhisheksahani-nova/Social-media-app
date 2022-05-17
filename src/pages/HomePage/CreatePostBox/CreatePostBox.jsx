@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreatePostBox.css";
 import TextareaAutosize from "react-textarea-autosize";
-import { createNewPost } from "../../../features/posts/postsSlice";
-import { useDispatch } from "react-redux";
+import { createNewPost, editPost } from "../../../features/posts/postsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-function CreatePostBox() {
+function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [postData, setPostData] = useState({ content: "" });
+
+  const postObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
-  function handleCreateNewPost(postData, token) {
-    dispatch(createNewPost({ postData, token }));
+  useEffect(() => {
+    if (isPostEdit) {
+      const postToEdit = postObj.posts.filter((post) => post._id == editPostId);
+      setPostData({ ...postData, content: postToEdit[0].content });
+    }
+  }, [isPostEdit]);
+
+  function handleCreatePostAndEdit(postData, editPostId, token) {
+    if (isPostEdit) {
+      dispatch(editPost({ postData, editPostId, token }));
+      setIsPostEdit((prev) => !prev);
+    } else {
+      dispatch(createNewPost({ postData, token }));
+    }
+
     setPostData({ content: "" });
   }
 
@@ -42,7 +57,9 @@ function CreatePostBox() {
           <div className="d-flex note-footer justify-cont-right">
             <button
               className="btn btn-custom-sty btn-custom-small"
-              onClick={() => handleCreateNewPost(postData, token)}
+              onClick={() =>
+                handleCreatePostAndEdit(postData, editPostId, token)
+              }
             >
               Post
             </button>

@@ -1,0 +1,94 @@
+.playlist-dropdown-container {
+  display: block;
+  position: fixed;
+  width: fit-content;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.playlist-stacklist {
+  width: fit-content;
+  z-index: 2;
+  background-color: var(--light-clr);
+  color: var(--gray-shade3);
+  display: grid;
+  position: fixed;
+  width: 9rem;
+}
+
+.add-new-label-dropdown {
+  top: 35%;
+  right: 45%;
+}
+
+.select-label-dropdown {
+  top: 16.5rem;
+  left: 35.8rem;
+  box-shadow: 0 0 6px var(--gray-shade5);
+}
+
+.post-dropdown-icon {
+  font-size: 0.8rem;
+}
+
+.playlist-li-item {
+  padding: 0.4rem 0;
+  border: none;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--gray-shade5);
+}
+
+.mt-small {
+  margin-top: 0.5rem;
+}
+
+.playlist-dropdown-inp {
+  padding: 0.4rem;
+  border: none;
+  border-bottom: 1px solid var(--gray-shade5);
+  outline: none;
+}
+
+.cursor-p {
+  cursor: pointer;
+}
+
+.j-content-right {
+  justify-content: right;
+}
+
+.j-space-between {
+  justify-content: space-between;
+}
+
+.playlist-create-btn-resize {
+  padding: 0.3rem 0.7rem;
+}
+
+.playlist-add-icon {
+  margin-right: 5px;
+}
+
+.p-small {
+  padding: 0.5rem;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.select-label-fontsize {
+  font-size: 0.8rem;
+}
+
+.break-word {
+  word-break: break-word;
+}

@@ -16,7 +16,7 @@ function HomePage() {
 
   return (
     <div>
-      {console.log(postsObj.posts)}
+      {console.log(postsObj.posts, "homepage")}
       <Navbar />
       <section className="d-flex gap-4">
         <Sidebar />

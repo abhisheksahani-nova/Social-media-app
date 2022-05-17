@@ -38,8 +38,8 @@ export const createNewPost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   "post/deletePost",
-  async (data, thunkAPI) => {
-    const { token } = data;
+  async (data) => {
+    const { id ,token } = data;
 
     try {
       const response = await axios.delete(`/api/posts/${id}`, {
@@ -49,6 +49,7 @@ export const deletePost = createAsyncThunk(
       return response.data.posts;
     } catch (err) {
       console.log(error);
+      return err;
     }
   }
 );
@@ -81,16 +82,16 @@ const postSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createNewPost.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
+        state.posts = action.payload;
       })
       .addCase(getPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
       })
       .addCase(deletePost.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
+        state.posts = action.payload;
       })
       .addCase(editPost.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
+        state.posts = action.payload;
       });
   },
 });

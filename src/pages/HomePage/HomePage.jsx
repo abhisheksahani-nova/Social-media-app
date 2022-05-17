@@ -3,34 +3,30 @@ import "./HomePage.css";
 import { Navbar, Sidebar, Post, FollowContainer } from "../../components/index";
 import CreatePostBox from "./CreatePostBox/CreatePostBox";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewPost } from "../../features/posts/postsSlice";
+import { getPosts, createNewPost } from "../../features/posts/postsSlice";
 
 function HomePage() {
-  const posts = useSelector((state) => state.posts);
+  const postsObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
- 
-    var postData= {
-      content:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. ",
-    }
-  
-
   useEffect(() => {
-    if (token) {
-      dispatch(createNewPost({ postData, token }));
-    }
-  }, [token]);
+    dispatch(getPosts());
+  }, []);
 
   return (
     <div>
+      {console.log(postsObj.posts)}
       <Navbar />
       <section className="d-flex gap-4">
         <Sidebar />
         <div>
           <CreatePostBox />
-          <Post />
+          <div className="d-flex flex-direction gap-1 ">
+            {postsObj.posts.map((post) => {
+              return <Post key={post._id} post={post} />;
+            })}
+          </div>
         </div>
         <FollowContainer />
       </section>

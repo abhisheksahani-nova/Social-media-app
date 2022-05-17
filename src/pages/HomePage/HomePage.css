@@ -18,6 +18,10 @@
   align-items: flex-start;
 }
 
+.flex-direction {
+  flex-direction: column;
+}
+
 .f-weight-500 {
   font-weight: 500;
 }

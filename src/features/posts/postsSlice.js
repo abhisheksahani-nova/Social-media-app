@@ -84,7 +84,7 @@ const postSlice = createSlice({
         state.posts.push(action.payload);
       })
       .addCase(getPosts.fulfilled, (state, action) => {
-        state.posts.push(action.payload);
+        state.posts = action.payload;
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         state.posts.push(action.payload);

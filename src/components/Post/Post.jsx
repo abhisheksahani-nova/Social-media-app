@@ -14,7 +14,7 @@ function Post({ post }) {
         alt="avatar"
       />
       {isDropdownOpen && <PostDropdown setIsDropdownOpen={setIsDropdownOpen} id={_id} />}
-      <div>
+      <div className="width-100">
         <div className="d-flex justify-cont-between mb-1">
           <div>
             <h5>{name}</h5>

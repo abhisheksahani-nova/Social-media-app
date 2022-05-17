@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CreatePostBox.css";
+import TextareaAutosize from "react-textarea-autosize";
+import { createNewPost } from "../../../features/posts/postsSlice";
+import { useDispatch } from "react-redux";
 
 function CreatePostBox() {
+  const [postData, setPostData] = useState({ content: "" });
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+
+  function handleCreateNewPost(postData, token) {
+    dispatch(createNewPost({ postData, token }));
+    setPostData({ content: "" });
+  }
+
   return (
     <div className="d-flex create-note-container mt-2 mb-2 small-gap">
       <img
@@ -10,10 +22,13 @@ function CreatePostBox() {
       />
       <div className="create-note-container">
         <div className="d-flex title-inp-container mb-2">
-          <input
+          <TextareaAutosize
             className="note-title-inp"
-            type="text"
             placeholder="What do you want to talk about?"
+            value={postData.content}
+            onChange={(e) =>
+              setPostData({ ...postData, content: e.target.value })
+            }
           />
           <i className="fa-solid fa-xmark"></i>
         </div>
@@ -25,7 +40,10 @@ function CreatePostBox() {
             <i className="fa-solid fa-face-grin-wide"></i>
           </div>
           <div className="d-flex note-footer justify-cont-right">
-            <button className="btn btn-custom-sty btn-custom-small">
+            <button
+              className="btn btn-custom-sty btn-custom-small"
+              onClick={() => handleCreateNewPost(postData, token)}
+            >
               Post
             </button>
           </div>

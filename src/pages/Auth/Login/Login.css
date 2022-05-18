@@ -1,0 +1,65 @@
+.login_form_container {
+  justify-content: center;
+  align-items: center;
+  padding: 7rem 0;
+}
+
+.login_form {
+  width: 27rem;
+  padding-left: 2.3rem;
+}
+
+.login_inp_resize {
+  padding: 0.7rem;
+}
+
+.login_custom_btn {
+  padding: 0.6rem 9.1rem;
+}
+
+.create_acc_link {
+  color: var(--text-primary);
+}
+
+.login_checkbox_inp_container {
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.login_inp_label_resize {
+  font-size: 0.95rem;
+}
+
+.login-inp-icon {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 3rem;
+}
+
+.t-decoration-none {
+  text-decoration: none;
+}
+
+.login-checkbox-label-size {
+  font-size: 0.8rem;
+}
+
+.ecommerce-login-inp::placeholder {
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 500px) {
+  .ecommerce-login-inp::placeholder {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login-checkbox-label-size {
+    font-size: 1.1rem;
+  }
+
+  .login_inp_label_resize {
+    font-size: 1.2rem;
+  }
+}

@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CreatePostBox.css";
+import TextareaAutosize from "react-textarea-autosize";
+import { createNewPost, editPost } from "../../../features/posts/postsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-function CreatePostBox() {
+function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
+  const [postData, setPostData] = useState({ content: "" });
+
+  const postObj = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isPostEdit) {
+      const postToEdit = postObj.posts.filter((post) => post._id == editPostId);
+      setPostData({ ...postData, content: postToEdit[0].content });
+    }
+  }, [isPostEdit]);
+
+  function handleCreatePostAndEdit(postData, editPostId, token) {
+    if (isPostEdit) {
+      dispatch(editPost({ postData, editPostId, token }));
+      setIsPostEdit((prev) => !prev);
+    } else {
+      dispatch(createNewPost({ postData, token }));
+    }
+
+    setPostData({ content: "" });
+  }
+
   return (
     <div className="d-flex create-note-container mt-2 mb-2 small-gap">
       <img
@@ -10,10 +37,13 @@ function CreatePostBox() {
       />
       <div className="create-note-container">
         <div className="d-flex title-inp-container mb-2">
-          <input
+          <TextareaAutosize
             className="note-title-inp"
-            type="text"
             placeholder="What do you want to talk about?"
+            value={postData.content}
+            onChange={(e) =>
+              setPostData({ ...postData, content: e.target.value })
+            }
           />
           <i className="fa-solid fa-xmark"></i>
         </div>
@@ -25,7 +55,12 @@ function CreatePostBox() {
             <i className="fa-solid fa-face-grin-wide"></i>
           </div>
           <div className="d-flex note-footer justify-cont-right">
-            <button className="btn btn-custom-sty btn-custom-small">
+            <button
+              className="btn btn-custom-sty btn-custom-small"
+              onClick={() =>
+                handleCreatePostAndEdit(postData, editPostId, token)
+              }
+            >
               Post
             </button>
           </div>

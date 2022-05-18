@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { Navbar, Sidebar, Post, FollowContainer } from "../../components/index";
 import CreatePostBox from "./CreatePostBox/CreatePostBox";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../../features/posts/postsSlice";
 
 function HomePage() {
+  const [isPostEdit, setIsPostEdit] = useState(false);
+  const [editPostId, setEditPostId] = useState("");
+  const postsObj = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
+
   return (
     <div>
       <Navbar />
       <section className="d-flex gap-4">
         <Sidebar />
         <div>
-          <CreatePostBox />
-          <Post />
+          <CreatePostBox
+            isPostEdit={isPostEdit}
+            setIsPostEdit={setIsPostEdit}
+            editPostId={editPostId}
+          />
+          <div className="d-flex flex-direction gap-1 ">
+            {postsObj.posts.map((post) => {
+              return (
+                <Post
+                  key={post._id}
+                  post={post}
+                  setIsPostEdit={setIsPostEdit}
+                  setEditPostId={setEditPostId}
+                />
+              );
+            })}
+          </div>
         </div>
         <FollowContainer />
       </section>

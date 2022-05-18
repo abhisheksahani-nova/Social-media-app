@@ -10,11 +10,33 @@ const initialState = {
 export const bookmarkPost = createAsyncThunk(
   "users/bookmarkPost",
   async (data) => {
-    const { id, token } = data;
+    const { _id, token } = data;
 
     try {
       const response = await axios.post(
-        `/api/users/bookmark/${id}`,
+        `/api/users/bookmark/${_id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      console.log(response);
+      return response.data.bookmarks;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
+
+export const removePostFromBookmark = createAsyncThunk(
+  "users/removePostFromBookmark",
+  async (data) => {
+    const { _id, token } = data;
+
+    try {
+      const response = await axios.post(
+        `/api/users/remove-bookmark/${_id}`,
         {},
         {
           headers: { authorization: token },
@@ -34,9 +56,13 @@ const UsersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(bookmarkPost.fulfilled, (state, action) => {
-      state.bookmarks = action.payload;
-    });
+    builder
+      .addCase(bookmarkPost.fulfilled, (state, action) => {
+        state.bookmarks = action.payload;
+      })
+      .addCase(removePostFromBookmark.fulfilled, (state, action) => {
+        state.bookmarks = action.payload;
+      });
   },
 });
 

@@ -2,30 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./Post.css";
 import { PostDropdown } from "../index";
 import { likePost, dislikePost } from "../../features/posts/postsSlice";
-import { bookmarkPost } from "../../features/users/usersSlice";
+import {
+  bookmarkPost,
+  removePostFromBookmark,
+} from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
   const { _id, content, username, name } = post;
 
   const [isPostLikedBy, setIsPostLikedBy] = useState(false);
+  const [isPostBookmark, setIsPostBookmark] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const token = localStorage.getItem("token");
   const activeUsername = localStorage.getItem("username");
 
   const dispatch = useDispatch();
   const postObj = useSelector((state) => state.posts);
+  const bookmark = useSelector((state) => state.users.bookmarks);
 
   useEffect(() => {
-    const thisPost = postObj.posts.filter(post => post._id == _id);
-    const isLikedPost = thisPost[0].likes.likedBy.some(user => user.username == activeUsername)
+    const thisPost = postObj.posts.filter((post) => post._id == _id);
+    const isLikedPost = thisPost[0].likes.likedBy.some(
+      (user) => user.username == activeUsername
+    );
 
     setIsPostLikedBy(isLikedPost);
   }, [postObj]);
 
-  function handleBookmarkPost(id, token) {
-    dispatch(bookmarkPost({ id, token }));
-  }
+  useEffect(() => {
+    const isBookmark = bookmark.some((user) => user._id == _id);
+    setIsPostBookmark(isBookmark);
+  }, [bookmark]);
 
   return (
     <div className="d-flex user-post-container">
@@ -70,10 +78,18 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
           <i className="fa-regular fa-message user-post-footer-icon"></i>
           <i className="fa-solid fa-share-nodes user-post-footer-icon"></i>
-          <i
-            className="fa-regular fa-bookmark user-post-footer-icon"
-            onClick={() => handleBookmarkPost(_id, token)}
-          ></i>
+
+          {isPostBookmark ? (
+            <i
+              className="fa-solid fa-bookmark user-post-footer-icon"
+              onClick={() => dispatch(removePostFromBookmark({ _id, token }))}
+            ></i>
+          ) : (
+            <i
+              className="fa-regular fa-bookmark user-post-footer-icon"
+              onClick={() => dispatch(bookmarkPost({ _id, token }))}
+            ></i>
+          )}
         </div>
       </div>
     </div>

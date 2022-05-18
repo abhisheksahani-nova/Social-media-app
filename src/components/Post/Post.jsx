@@ -14,35 +14,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const dispatch = useDispatch();
 
   function handleLikeDislikePost(postId, token) {
-    const callLike = async (postId, token) => {
-      try {
-        const response = await axios.post(`/api/posts/like/${postId}`, {} ,{
-          headers: { authorization: token },
-        });
-        console.log(response);
-      } catch (err) {
-        console.log(err.response);
-      }
-    };
-
-    callLike(postId, token);
+    dispatch(likePost({ postId, token }));
   }
 
   function handleBookmarkPost(id, token) {
-    // dispatch(bookmarkPost({ id, token }));
-    const bookmarkCall = async (id, token) => {
-      try {
-        const response = await axios.post(`/api/users/bookmark/${id}`, {} ,{
-          headers: { authorization: token },
-        });
-        console.log(response);
-        return response.data.bookmarks;
-      } catch (err) {
-        console.log(err,err.response);
-        return err;
-      }
-    };
-    bookmarkCall(id, token)
+    dispatch(bookmarkPost({ id, token }));
   }
 
   return (

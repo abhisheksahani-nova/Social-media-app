@@ -11,7 +11,7 @@ export const bookmarkPost = createAsyncThunk(
     const { id, token } = data;
 
     try {
-      const response = await axios.post(`/api/users/bookmark/${id}`, {
+      const response = await axios.post(`/api/users/bookmark/${id}`, {} ,{
         headers: { authorization: token },
       });
       console.log(response)

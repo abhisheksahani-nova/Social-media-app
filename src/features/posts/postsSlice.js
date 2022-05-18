@@ -65,28 +65,23 @@ export const editPost = createAsyncThunk("post/editPost", async (data) => {
   }
 });
 
-export const likePost = createAsyncThunk(
-  "post/likePost",
-  async (data, { rejectWithValue }) => {
-    const { postId, token } = data;
-    console.log(data);
+export const likePost = createAsyncThunk("post/likePost", async (data) => {
+  const { postId, token } = data;
 
-    try {
-      const response = await axios.post(`/api/posts/like/${postId}`, {
+  try {
+    const response = await axios.post(
+      `/api/posts/like/${postId}`,
+      {},
+      {
         headers: { authorization: token },
-      });
-      console.log(response);
-      return response.data.posts;
-    } catch (err) {
-      console.log(error);
-      if (!err.response) {
-        throw err;
       }
-
-      return rejectWithValue(err.response.data);
-    }
+    );
+    console.log(response);
+    return response.data.posts;
+  } catch (err) {
+    console.log(error);
   }
-);
+});
 
 export const dislikePost = createAsyncThunk(
   "post/dislikePost",
@@ -94,9 +89,13 @@ export const dislikePost = createAsyncThunk(
     const { id, token } = data;
 
     try {
-      const response = await axios.post(`/api/posts/dislike/${id}`, {
-        headers: { authorization: token },
-      });
+      const response = await axios.post(
+        `/api/posts/dislike/${id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
       return response.data.posts;
     } catch (err) {
       console.log(error);

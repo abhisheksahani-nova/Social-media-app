@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 import { PostDropdown } from "../index";
 import { likePost, dislikePost } from "../../features/posts/postsSlice";
-import { bookmarkPost } from "../../features/bookmarks/bookmarksSlice";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+import { bookmarkPost } from "../../features/users/usersSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
   const { _id, content, username, name } = post;
+
+  const [isPostLikedBy, setIsPostLikedBy] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const activeUsername = localStorage.getItem("username");
 
   const dispatch = useDispatch();
+  const postObj = useSelector((state) => state.posts);
 
-  function handleLikeDislikePost(postId, token) {
-    dispatch(likePost({ postId, token }));
+  useEffect(() => {
+    const islikedPost = postObj.posts.some((post) =>
+      post.likes.likedBy.some((user) => user.username == activeUsername)
+    );
+
+    setIsPostLikedBy(islikedPost);
+  }, [postObj]);
+
+  function handleLikeDislikePost(id, token) {
+    if (isPostLikedBy) {
+      dispatch(dislikePost({ id, token }));
+    } else {
+      dispatch(likePost({ id, token }));
+    }
   }
 
   function handleBookmarkPost(id, token) {

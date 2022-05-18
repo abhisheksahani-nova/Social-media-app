@@ -66,11 +66,11 @@ export const editPost = createAsyncThunk("post/editPost", async (data) => {
 });
 
 export const likePost = createAsyncThunk("post/likePost", async (data) => {
-  const { postId, token } = data;
+  const { id, token } = data;
 
   try {
     const response = await axios.post(
-      `/api/posts/like/${postId}`,
+      `/api/posts/like/${id}`,
       {},
       {
         headers: { authorization: token },
@@ -79,7 +79,8 @@ export const likePost = createAsyncThunk("post/likePost", async (data) => {
     console.log(response);
     return response.data.posts;
   } catch (err) {
-    console.log(error);
+    console.log(err);
+    return err;
   }
 });
 
@@ -96,6 +97,7 @@ export const dislikePost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
+      console.log(response);
       return response.data.posts;
     } catch (err) {
       console.log(error);
@@ -125,10 +127,6 @@ const postSlice = createSlice({
       .addCase(likePost.fulfilled, (state, action) => {
         state.posts = action.payload;
       })
-      .addCase(likePost.rejected, (state, action) => {
-        console.log("rejected", action, state);
-      })
-
       .addCase(dislikePost.fulfilled, (state, action) => {
         state.posts = action.payload;
       });

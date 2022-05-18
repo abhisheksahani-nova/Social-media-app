@@ -13,6 +13,10 @@
   font-size: 0.92rem;
 }
 
-.width-100{
+.width-100 {
   width: 100%;
+}
+
+.clr-red {
+  color: var(--red);
 }

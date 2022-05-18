@@ -66,11 +66,11 @@ export const editPost = createAsyncThunk("post/editPost", async (data) => {
 });
 
 export const likePost = createAsyncThunk("post/likePost", async (data) => {
-  const { id, token } = data;
+  const { _id, token } = data;
 
   try {
     const response = await axios.post(
-      `/api/posts/like/${id}`,
+      `/api/posts/like/${_id}`,
       {},
       {
         headers: { authorization: token },
@@ -87,11 +87,11 @@ export const likePost = createAsyncThunk("post/likePost", async (data) => {
 export const dislikePost = createAsyncThunk(
   "post/dislikePost",
   async (data) => {
-    const { id, token } = data;
+    const { _id, token } = data;
 
     try {
       const response = await axios.post(
-        `/api/posts/dislike/${id}`,
+        `/api/posts/dislike/${_id}`,
         {},
         {
           headers: { authorization: token },

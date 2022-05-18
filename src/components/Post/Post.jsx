@@ -17,20 +17,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const postObj = useSelector((state) => state.posts);
 
   useEffect(() => {
-    const islikedPost = postObj.posts.some((post) =>
-      post.likes.likedBy.some((user) => user.username == activeUsername)
-    );
+    const thisPost = postObj.posts.filter(post => post._id == _id);
+    const isLikedPost = thisPost[0].likes.likedBy.some(user => user.username == activeUsername)
 
-    setIsPostLikedBy(islikedPost);
+    setIsPostLikedBy(isLikedPost);
   }, [postObj]);
-
-  function handleLikeDislikePost(id, token) {
-    if (isPostLikedBy) {
-      dispatch(dislikePost({ id, token }));
-    } else {
-      dispatch(likePost({ id, token }));
-    }
-  }
 
   function handleBookmarkPost(id, token) {
     dispatch(bookmarkPost({ id, token }));
@@ -65,10 +56,18 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
         </div>
         <small>{content}</small>
         <div className="d-flex justify-cont-between mt-2">
-          <i
-            className="fa-regular fa-heart user-post-footer-icon"
-            onClick={() => handleLikeDislikePost(_id, token)}
-          ></i>
+          {isPostLikedBy ? (
+            <i
+              className="fa-solid fa-heart clr-red user-post-footer-icon"
+              onClick={() => dispatch(dislikePost({ _id, token }))}
+            ></i>
+          ) : (
+            <i
+              className="fa-regular fa-heart user-post-footer-icon"
+              onClick={() => dispatch(likePost({ _id, token }))}
+            ></i>
+          )}
+
           <i className="fa-regular fa-message user-post-footer-icon"></i>
           <i className="fa-solid fa-share-nodes user-post-footer-icon"></i>
           <i

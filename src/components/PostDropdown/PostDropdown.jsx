@@ -1,9 +1,19 @@
 import React from "react";
 import "./PostDropdown.css";
 import { deletePost } from "../../features/posts/postsSlice.js";
+import { deleteCommentOfPost } from "../../features/comments/commentsSlice";
 import { useDispatch } from "react-redux";
 
-function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
+function PostDropdown({
+  setIsDropdownOpen,
+  id,
+  setIsPostEdit,
+  setEditPostId,
+  isCommentDropdownOpen,
+  setIsCommentDropdownOpen,
+  postId,
+  commentId,
+}) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -18,6 +28,25 @@ function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
     setIsDropdownOpen((prev) => !prev);
   }
 
+  function handleCloseDropdown() {
+    if (isCommentDropdownOpen) {
+      setIsCommentDropdownOpen((prev) => !prev);
+    } else {
+      setIsDropdownOpen((prev) => !prev);
+    }
+  }
+
+  function handleDelete(id, token, postId, commentId) {
+    if (isCommentDropdownOpen) {
+      dispatch(deleteCommentOfPost({ postId, commentId, token }));
+      setIsCommentDropdownOpen((prev) => !prev);
+      console.log("comment delete");
+    } else {
+      handleDeletePost(id, token);
+      console.log("post delete");
+    }
+  }
+
   return (
     <div className="playlist-dropdown-container">
       <ul
@@ -29,22 +58,27 @@ function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
           <h5 className="break-word">Select</h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            onClick={() => handleCloseDropdown()}
           ></i>
         </li>
 
-        <li className="d-flex playlist-li-item mt-small cursor-p j-space-between">
-          <small className="break-word" onClick={() => handleEditPost(id)}>
-            Edit post
+        <li
+          className="d-flex playlist-li-item mt-small cursor-p j-space-between"
+          onClick={() => handleEditPost(id)}
+        >
+          <small className="break-word">
+            {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}
           </small>
           <i class="fa-solid fa-pencil post-dropdown-icon"></i>
         </li>
 
         <li
           className="d-flex playlist-li-item cursor-p j-space-between"
-          onClick={() => handleDeletePost(id, token)}
+          onClick={() => handleDelete(id, token, postId, commentId)}
         >
-          <small className="break-word">Delete post</small>
+          <small className="break-word">{`Delete ${
+            isCommentDropdownOpen ? "comment" : "post"
+          }`}</small>
           <i class="fa-solid fa-trash post-dropdown-icon"></i>
         </li>
       </ul>

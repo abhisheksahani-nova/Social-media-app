@@ -52,7 +52,8 @@ export const deleteCommentOfPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      return response.data.comments;
+      console.log(response);
+      return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
       return err;
@@ -137,7 +138,13 @@ const CommentsSlice = createSlice({
         const filerArray = state.comments.filter((post) => post._id !== postId);
         filerArray.push(action.payload);
         state.comments = filerArray;
-      });
+      })
+      .addCase(deleteCommentOfPost.fulfilled, (state, action) => {
+        const postId = action.payload._id;
+        const filerArray = state.comments.filter((post) => post._id !== postId);
+        filerArray.push(action.payload);
+        state.comments = filerArray;
+      })
   },
 });
 

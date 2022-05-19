@@ -11,6 +11,7 @@ import {
   createNewCommentToPost,
 } from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import TextareaAutosize from "react-textarea-autosize";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
   const { _id, content, username, name } = post;
@@ -51,6 +52,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   function handleCommentPost(commentData, postId, token) {
     dispatch(createNewCommentToPost({ commentData, postId, token }));
+    setCommentData({ text: "" });
   }
 
   return (
@@ -124,17 +126,18 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
               class="avatar xs"
               src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
             />
-            <input
-              class="create-post-input note-title-inp pl-1"
+            <TextareaAutosize
+              class="create-post-input note-title-inp pl-1 comment-textarea"
               type="text"
               placeholder="Add a comment"
               onChange={(e) =>
                 setCommentData({ ...commentData, text: e.target.value })
               }
+              value={commentData.text}
             />
           </div>
 
-          <div className="d-flex j-content-right mr-2">
+          <div className="d-flex j-content-right mr-2 mb-small">
             <button
               className="btn btn-custom-sty btn-custom-small"
               onClick={() => handleCommentPost(commentData, _id, token)}
@@ -146,7 +149,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
           {comments[0].postComments && (
             <div>
               {comments[0].postComments.map((comment) => {
-                return <Comment key={comment._id} comment={comment} />;
+                return <Comment key={comment._id} comment={comment} postId={_id} />;
               })}
             </div>
           )}

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Comment.css";
+import { PostDropdown } from "../index";
 
-function Comment({ comment }) {
+function Comment({ comment, postId }) {
   const { _id, text, username, name, votes } = comment;
+
+  const [isCommentDropdownOpen, setIsCommentDropdownOpen] = useState(false);
 
   return (
     <div className="d-flex user-post-container gap-small">
@@ -12,6 +15,15 @@ function Comment({ comment }) {
         alt="avatar"
       />
 
+      {isCommentDropdownOpen && (
+        <PostDropdown
+          isCommentDropdownOpen={isCommentDropdownOpen}
+          setIsCommentDropdownOpen={setIsCommentDropdownOpen}
+          postId={postId}
+          commentId={_id}
+        />
+      )}
+
       <div className="width-100">
         <div className="comment-content-container">
           <div className="d-flex justify-cont-between mb-1">
@@ -20,7 +32,10 @@ function Comment({ comment }) {
               <small> @{username} </small>
               <small>. &nbsp;1m</small>
             </div>
-            <i className="fa-solid fa-ellipsis"></i>
+            <i
+              className="fa-solid fa-ellipsis"
+              onClick={() => setIsCommentDropdownOpen((prev) => !prev)}
+            ></i>
           </div>
           <small> {text} </small>
         </div>

@@ -95,11 +95,11 @@
 }
 
 .btn-custom-small {
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.75rem;
   outline: none;
+  font-size: 0.9rem;
 }
 
-.border-none{
+.border-none {
   border: none;
 }
-

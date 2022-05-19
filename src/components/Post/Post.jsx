@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
-import { PostDropdown } from "../index";
+import { PostDropdown, Comment } from "../index";
 import { likePost, dislikePost } from "../../features/posts/postsSlice";
 import {
   bookmarkPost,
@@ -14,6 +14,8 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const [isPostLikedBy, setIsPostLikedBy] = useState(false);
   const [isPostBookmark, setIsPostBookmark] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  
   const token = localStorage.getItem("token");
   const activeUsername = localStorage.getItem("username");
 
@@ -36,7 +38,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   }, [bookmark]);
 
   return (
-    <div className="d-flex flex-direction  ">
+    <div className="d-flex flex-direction bg-white ">
       <div className="d-flex  user-post-container">
         <img
           className="avatar xs"
@@ -95,19 +97,29 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
         </div>
       </div>
 
-      <div class="d-flex create-note-container small-gap border-none">
-        <img
-          class="avatar xs"
-          src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
-        />
-        <input
-          class="create-post-input note-title-inp pl-1"
-          type="text"
-          placeholder="Add a comment"
-        />
+      <div>
+        <div class="d-flex create-note-container small-gap border-none">
+          <img
+            class="avatar xs"
+            src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
+          />
+          <input
+            class="create-post-input note-title-inp pl-1"
+            type="text"
+            placeholder="Add a comment"
+          />
+        </div>
+
+        <div className="d-flex j-content-right mr-2">
+          <button className="btn btn-custom-sty btn-custom-small">Post</button>
+        </div>
       </div>
 
-      
+      <div>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </div>
   );
 }

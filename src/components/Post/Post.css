@@ -20,3 +20,11 @@
 .clr-red {
   color: var(--red);
 }
+
+.bg-white {
+  background-color: var(--light-bg-clr);
+}
+
+.mr-2{
+  margin-right: 2rem;
+}

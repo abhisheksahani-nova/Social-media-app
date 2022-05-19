@@ -1,7 +1,9 @@
 import React from "react";
 import "./Comment.css";
 
-function Comment() {
+function Comment({ comment }) {
+  const { _id, text, username, name, votes } = comment;
+
   return (
     <div className="d-flex user-post-container gap-small">
       <img
@@ -14,13 +16,13 @@ function Comment() {
         <div className="comment-content-container">
           <div className="d-flex justify-cont-between mb-1">
             <div>
-              <h5>Adarsh Balika</h5>
-              <small> @adarshBalika </small>
+              <h5>{name}</h5>
+              <small> @{username} </small>
               <small>. &nbsp;1m</small>
             </div>
             <i className="fa-solid fa-ellipsis"></i>
           </div>
-          <small>It is my first comment , hurray</small>
+          <small> {text} </small>
         </div>
 
         <div className="comment-icon-container">

@@ -6,6 +6,7 @@ import {
   bookmarkPost,
   removePostFromBookmark,
 } from "../../features/users/usersSlice";
+import { getCommentsForPost } from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
@@ -15,13 +16,16 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const [isPostBookmark, setIsPostBookmark] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  
+
   const token = localStorage.getItem("token");
   const activeUsername = localStorage.getItem("username");
 
   const dispatch = useDispatch();
   const postObj = useSelector((state) => state.posts);
   const bookmark = useSelector((state) => state.users.bookmarks);
+  const comments = useSelector((state) =>
+    state.comments.comments.filter((post) => post._id == _id)
+  );
 
   useEffect(() => {
     const thisPost = postObj.posts.filter((post) => post._id == _id);
@@ -37,8 +41,13 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
     setIsPostBookmark(isBookmark);
   }, [bookmark]);
 
+  useEffect(() => {
+    dispatch(getCommentsForPost({ _id }));
+  }, []);
+
   return (
     <div className="d-flex flex-direction bg-white ">
+      {console.log(comments, "comments of post", username)}
       <div className="d-flex  user-post-container">
         <img
           className="avatar xs"
@@ -79,7 +88,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
               ></i>
             )}
 
-            <i className="fa-regular fa-message user-post-footer-icon"></i>
+            <i
+              className="fa-regular fa-message user-post-footer-icon"
+              onClick={() => setShowCommentBox((prev) => !prev)}
+            ></i>
+
             <i className="fa-solid fa-share-nodes user-post-footer-icon"></i>
 
             {isPostBookmark ? (
@@ -97,29 +110,33 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
         </div>
       </div>
 
-      <div>
-        <div class="d-flex create-note-container small-gap border-none">
-          <img
-            class="avatar xs"
-            src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
-          />
-          <input
-            class="create-post-input note-title-inp pl-1"
-            type="text"
-            placeholder="Add a comment"
-          />
-        </div>
+      {showCommentBox && (
+        <div>
+          <div class="d-flex create-note-container small-gap border-none">
+            <img
+              class="avatar xs"
+              src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
+            />
+            <input
+              class="create-post-input note-title-inp pl-1"
+              type="text"
+              placeholder="Add a comment"
+            />
+          </div>
 
-        <div className="d-flex j-content-right mr-2">
-          <button className="btn btn-custom-sty btn-custom-small">Post</button>
-        </div>
-      </div>
+          <div className="d-flex j-content-right mr-2">
+            <button className="btn btn-custom-sty btn-custom-small">
+              Post
+            </button>
+          </div>
 
-      <div>
-        <Comment />
-        <Comment />
-        <Comment />
-      </div>
+          <div>
+            {comments[0].postComments.map((comment) => {
+              return <Comment key={comment._id} comment={comment} />;
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

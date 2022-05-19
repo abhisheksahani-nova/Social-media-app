@@ -7,11 +7,13 @@ const initialState = {
 
 export const getCommentsForPost = createAsyncThunk(
   "comments/getCommentsForPost",
-  async () => {
+  async (data) => {
+    const { _id } = data;
+
     try {
-      const response = await axios.get(`/api/comments/${id}`);
-      console.log(response);
-      return response.data.comments;
+      const response = await axios.get(`/api/comments/${_id}`);
+      console.log(response.data);
+      return { _id: _id, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
     }
@@ -44,7 +46,7 @@ export const deleteCommentOfPost = createAsyncThunk(
     const { postId, commentId, token } = data;
 
     try {
-      const response = await axios.post(
+      const response = await axios.delete(
         `/api/comments/delete/${postId}/${commentId}`,
         {
           headers: { authorization: token },
@@ -123,7 +125,9 @@ const CommentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder;
+    builder.addCase(getCommentsForPost.fulfilled, (state, action) => {
+      state.comments.push(action.payload);
+    });
   },
 });
 

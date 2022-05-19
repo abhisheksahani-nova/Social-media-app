@@ -76,7 +76,6 @@ export const likePost = createAsyncThunk("post/likePost", async (data) => {
         headers: { authorization: token },
       }
     );
-    console.log(response);
     return response.data.posts;
   } catch (err) {
     console.log(err);
@@ -97,7 +96,6 @@ export const dislikePost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response);
       return response.data.posts;
     } catch (err) {
       console.log(error);

@@ -12,7 +12,7 @@ export const getCommentsForPost = createAsyncThunk(
 
     try {
       const response = await axios.get(`/api/comments/${_id}`);
-      console.log(response.data);
+
       return { _id: _id, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
@@ -23,17 +23,17 @@ export const getCommentsForPost = createAsyncThunk(
 export const createNewCommentToPost = createAsyncThunk(
   "comments/createNewCommentToPost",
   async (data) => {
-    const { commentData, token } = data;
+    const { commentData, postId, token } = data;
 
     try {
       const response = await axios.post(
-        `/api/comments/add/${id}`,
+        `/api/comments/add/${postId}`,
         { commentData },
         {
           headers: { authorization: token },
         }
       );
-      return response.data.comments;
+      return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
     }
@@ -125,9 +125,19 @@ const CommentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCommentsForPost.fulfilled, (state, action) => {
-      state.comments.push(action.payload);
-    });
+    builder
+      .addCase(getCommentsForPost.fulfilled, (state, action) => {
+        const postId = action.payload._id;
+        const filerArray = state.comments.filter((post) => post._id !== postId);
+        filerArray.push(action.payload);
+        state.comments = filerArray;
+      })
+      .addCase(createNewCommentToPost.fulfilled, (state, action) => {
+        const postId = action.payload._id;
+        const filerArray = state.comments.filter((post) => post._id !== postId);
+        filerArray.push(action.payload);
+        state.comments = filerArray;
+      });
   },
 });
 

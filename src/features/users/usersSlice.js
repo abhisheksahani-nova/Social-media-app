@@ -20,7 +20,6 @@ export const bookmarkPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response);
       return response.data.bookmarks;
     } catch (err) {
       console.log(err);
@@ -42,7 +41,6 @@ export const removePostFromBookmark = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response);
       return response.data.bookmarks;
     } catch (err) {
       console.log(err);

@@ -6,7 +6,10 @@ import {
   bookmarkPost,
   removePostFromBookmark,
 } from "../../features/users/usersSlice";
-import { getCommentsForPost } from "../../features/comments/commentsSlice";
+import {
+  getCommentsForPost,
+  createNewCommentToPost,
+} from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
@@ -16,6 +19,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const [isPostBookmark, setIsPostBookmark] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentData, setCommentData] = useState({ text: "" });
 
   const token = localStorage.getItem("token");
   const activeUsername = localStorage.getItem("username");
@@ -45,9 +49,12 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
     dispatch(getCommentsForPost({ _id }));
   }, []);
 
+  function handleCommentPost(commentData, postId, token) {
+    dispatch(createNewCommentToPost({ commentData, postId, token }));
+  }
+
   return (
     <div className="d-flex flex-direction bg-white ">
-      {console.log(comments, "comments of post", username)}
       <div className="d-flex  user-post-container">
         <img
           className="avatar xs"
@@ -121,20 +128,28 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
               class="create-post-input note-title-inp pl-1"
               type="text"
               placeholder="Add a comment"
+              onChange={(e) =>
+                setCommentData({ ...commentData, text: e.target.value })
+              }
             />
           </div>
 
           <div className="d-flex j-content-right mr-2">
-            <button className="btn btn-custom-sty btn-custom-small">
+            <button
+              className="btn btn-custom-sty btn-custom-small"
+              onClick={() => handleCommentPost(commentData, _id, token)}
+            >
               Post
             </button>
           </div>
 
-          <div>
-            {comments[0].postComments.map((comment) => {
-              return <Comment key={comment._id} comment={comment} />;
-            })}
-          </div>
+          {comments[0].postComments && (
+            <div>
+              {comments[0].postComments.map((comment) => {
+                return <Comment key={comment._id} comment={comment} />;
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>

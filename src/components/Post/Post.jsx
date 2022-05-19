@@ -149,7 +149,14 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
           {comments[0].postComments && (
             <div>
               {comments[0].postComments.map((comment) => {
-                return <Comment key={comment._id} comment={comment} postId={_id} />;
+                return (
+                  <Comment
+                    key={comment._id}
+                    comment={comment}
+                    postId={_id}
+                    postUsername={username}
+                  />
+                );
               })}
             </div>
           )}

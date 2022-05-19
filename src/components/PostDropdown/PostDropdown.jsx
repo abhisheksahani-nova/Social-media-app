@@ -40,10 +40,8 @@ function PostDropdown({
     if (isCommentDropdownOpen) {
       dispatch(deleteCommentOfPost({ postId, commentId, token }));
       setIsCommentDropdownOpen((prev) => !prev);
-      console.log("comment delete");
     } else {
       handleDeletePost(id, token);
-      console.log("post delete");
     }
   }
 

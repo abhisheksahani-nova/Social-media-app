@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./Comment.css";
 import { PostDropdown } from "../index";
 
-function Comment({ comment, postId }) {
+function Comment({ comment, postId, postUsername }) {
   const { _id, text, username, name, votes } = comment;
 
   const [isCommentDropdownOpen, setIsCommentDropdownOpen] = useState(false);
+  const signInUser = localStorage.getItem("username");
 
   return (
     <div className="d-flex user-post-container gap-small">
@@ -32,10 +33,12 @@ function Comment({ comment, postId }) {
               <small> @{username} </small>
               <small>. &nbsp;1m</small>
             </div>
-            <i
-              className="fa-solid fa-ellipsis"
-              onClick={() => setIsCommentDropdownOpen((prev) => !prev)}
-            ></i>
+            {(postUsername == signInUser || username == signInUser) && (
+              <i
+                className="fa-solid fa-ellipsis"
+                onClick={() => setIsCommentDropdownOpen((prev) => !prev)}
+              ></i>
+            )}
           </div>
           <small> {text} </small>
         </div>

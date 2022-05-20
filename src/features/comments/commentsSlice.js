@@ -88,11 +88,14 @@ export const upvoteCommentOfPost = createAsyncThunk(
     try {
       const response = await axios.post(
         `/api/comments/upvote/${postId}/${commentId}`,
+        {},
         {
           headers: { authorization: token },
         }
       );
-      return response.data.comments;
+      console.log(response)
+
+      return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
       return err;
@@ -108,17 +111,28 @@ export const downvoteCommentOfPost = createAsyncThunk(
     try {
       const response = await axios.post(
         `/api/comments/downvote/${postId}/${commentId}`,
+        {},
         {
           headers: { authorization: token },
         }
       );
-      return response.data.comments;
+      console.log(response)
+
+      return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
       return err;
     }
   }
 );
+
+function updateCommentsArray(state, action) {
+  const postId = action.payload._id;
+  const filerArray = state.comments.filter((post) => post._id !== postId);
+  filerArray.push(action.payload);
+
+  return filerArray;
+}
 
 const CommentsSlice = createSlice({
   name: "comments",
@@ -127,28 +141,22 @@ const CommentsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCommentsForPost.fulfilled, (state, action) => {
-        const postId = action.payload._id;
-        const filerArray = state.comments.filter((post) => post._id !== postId);
-        filerArray.push(action.payload);
-        state.comments = filerArray;
+        state.comments = updateCommentsArray(state, action);
       })
       .addCase(createNewCommentToPost.fulfilled, (state, action) => {
-        const postId = action.payload._id;
-        const filerArray = state.comments.filter((post) => post._id !== postId);
-        filerArray.push(action.payload);
-        state.comments = filerArray;
+        state.comments = updateCommentsArray(state, action);
       })
       .addCase(deleteCommentOfPost.fulfilled, (state, action) => {
-        const postId = action.payload._id;
-        const filerArray = state.comments.filter((post) => post._id !== postId);
-        filerArray.push(action.payload);
-        state.comments = filerArray;
+        state.comments = updateCommentsArray(state, action);
       })
       .addCase(editCommentOfPost.fulfilled, (state, action) => {
-        const postId = action.payload._id;
-        const filerArray = state.comments.filter((post) => post._id !== postId);
-        filerArray.push(action.payload);
-        state.comments = filerArray;
+        state.comments = updateCommentsArray(state, action);
+      })
+      .addCase(upvoteCommentOfPost.fulfilled, (state, action) => {
+        state.comments = updateCommentsArray(state, action);
+      })
+      .addCase(downvoteCommentOfPost.fulfilled, (state, action) => {
+        state.comments = updateCommentsArray(state, action);
       });
   },
 });

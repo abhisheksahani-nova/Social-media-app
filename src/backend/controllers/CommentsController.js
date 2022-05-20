@@ -28,6 +28,48 @@ export const getPostCommentsHandler = function (schema, request) {
 };
 
 /**
+ * This handler handles getting a comment for a particular post in the db by commentId.
+ * send GET Request at /api/comments/:postId/:commentId
+ * */
+
+export const getPostCommentHandler = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+    const postId = request.params.postId;
+    const commentId = request.params.commentId;
+    const post = schema.posts.findBy({ _id: postId }).attrs;
+    return new Response(
+      200,
+      {},
+      {
+        comment: post.comments.filter(
+          (comment) => comment._id === commentId
+        )[0],
+      }
+    );
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
  * This handler handles adding a comment to a particular post in the db.
  * send POST Request at /api/comments/add/:postId
  * */
@@ -211,7 +253,7 @@ export const upvotePostCommentHandler = function (schema, request) {
     post.comments[commentIndex].votes.downvotedBy = post.comments[
       commentIndex
     ].votes.downvotedBy.filter((currUser) => currUser._id !== user._id);
-    comments[commentIndex].votes.upvotedBy.push(user);
+    post.comments[commentIndex].votes.upvotedBy.push(user);
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { comments: post.comments });
   } catch (error) {
@@ -264,7 +306,7 @@ export const downvotePostCommentHandler = function (schema, request) {
     post.comments[commentIndex].votes.upvotedBy = post.comments[
       commentIndex
     ].votes.upvotedBy.filter((currUser) => currUser._id !== user._id);
-    comments[commentIndex].votes.downvotedBy.push(user);
+    post.comments[commentIndex].votes.downvotedBy.push(user);
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { comments: post.comments });
   } catch (error) {

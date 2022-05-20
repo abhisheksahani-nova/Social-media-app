@@ -17,12 +17,18 @@ function Comment({
   const { _id, text, username, name, votes } = comment;
 
   const [isCommentDropdownOpen, setIsCommentDropdownOpen] = useState(false);
+
   const signInUser = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  function handleCommentUpVote() {}
+  function handleCommentUpVote(postId, commentId, token) {
+    dispatch(upvoteCommentOfPost({ postId, commentId, token }));
+  }
 
-  function handleCommentDownVote() {}
+  function handleCommentDownVote(postId, commentId, token) {
+    dispatch(downvoteCommentOfPost({ postId, commentId, token }));
+  }
 
   return (
     <div className="d-flex user-post-container gap-small">
@@ -40,6 +46,7 @@ function Comment({
           commentId={_id}
           editCommentData={editCommentData}
           setEditCommentData={setEditCommentData}
+          commentUsername={username}
         />
       )}
 
@@ -61,15 +68,22 @@ function Comment({
           <small> {text} </small>
         </div>
 
-        <div className="comment-icon-container">
-          <i
-            class="fa-regular fa-thumbs-up comment-like-icon"
-            onClick={() => handleCommentUpVote()}
-          ></i>
-          <i
-            class="fa-regular fa-thumbs-down"
-            onClick={() => handleCommentDownVote()}
-          ></i>
+        <div className="d-flex gap-1 comment-icon-container">
+          <div>
+            <i
+              class="fa-regular fa-thumbs-up comment-like-icon"
+              onClick={() => handleCommentUpVote(postId, _id, token)}
+            ></i>
+            <span className="vote-count"> {votes.upvotedBy.length} </span>
+          </div>
+
+          <div>
+            <i
+              class="fa-regular fa-thumbs-down comment-like-icon"
+              onClick={() => handleCommentDownVote(postId, _id, token)}
+            ></i>
+            <span className="vote-count"> {votes.downvotedBy.length} </span>
+          </div>
         </div>
       </div>
     </div>

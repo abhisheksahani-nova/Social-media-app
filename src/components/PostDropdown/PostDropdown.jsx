@@ -15,9 +15,11 @@ function PostDropdown({
   commentId,
   editCommentData,
   setEditCommentData,
+  commentUsername,
 }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const signInUser = localStorage.getItem("username");
 
   function handleDeletePost(id, token) {
     dispatch(deletePost({ id, token }));
@@ -76,15 +78,20 @@ function PostDropdown({
           ></i>
         </li>
 
-        <li
-          className="d-flex playlist-li-item mt-small cursor-p j-space-between"
-          onClick={() => handleEdit(id)}
-        >
-          <small className="break-word">
-            {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}
-          </small>
-          <i class="fa-solid fa-pencil post-dropdown-icon"></i>
-        </li>
+        {!isCommentDropdownOpen ||
+        (isCommentDropdownOpen && signInUser == commentUsername) ? (
+          <li
+            className="d-flex playlist-li-item cursor-p j-space-between"
+            onClick={() => handleEdit(id)}
+          >
+            <small className="break-word">
+              {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}
+            </small>
+            <i class="fa-solid fa-pencil post-dropdown-icon"></i>
+          </li>
+        ) : (
+          ""
+        )}
 
         <li
           className="d-flex playlist-li-item cursor-p j-space-between"

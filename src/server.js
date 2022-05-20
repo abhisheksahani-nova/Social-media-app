@@ -17,6 +17,7 @@ import {
 } from "./backend/controllers/PostController";
 import {
   getPostCommentsHandler,
+  getPostCommentHandler,
   addPostCommentHandler,
   editPostCommentHandler,
   deletePostCommentHandler,
@@ -82,6 +83,10 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/comments/:postId", getPostCommentsHandler.bind(this));
 
       //post comments routes (private)
+      this.get(
+        "/comments/:postId/:commentId",
+        getPostCommentHandler.bind(this)
+      );
       this.post("/comments/add/:postId", addPostCommentHandler.bind(this));
       this.post(
         "/comments/edit/:postId/:commentId",
@@ -99,6 +104,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/comments/downvote/:postId/:commentId",
         downvotePostCommentHandler.bind(this)
       );
+
       // user routes (public)
       this.get("/users", getAllUsersHandler.bind(this));
       this.get("/users/:userId", getUserHandler.bind(this));
@@ -106,14 +112,14 @@ export function makeServer({ environment = "development" } = {}) {
       // user routes (private)
       this.post("users/edit", editUserHandler.bind(this));
       this.get("/users/bookmark", getBookmarkPostsHandler.bind(this));
-      this.post("/users/bookmark/:postId/", bookmarkPostHandler.bind(this));
+      this.post("/users/bookmark/:postId", bookmarkPostHandler.bind(this));
       this.post(
-        "/users/remove-bookmark/:postId/",
+        "/users/remove-bookmark/:postId",
         removePostFromBookmarkHandler.bind(this)
       );
-      this.post("/users/follow/:followUserId/", followUserHandler.bind(this));
+      this.post("/users/follow/:followUserId", followUserHandler.bind(this));
       this.post(
-        "/users/unfollow/:followUserId/",
+        "/users/unfollow/:followUserId",
         unfollowUserHandler.bind(this)
       );
     },

@@ -1,5 +1,5 @@
 .comment-content-container {
-  background-color: #f2f2f2;
+  background-color: var(--social-comment-bg-clr);
   padding: 0.8rem;
   border-radius: 0rem 1rem 1rem 1rem;
 }
@@ -13,5 +13,9 @@
 }
 
 .comment-like-icon {
-  margin-right: 12px;
+  margin-right: 6px;
+}
+
+.vote-count {
+  font-size: 0.8rem;
 }

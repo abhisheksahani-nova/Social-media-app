@@ -9,6 +9,7 @@ import {
 import {
   getCommentsForPost,
   createNewCommentToPost,
+  editCommentOfPost,
 } from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
@@ -21,6 +22,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentData, setCommentData] = useState({ text: "" });
+  const [editCommentData, setEditCommentData] = useState({
+    postId: "",
+    commentId: "",
+    isEditComment: false,
+  });
 
   const token = localStorage.getItem("token");
   const activeUsername = localStorage.getItem("username");
@@ -28,6 +34,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const dispatch = useDispatch();
   const postObj = useSelector((state) => state.posts);
   const bookmark = useSelector((state) => state.users.bookmarks);
+  const postsCommentsArray = useSelector((state) => state.comments.comments);
   const comments = useSelector((state) =>
     state.comments.comments.filter((post) => post._id == _id)
   );
@@ -50,9 +57,48 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
     dispatch(getCommentsForPost({ _id }));
   }, []);
 
+  useEffect(() => {
+    if (editCommentData.isEditComment) {
+      const commentToEditPost = postsCommentsArray.filter(
+        (post) => post._id == editCommentData.postId
+      );
+
+      const commentToEdit = commentToEditPost[0].postComments.filter(
+        (comment) => comment._id == editCommentData.commentId
+      );
+
+      setCommentData({ ...commentData, text: commentToEdit[0].text });
+    }
+  }, [editCommentData]);
+
   function handleCommentPost(commentData, postId, token) {
     dispatch(createNewCommentToPost({ commentData, postId, token }));
     setCommentData({ text: "" });
+  }
+
+  function handleEditCommentOfPost(commentData, postId, commentId, token) {
+    dispatch(editCommentOfPost({ commentData, postId, commentId, token }));
+  }
+
+  function postHandler(commentData, _id, token) {
+    if (editCommentData.isEditComment) {
+      handleEditCommentOfPost(
+        commentData,
+        editCommentData.postId,
+        editCommentData.commentId,
+        token
+      );
+
+      setEditCommentData({
+        postId: "",
+        commentId: "",
+        isEditComment: false,
+      });
+
+      setCommentData({ text: "" });
+    } else {
+      handleCommentPost(commentData, _id, token);
+    }
   }
 
   return (
@@ -140,7 +186,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
           <div className="d-flex j-content-right mr-2 mb-small">
             <button
               className="btn btn-custom-sty btn-custom-small"
-              onClick={() => handleCommentPost(commentData, _id, token)}
+              onClick={() => postHandler(commentData, _id, token)}
             >
               Post
             </button>
@@ -155,6 +201,8 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
                     comment={comment}
                     postId={_id}
                     postUsername={username}
+                    editCommentData={editCommentData}
+                    setEditCommentData={setEditCommentData}
                   />
                 );
               })}

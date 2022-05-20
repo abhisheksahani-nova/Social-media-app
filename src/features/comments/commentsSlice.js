@@ -52,7 +52,6 @@ export const deleteCommentOfPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response);
       return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
@@ -74,7 +73,7 @@ export const editCommentOfPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      return response.data.comments;
+      return { _id: postId, postComments: response.data.comments };
     } catch (err) {
       console.log(error);
     }
@@ -145,6 +144,12 @@ const CommentsSlice = createSlice({
         filerArray.push(action.payload);
         state.comments = filerArray;
       })
+      .addCase(editCommentOfPost.fulfilled, (state, action) => {
+        const postId = action.payload._id;
+        const filerArray = state.comments.filter((post) => post._id !== postId);
+        filerArray.push(action.payload);
+        state.comments = filerArray;
+      });
   },
 });
 

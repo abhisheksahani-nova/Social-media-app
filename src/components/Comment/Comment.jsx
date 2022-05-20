@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import "./Comment.css";
 import { PostDropdown } from "../index";
+import { useDispatch } from "react-redux";
+import {
+  upvoteCommentOfPost,
+  downvoteCommentOfPost,
+} from "../../features/comments/commentsSlice";
 
-function Comment({ comment, postId, postUsername }) {
+function Comment({
+  comment,
+  postId,
+  postUsername,
+  editCommentData,
+  setEditCommentData,
+}) {
   const { _id, text, username, name, votes } = comment;
 
   const [isCommentDropdownOpen, setIsCommentDropdownOpen] = useState(false);
   const signInUser = localStorage.getItem("username");
+  const dispatch = useDispatch();
+
+  function handleCommentUpVote() {}
+
+  function handleCommentDownVote() {}
 
   return (
     <div className="d-flex user-post-container gap-small">
@@ -22,6 +38,8 @@ function Comment({ comment, postId, postUsername }) {
           setIsCommentDropdownOpen={setIsCommentDropdownOpen}
           postId={postId}
           commentId={_id}
+          editCommentData={editCommentData}
+          setEditCommentData={setEditCommentData}
         />
       )}
 
@@ -44,8 +62,14 @@ function Comment({ comment, postId, postUsername }) {
         </div>
 
         <div className="comment-icon-container">
-          <i class="fa-regular fa-thumbs-up comment-like-icon"></i>
-          <i class="fa-regular fa-thumbs-down"></i>
+          <i
+            class="fa-regular fa-thumbs-up comment-like-icon"
+            onClick={() => handleCommentUpVote()}
+          ></i>
+          <i
+            class="fa-regular fa-thumbs-down"
+            onClick={() => handleCommentDownVote()}
+          ></i>
         </div>
       </div>
     </div>

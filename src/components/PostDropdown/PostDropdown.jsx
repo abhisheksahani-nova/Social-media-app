@@ -13,6 +13,8 @@ function PostDropdown({
   setIsCommentDropdownOpen,
   postId,
   commentId,
+  editCommentData,
+  setEditCommentData,
 }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -26,6 +28,20 @@ function PostDropdown({
     setIsPostEdit((prev) => !prev);
     setEditPostId(id);
     setIsDropdownOpen((prev) => !prev);
+  }
+
+  function handleEdit(id) {
+    if (isCommentDropdownOpen) {
+      setEditCommentData({
+        ...editCommentData,
+        postId: postId,
+        commentId: commentId,
+        isEditComment: true,
+      });
+      setIsCommentDropdownOpen((prev) => !prev);
+    } else {
+      handleEditPost(id);
+    }
   }
 
   function handleCloseDropdown() {
@@ -62,7 +78,7 @@ function PostDropdown({
 
         <li
           className="d-flex playlist-li-item mt-small cursor-p j-space-between"
-          onClick={() => handleEditPost(id)}
+          onClick={() => handleEdit(id)}
         >
           <small className="break-word">
             {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}

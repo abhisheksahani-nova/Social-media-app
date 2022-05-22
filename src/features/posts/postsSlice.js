@@ -110,13 +110,20 @@ const postSlice = createSlice({
   reducers: {
     sortByMostLiked: (state, action) => {
       const postsArr = [...action.payload.posts];
-      let mostLiked = postsArr.sort(
+      const mostLikedPosts = postsArr.sort(
         (a, b) => b.likes.likeCount - a.likes.likeCount
       );
 
-      console.log(postsArr, mostLiked);
+      state.posts = mostLikedPosts;
+    },
 
-      state.posts = mostLiked;
+    sortByLatest: (state, action) => {
+      const postsArr = [...action.payload.posts];
+      const latestPosts = postsArr.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+
+      state.posts = latestPosts;
     },
   },
   extraReducers: (builder) => {
@@ -142,6 +149,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { sortByMostLiked } = postSlice.actions;
+export const { sortByMostLiked, sortByLatest } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../PostDropdown/PostDropdown.css";
 import "./FilterDropdown.css";
-import { sortByMostLiked } from "../../features/posts/postsSlice";
+import { sortByMostLiked, sortByLatest } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function FilterDropdown({ setIsFilterDropdownOpen }) {
@@ -10,6 +10,11 @@ function FilterDropdown({ setIsFilterDropdownOpen }) {
 
   function handleMostLikedPost() {
     dispatch(sortByMostLiked({ posts }));
+    setIsFilterDropdownOpen((prev) => !prev);
+  }
+
+  function handleLatestPost() {
+    dispatch(sortByLatest({ posts }));
     setIsFilterDropdownOpen((prev) => !prev);
   }
 
@@ -27,7 +32,10 @@ function FilterDropdown({ setIsFilterDropdownOpen }) {
         ></i>
       </li>
 
-      <li className="d-flex playlist-li-item cursor-p j-space-between">
+      <li
+        className="d-flex playlist-li-item cursor-p j-space-between"
+        onClick={() => handleLatestPost()}
+      >
         <small className="break-word">Latest post</small>
       </li>
 

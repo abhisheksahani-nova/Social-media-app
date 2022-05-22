@@ -4,5 +4,14 @@ import Post from "./Post/Post";
 import FollowContainer from "./FollowContainer/FollowContainer";
 import PostDropdown from "./PostDropdown/PostDropdown";
 import Comment from "./Comment/Comment";
+import FilterDropdown from "./FilterDropdown/FilterDropdown";
 
-export { Navbar, Sidebar, Post, FollowContainer, PostDropdown, Comment };
+export {
+  Navbar,
+  Sidebar,
+  Post,
+  FollowContainer,
+  PostDropdown,
+  Comment,
+  FilterDropdown,
+};

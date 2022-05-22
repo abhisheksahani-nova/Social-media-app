@@ -107,7 +107,18 @@ export const dislikePost = createAsyncThunk(
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    sortByMostLiked: (state, action) => {
+      const postsArr = [...action.payload.posts];
+      let mostLiked = postsArr.sort(
+        (a, b) => b.likes.likeCount - a.likes.likeCount
+      );
+
+      console.log(postsArr, mostLiked);
+
+      state.posts = mostLiked;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createNewPost.fulfilled, (state, action) => {
@@ -130,5 +141,7 @@ const postSlice = createSlice({
       });
   },
 });
+
+export const { sortByMostLiked } = postSlice.actions;
 
 export default postSlice.reducer;

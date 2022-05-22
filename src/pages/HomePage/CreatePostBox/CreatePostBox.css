@@ -54,12 +54,12 @@
 
 .pri-outline-btn {
   background-color: var(--light-clr);
-  color: var(--note-pri-clr);
-  border: 1px solid var(--note-pri-clr);
+  color: var(--custom-sec-clr);
+  border: 1px solid var(--custom-sec-clr);
 }
 
 .pri-outline-btn:hover {
-  background-color: var(--note-pri-clr);
+  background-color: var(--custom-sec-clr);
   color: var(--light-clr);
 }
 

@@ -64,6 +64,7 @@ const UsersSlice = createSlice({
   initialState,
   reducers: {
     updateBookmarks: (state, action) => {
+      console.log(state.bookmarks)
       state.bookmarks = action.payload.updatedBookmarks;
     },
   },

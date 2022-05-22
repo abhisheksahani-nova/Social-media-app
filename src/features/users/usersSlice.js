@@ -7,6 +7,16 @@ const initialState = {
   bookmarks: [],
 };
 
+export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
+  try {
+    const response = await axios.get(`/api/users`);
+    return response.data.users;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+});
+
 export const bookmarkPost = createAsyncThunk(
   "users/bookmarkPost",
   async (data) => {
@@ -52,7 +62,11 @@ export const removePostFromBookmark = createAsyncThunk(
 const UsersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    updateBookmarks: (state, action) => {
+      state.bookmarks = action.payload.updatedBookmarks;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(bookmarkPost.fulfilled, (state, action) => {
@@ -63,5 +77,7 @@ const UsersSlice = createSlice({
       });
   },
 });
+
+export const { updateBookmarks } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

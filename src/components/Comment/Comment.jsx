@@ -6,6 +6,7 @@ import {
   upvoteCommentOfPost,
   downvoteCommentOfPost,
 } from "../../features/comments/commentsSlice";
+import { getPosts } from "../../features/posts/postsSlice";
 
 function Comment({
   comment,
@@ -24,10 +25,12 @@ function Comment({
 
   function handleCommentUpVote(postId, commentId, token) {
     dispatch(upvoteCommentOfPost({ postId, commentId, token }));
+    dispatch(getPosts());
   }
 
   function handleCommentDownVote(postId, commentId, token) {
     dispatch(downvoteCommentOfPost({ postId, commentId, token }));
+    dispatch(getPosts());
   }
 
   return (

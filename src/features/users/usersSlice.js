@@ -23,10 +23,10 @@ export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
 export const getUserById = createAsyncThunk(
   "users/getUserById",
   async (data) => {
-    const { _id } = data;
+    const { id } = data;
 
     try {
-      const response = await axios.get(`/api/users/${_id}`);
+      const response = await axios.get(`/api/users/${id}`);
       console.log(response);
       return response.data.user;
     } catch (err) {

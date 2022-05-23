@@ -15,8 +15,8 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "https://www.lipsum.com/",
-    portfolio: "Sharing my happy thoughts",
+    bio: "Sharing my happy thoughts",
+    portfolio: "https://www.lipsum.com/",
   },
   {
     _id: uuid(),
@@ -28,9 +28,9 @@ export const users = [
     updatedAt: formatDate(),
     avatar:
       "https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU",
-    bio: "https://www.lipsum.com/",
+    bio: "A Homosapien evolved to do software development, storytelling and art",
     portfolio:
-      "A Homosapien evolved to do software development, storytelling and art",
+      "https://www.lipsum.com/",
   },
   {
     _id: uuid(),

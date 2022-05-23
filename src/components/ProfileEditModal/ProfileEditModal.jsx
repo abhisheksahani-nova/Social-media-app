@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileEditModal.css";
+import { editUserDetails } from "../../features/users/usersSlice";
+import { useDispatch } from "react-redux";
 
-function ProfileEditModal({ setShowModal }) {
+function ProfileEditModal({ setShowModal, user }) {
+  const [editUserData, setEditUserData] = useState({ bio: "", portfolio: "" });
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+
+  function handleEditUserData(token) {
+    const userData = { ...user, ...editUserData };
+    dispatch(editUserDetails({ userData, token }));
+    setShowModal((prev) => !prev);
+  }
+
   return (
     <div className="playlist-dropdown-container">
       <div
@@ -23,6 +35,9 @@ function ProfileEditModal({ setShowModal }) {
             type="text"
             placeholder="Enter your bio"
             className="profile-edit-modal-inp"
+            onChange={(e) =>
+              setEditUserData({ ...editUserData, bio: e.target.value })
+            }
           ></input>
         </div>
 
@@ -32,11 +47,19 @@ function ProfileEditModal({ setShowModal }) {
             type="text"
             placeholder="Enter your portfolio"
             className="profile-edit-modal-inp"
+            onChange={(e) =>
+              setEditUserData({ ...editUserData, portfolio: e.target.value })
+            }
           ></input>
         </div>
 
         <div className="d-flex justify-cont-right">
-          <button className="btn btn-custom-sty">Save</button>
+          <button
+            className="btn btn-custom-sty"
+            onClick={() => handleEditUserData(token)}
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>

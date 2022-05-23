@@ -1,0 +1,17 @@
+.profile-edit-modal {
+  width: 35%;
+  top: 15%;
+  left: 33%;
+  border-radius: 8px;
+}
+
+.profile-edit-modal-inp {
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid var(--gray-shade5);
+}
+
+.profile-edit-modal-inp-label {
+  font-size: 0.9rem;
+}

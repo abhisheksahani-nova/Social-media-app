@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Sidebar, FollowContainer } from "../../components/index";
 import "./Profile.css";
+import { ProfileEditModal } from "../../components/index";
 
 function Profile() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div>
       <Navbar />
       <section className="d-flex gap-4">
         <Sidebar />
+
+        {showModal && <ProfileEditModal setShowModal={setShowModal} />}
+
         <div className="user-profile-middle-container p-2">
           <div className="d-flex flex-direction-col gap-1 ">
             <section className="d-flex justify-cont-center ">
@@ -32,7 +37,12 @@ function Profile() {
                     </a>
                   </p>
                 </div>
-                <button className="btn btn-custom-sty">Edit</button>
+                <button
+                  className="btn btn-custom-sty"
+                  onClick={() => setShowModal((prev) => !prev)}
+                >
+                  Edit
+                </button>
               </div>
             </section>
           </div>

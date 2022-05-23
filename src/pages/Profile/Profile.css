@@ -1,0 +1,23 @@
+.p-1 {
+  padding: 1rem;
+}
+
+.p-2{
+    padding: 2rem;
+}
+
+.justify-cont-center {
+  justify-content: center;
+}
+
+.profile-page-container {
+  padding: 2rem;
+}
+
+.user-profile-middle-container{
+    width: 43%;
+}
+
+.profile-card{
+    width: 30rem;
+}

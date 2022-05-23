@@ -26,7 +26,7 @@ function HomePage() {
             setIsPostEdit={setIsPostEdit}
             editPostId={editPostId}
           />
-          <div className="d-flex flex-direction gap-1 ">
+          <div className="d-flex flex-direction-col gap-1 ">
             {postsObj.posts.map((post) => {
               return (
                 <Post

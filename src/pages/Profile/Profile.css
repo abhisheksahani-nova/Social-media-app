@@ -2,8 +2,8 @@
   padding: 1rem;
 }
 
-.p-2{
-    padding: 2rem;
+.p-2 {
+  padding: 2rem;
 }
 
 .justify-cont-center {
@@ -14,10 +14,18 @@
   padding: 2rem;
 }
 
-.user-profile-middle-container{
-    width: 43%;
+.user-profile-middle-container {
+  width: 43%;
 }
 
-.profile-card{
-    width: 30rem;
+.profile-card {
+  width: 30rem;
+}
+
+.profile-para-text {
+  font-size: 0.9rem;
+}
+
+.mb-small{
+    margin-bottom: 0.5rem;
 }

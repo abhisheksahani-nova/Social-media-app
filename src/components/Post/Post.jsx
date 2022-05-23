@@ -89,7 +89,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   }
 
   return (
-    <div className="d-flex flex-direction bg-white ">
+    <div className="d-flex flex-direction-col bg-white ">
       <div className="d-flex  user-post-container">
         <img
           className="avatar xs"

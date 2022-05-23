@@ -13,6 +13,27 @@
   font-size: 0.92rem;
 }
 
-.width-100{
+.width-100 {
   width: 100%;
+}
+
+.clr-red {
+  color: var(--red);
+}
+
+.bg-white {
+  background-color: var(--light-bg-clr);
+}
+
+.mr-2 {
+  margin-right: 2rem;
+}
+
+.comment-textarea {
+  min-height: 3.2rem;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.mb-small{
+  margin-bottom: 10px;
 }

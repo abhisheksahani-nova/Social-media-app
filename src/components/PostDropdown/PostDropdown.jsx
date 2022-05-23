@@ -1,11 +1,25 @@
 import React from "react";
 import "./PostDropdown.css";
 import { deletePost } from "../../features/posts/postsSlice.js";
+import { deleteCommentOfPost } from "../../features/comments/commentsSlice";
 import { useDispatch } from "react-redux";
 
-function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
+function PostDropdown({
+  setIsDropdownOpen,
+  id,
+  setIsPostEdit,
+  setEditPostId,
+  isCommentDropdownOpen,
+  setIsCommentDropdownOpen,
+  postId,
+  commentId,
+  editCommentData,
+  setEditCommentData,
+  commentUsername,
+}) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const signInUser = localStorage.getItem("username");
 
   function handleDeletePost(id, token) {
     dispatch(deletePost({ id, token }));
@@ -16,6 +30,37 @@ function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
     setIsPostEdit((prev) => !prev);
     setEditPostId(id);
     setIsDropdownOpen((prev) => !prev);
+  }
+
+  function handleEdit(id) {
+    if (isCommentDropdownOpen) {
+      setEditCommentData({
+        ...editCommentData,
+        postId: postId,
+        commentId: commentId,
+        isEditComment: true,
+      });
+      setIsCommentDropdownOpen((prev) => !prev);
+    } else {
+      handleEditPost(id);
+    }
+  }
+
+  function handleCloseDropdown() {
+    if (isCommentDropdownOpen) {
+      setIsCommentDropdownOpen((prev) => !prev);
+    } else {
+      setIsDropdownOpen((prev) => !prev);
+    }
+  }
+
+  function handleDelete(id, token, postId, commentId) {
+    if (isCommentDropdownOpen) {
+      dispatch(deleteCommentOfPost({ postId, commentId, token }));
+      setIsCommentDropdownOpen((prev) => !prev);
+    } else {
+      handleDeletePost(id, token);
+    }
   }
 
   return (
@@ -29,22 +74,32 @@ function PostDropdown({ setIsDropdownOpen, id, setIsPostEdit, setEditPostId }) {
           <h5 className="break-word">Select</h5>
           <i
             className="fa-solid fa-rectangle-xmark cursor-p"
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            onClick={() => handleCloseDropdown()}
           ></i>
         </li>
 
-        <li className="d-flex playlist-li-item mt-small cursor-p j-space-between">
-          <small className="break-word" onClick={() => handleEditPost(id)}>
-            Edit post
-          </small>
-          <i class="fa-solid fa-pencil post-dropdown-icon"></i>
-        </li>
+        {!isCommentDropdownOpen ||
+        (isCommentDropdownOpen && signInUser == commentUsername) ? (
+          <li
+            className="d-flex playlist-li-item cursor-p j-space-between"
+            onClick={() => handleEdit(id)}
+          >
+            <small className="break-word">
+              {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}
+            </small>
+            <i class="fa-solid fa-pencil post-dropdown-icon"></i>
+          </li>
+        ) : (
+          ""
+        )}
 
         <li
           className="d-flex playlist-li-item cursor-p j-space-between"
-          onClick={() => handleDeletePost(id, token)}
+          onClick={() => handleDelete(id, token, postId, commentId)}
         >
-          <small className="break-word">Delete post</small>
+          <small className="break-word">{`Delete ${
+            isCommentDropdownOpen ? "comment" : "post"
+          }`}</small>
           <i class="fa-solid fa-trash post-dropdown-icon"></i>
         </li>
       </ul>

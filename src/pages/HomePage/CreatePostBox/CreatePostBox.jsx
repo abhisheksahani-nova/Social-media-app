@@ -23,6 +23,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
       dispatch(editPost({ postData, editPostId, token }));
       setIsPostEdit((prev) => !prev);
     } else {
+      if(postData.content)
       dispatch(createNewPost({ postData, token }));
     }
 

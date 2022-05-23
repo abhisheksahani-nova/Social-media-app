@@ -10,7 +10,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -20,6 +20,28 @@ export const posts = [
     name: "Adarsh Balika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "shubhamsoni",
+        name: "Shubham Soni",
+        text: "Interesting",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "sohamshah",
+        name: "Soham Shah",
+        text: "Wow!",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -31,7 +53,30 @@ export const posts = [
       dislikedBy: [],
     },
     username: "shubhamsoni",
-    name: "Shubham Soni",
+    name: "Shubhum Soni",
+
+    comments: [
+      {
+        _id: uuid(),
+        username: "arjunsharma",
+        name: "Arjun Sharma",
+        text: "Great work, would love to hear more from you",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "sunnysingh",
+        name: "Sunny Singh",
+        text: "Lets meet soon buddy, its been to long we didn't met",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

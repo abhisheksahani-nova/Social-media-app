@@ -1,0 +1,21 @@
+.comment-content-container {
+  background-color: var(--social-comment-bg-clr);
+  padding: 0.8rem;
+  border-radius: 0rem 1rem 1rem 1rem;
+}
+
+.gap-small {
+  gap: 0.5rem;
+}
+
+.comment-icon-container {
+  margin: 10px 20px 0;
+}
+
+.comment-like-icon {
+  margin-right: 6px;
+}
+
+.vote-count {
+  font-size: 0.8rem;
+}

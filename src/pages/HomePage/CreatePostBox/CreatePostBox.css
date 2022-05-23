@@ -1,7 +1,7 @@
 .create-note-container {
   width: 38rem;
   border: 1px solid var(--gray-shade5);
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
   background-color: var(--light-bg-clr);
 }
@@ -95,6 +95,11 @@
 }
 
 .btn-custom-small {
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.75rem;
   outline: none;
+  font-size: 0.9rem;
+}
+
+.border-none {
+  border: none;
 }

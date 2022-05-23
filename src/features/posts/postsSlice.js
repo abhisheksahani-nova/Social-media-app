@@ -65,6 +65,45 @@ export const editPost = createAsyncThunk("post/editPost", async (data) => {
   }
 });
 
+export const likePost = createAsyncThunk("post/likePost", async (data) => {
+  const { _id, token } = data;
+
+  try {
+    const response = await axios.post(
+      `/api/posts/like/${_id}`,
+      {},
+      {
+        headers: { authorization: token },
+      }
+    );
+    return response.data.posts;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+});
+
+export const dislikePost = createAsyncThunk(
+  "post/dislikePost",
+  async (data) => {
+    const { _id, token } = data;
+
+    try {
+      const response = await axios.post(
+        `/api/posts/dislike/${_id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      return response.data.posts;
+    } catch (err) {
+      console.log(error);
+      return err;
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -81,6 +120,12 @@ const postSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(editPost.fulfilled, (state, action) => {
+        state.posts = action.payload;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.posts = action.payload;
+      })
+      .addCase(dislikePost.fulfilled, (state, action) => {
         state.posts = action.payload;
       });
   },

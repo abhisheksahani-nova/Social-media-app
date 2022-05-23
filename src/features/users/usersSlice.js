@@ -4,18 +4,53 @@ import axios from "axios";
 const initialState = {
   users: [],
   currentUser: {},
+  user: {},
   bookmarks: [],
+  token: "",
 };
 
 export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
   try {
     const response = await axios.get(`/api/users`);
+    console.log(response);
     return response.data.users;
   } catch (err) {
     console.log(err);
     return err;
   }
 });
+
+export const getUserById = createAsyncThunk(
+  "users/getUserById",
+  async (data) => {
+    const { _id } = data;
+
+    try {
+      const response = await axios.get(`/api/users/${_id}`);
+      console.log(response);
+      return response.data.user;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
+
+export const getUserLoggedIn = createAsyncThunk(
+  "users/getUserLoggedIn",
+  async (data) => {
+    try {
+      const { userLoginData } = data;
+
+      const response = await axios.post("/api/auth/login", userLoginData);
+      console.log(response);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
 
 export const bookmarkPost = createAsyncThunk(
   "users/bookmarkPost",
@@ -59,6 +94,28 @@ export const removePostFromBookmark = createAsyncThunk(
   }
 );
 
+export const editUserDetails = createAsyncThunk(
+  "users/editUserDetails",
+  async (data) => {
+    const { userData, token } = data;
+
+    try {
+      const response = await axios.post(
+        `/api/users/edit`,
+        { userData },
+        {
+          headers: { authorization: token },
+        }
+      );
+      console.log(response);
+      return response.data.user;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
+
 const UsersSlice = createSlice({
   name: "users",
   initialState,
@@ -74,6 +131,19 @@ const UsersSlice = createSlice({
       })
       .addCase(removePostFromBookmark.fulfilled, (state, action) => {
         state.bookmarks = action.payload;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(editUserDetails.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+      })
+      .addCase(getUserLoggedIn.fulfilled, (state, action) => {
+        state.token = action.payload.encodedToken;
+        state.currentUser = action.payload.user;
       });
   },
 });

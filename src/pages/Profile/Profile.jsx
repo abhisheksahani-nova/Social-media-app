@@ -19,12 +19,6 @@ function Profile() {
     dispatch(getUserById({ id }));
   }, [id, showModal]);
 
-  useEffect(() => {
-    const userPosts = posts.filter((post) => post.username == user.username);
-    setUserPosts(userPosts);
-    console.log( posts)
-  }, [posts]);
-
   return (
     <div>
       <Navbar />
@@ -67,7 +61,11 @@ function Profile() {
             </section>
 
             <div>
-              
+              {posts
+                .filter((post) => post.username == user.username)
+                .map((post) => {
+                  return <Post key={post._id} post={post} />;
+                })}
             </div>
           </div>
         </div>

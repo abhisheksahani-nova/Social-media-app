@@ -15,6 +15,17 @@ function HomePage() {
     dispatch(getPosts());
   }, []);
 
+  function getHomePagePost() {
+    const homePagePost = postsObj.posts.filter(
+      (post) =>
+        post.username == "adarshbalika" ||
+        post.username == "abhishekSahani" ||
+        post.username == "msDhoni"
+    );
+
+    return homePagePost
+  }
+
   return (
     <div>
       <Navbar />
@@ -27,7 +38,7 @@ function HomePage() {
             editPostId={editPostId}
           />
           <div className="d-flex flex-direction-col gap-1 ">
-            {postsObj.posts.map((post) => {
+            {getHomePagePost().map((post) => {
               return (
                 <Post
                   key={post._id}

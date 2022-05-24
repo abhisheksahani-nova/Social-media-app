@@ -14,7 +14,10 @@ function Sidebar() {
         >
           <i className="fa-solid fa-house videolib-drawer-icon"></i> Home
         </li>
-        <li className="videolib-list-item sidebar-list">
+        <li
+          className="videolib-list-item sidebar-list"
+          onClick={() => navigate("/explore")}
+        >
           <i className="fa-solid fa-compass videolib-drawer-icon"></i> Explore
         </li>
         <li

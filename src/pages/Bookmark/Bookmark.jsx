@@ -25,7 +25,7 @@ function Bookmark() {
       <section className="d-flex gap-4">
         <Sidebar />
         <div>
-          <div className="d-flex flex-direction-col gap-1 ">
+          <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
             {bookmarks?.map((post) => {
               return <Post key={post._id} post={post} />;
             })}

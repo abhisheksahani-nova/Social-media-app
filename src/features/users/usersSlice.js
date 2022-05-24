@@ -12,7 +12,6 @@ const initialState = {
 export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
   try {
     const response = await axios.get(`/api/users`);
-    console.log(response);
     return response.data.users;
   } catch (err) {
     console.log(err);
@@ -27,7 +26,6 @@ export const getUserById = createAsyncThunk(
 
     try {
       const response = await axios.get(`/api/users/${id}`);
-      console.log(response);
       return response.data.user;
     } catch (err) {
       console.log(err);
@@ -43,7 +41,6 @@ export const getUserLoggedIn = createAsyncThunk(
       const { userLoginData } = data;
 
       const response = await axios.post("/api/auth/login", userLoginData);
-      console.log(response);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -107,7 +104,6 @@ export const editUserDetails = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response);
       return response.data.user;
     } catch (err) {
       console.log(err);

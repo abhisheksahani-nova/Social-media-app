@@ -6,7 +6,8 @@ const initialState = {
   currentUser: {},
   user: {},
   bookmarks: [],
-  token: "",
+  following: [],
+  token: localStorage.getItem("token"),
 };
 
 export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
@@ -112,6 +113,47 @@ export const editUserDetails = createAsyncThunk(
   }
 );
 
+export const followUser = createAsyncThunk("user/followUser", async (data) => {
+  const { id, token } = data;
+  console.log(data);
+
+  try {
+    const response = await axios.post(
+      `/api/users/follow/${id}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return response.data.followUser;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+export const UnfollowUser = createAsyncThunk(
+  "users/UnfollowUser",
+  async (data) => {
+    const { id, token } = data;
+
+    try {
+      const response = await axios.post(
+        `/api/users/unfollow/${id}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      return response.data.followUser;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
+
 const UsersSlice = createSlice({
   name: "users",
   initialState,
@@ -140,6 +182,30 @@ const UsersSlice = createSlice({
       .addCase(getUserLoggedIn.fulfilled, (state, action) => {
         state.token = action.payload.encodedToken;
         state.currentUser = action.payload.user;
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        if (action.payload) {
+          const unfollowUserId = action.payload._id;
+
+          const filerArray = state.following.filter(
+            (user) => user._id !== unfollowUserId
+          );
+          filerArray.push(action.payload);
+
+          state.following = filerArray;
+        }
+      })
+      .addCase(UnfollowUser.fulfilled, (state, action) => {
+        if (action.payload) {
+          const unfollowUserId = action.payload._id;
+
+          const filerArray = state.following.filter(
+            (user) => user._id !== unfollowUserId
+          );
+          filerArray.push(action.payload);
+
+          state.following = filerArray;
+        }
       });
   },
 });

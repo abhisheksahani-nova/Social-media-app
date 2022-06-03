@@ -1,6 +1,6 @@
 import React from "react";
 import "./PostDropdown.css";
-import { deletePost } from "../../features/posts/postsSlice.js";
+import { deletePost, getPosts } from "../../features/posts/postsSlice.js";
 import { deleteCommentOfPost } from "../../features/comments/commentsSlice";
 import { useDispatch } from "react-redux";
 
@@ -57,6 +57,7 @@ function PostDropdown({
   function handleDelete(id, token, postId, commentId) {
     if (isCommentDropdownOpen) {
       dispatch(deleteCommentOfPost({ postId, commentId, token }));
+      dispatch(getPosts());
       setIsCommentDropdownOpen((prev) => !prev);
     } else {
       handleDeletePost(id, token);

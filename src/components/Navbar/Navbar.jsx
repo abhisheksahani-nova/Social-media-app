@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import { FilterDropdown } from "../index";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
 
   return (
     <nav className="nav-bar navbar-container mb-0">
       <div className="nav-innerContainer font-clr">
         <h2 className="nav-heading mr-4 nav-custom-sty">Social Cloud.</h2>
       </div>
+
+      {isFilterDropdownOpen && (
+        <FilterDropdown setIsFilterDropdownOpen={setIsFilterDropdownOpen} />
+      )}
 
       <div className="nav-innerContainer font-clr width-auto">
         <input className="nav_searchBar" type="text" />
@@ -27,10 +33,12 @@ function Navbar() {
         </div>
 
         <div className="flex-col-center">
-          <a className="font-clr" href="/">
-            <i className="fa-solid fa-user"></i>
-          </a>
-          <small>Profile</small>
+          <button
+            className="btn pri-outline-btn"
+            onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
+          >
+            Filter
+          </button>
         </div>
 
         <div className="flex-col-center">

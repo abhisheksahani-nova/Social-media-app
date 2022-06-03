@@ -93,7 +93,6 @@ export const upvoteCommentOfPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response)
 
       return { _id: postId, postComments: response.data.comments };
     } catch (err) {
@@ -116,7 +115,6 @@ export const downvoteCommentOfPost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      console.log(response)
 
       return { _id: postId, postComments: response.data.comments };
     } catch (err) {

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
 import { PostDropdown, Comment } from "../index";
-import { likePost, dislikePost } from "../../features/posts/postsSlice";
+import {
+  likePost,
+  dislikePost,
+  getPosts,
+} from "../../features/posts/postsSlice";
 import {
   bookmarkPost,
   removePostFromBookmark,
 } from "../../features/users/usersSlice";
 import {
-  getCommentsForPost,
   createNewCommentToPost,
   editCommentOfPost,
 } from "../../features/comments/commentsSlice";
@@ -15,10 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
-  const { _id, content, username, name } = post;
+  const { _id, content, username, name, likes, comments } = post;
 
-  const [isPostLikedBy, setIsPostLikedBy] = useState(false);
-  const [isPostBookmark, setIsPostBookmark] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [commentData, setCommentData] = useState({ text: "" });
@@ -32,30 +33,14 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const activeUsername = localStorage.getItem("username");
 
   const dispatch = useDispatch();
-  const postObj = useSelector((state) => state.posts);
-  const bookmark = useSelector((state) => state.users.bookmarks);
+  const bookmarks = useSelector((state) => state.users.bookmarks);
   const postsCommentsArray = useSelector((state) => state.comments.comments);
-  const comments = useSelector((state) =>
-    state.comments.comments.filter((post) => post._id == _id)
+
+  const isPostLikedBy = likes.likedBy.some(
+    (user) => user.username == activeUsername
   );
 
-  useEffect(() => {
-    const thisPost = postObj.posts.filter((post) => post._id == _id);
-    const isLikedPost = thisPost[0].likes.likedBy.some(
-      (user) => user.username == activeUsername
-    );
-
-    setIsPostLikedBy(isLikedPost);
-  }, [postObj]);
-
-  useEffect(() => {
-    const isBookmark = bookmark.some((user) => user._id == _id);
-    setIsPostBookmark(isBookmark);
-  }, [bookmark]);
-
-  useEffect(() => {
-    dispatch(getCommentsForPost({ _id }));
-  }, []);
+  const isPostBookmark = bookmarks.some((user) => user._id == _id);
 
   useEffect(() => {
     if (editCommentData.isEditComment) {
@@ -73,11 +58,13 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   function handleCommentPost(commentData, postId, token) {
     dispatch(createNewCommentToPost({ commentData, postId, token }));
+    dispatch(getPosts());
     setCommentData({ text: "" });
   }
 
   function handleEditCommentOfPost(commentData, postId, commentId, token) {
     dispatch(editCommentOfPost({ commentData, postId, commentId, token }));
+    dispatch(getPosts());
   }
 
   function postHandler(commentData, _id, token) {
@@ -192,9 +179,9 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
             </button>
           </div>
 
-          {comments[0].postComments && (
+          {comments && (
             <div>
-              {comments[0].postComments.map((comment) => {
+              {comments.map((comment) => {
                 return (
                   <Comment
                     key={comment._id}

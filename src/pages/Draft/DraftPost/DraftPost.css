@@ -1,8 +1,8 @@
-.draft-post-content {
-  font-size: 0.9rem;
+.draft-post-footer {
+  color: var(--gray-shade4);
+  font-size: 0.95rem;
 }
 
-.draft-post-footer {
-  color: var(--gray-shade3);
-  font-size: 0.97rem;
+.cursor-pointer{
+  cursor: pointer;
 }

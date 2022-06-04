@@ -5,7 +5,6 @@ import DraftPost from "./DraftPost/DraftPost";
 
 function Draft() {
   const draftPosts = useSelector((state) => state.posts.draftPosts);
-  console.log(draftPosts);
 
   return (
     <div>

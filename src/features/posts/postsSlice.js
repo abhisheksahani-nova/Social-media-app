@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { v4 as uuid } from "uuid";
+import { useSelector } from "react-redux";
 
 const initialState = {
   posts: [],
@@ -123,7 +125,21 @@ export const addPostToDraft = createAsyncThunk(
   (data) => {
     const { postData } = data;
     try {
-      return { ...postData, username };
+      return { ...postData, id: uuid() };
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const deletePostFromDraft = createAsyncThunk(
+  "post/deletePostFromDraft",
+  (data) => {
+    const { id, draftPosts } = data;
+
+    try {
+      const updatedraftPosts = draftPosts.filter((post) => post.id !== id);
+      return updatedraftPosts;
     } catch (err) {
       console.log(error);
     }
@@ -177,6 +193,9 @@ const postSlice = createSlice({
       })
       .addCase(addPostToDraft.fulfilled, (state, action) => {
         state.draftPosts.push(action.payload);
+      })
+      .addCase(deletePostFromDraft.fulfilled, (state, action) => {
+        state.draftPosts = action.payload;
       });
   },
 });

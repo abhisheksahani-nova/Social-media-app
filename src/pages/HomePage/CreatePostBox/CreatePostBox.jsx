@@ -61,7 +61,10 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           <div className="d-flex note-footer justify-cont-right">
             <button
               className="btn pri-outline-btn btn-custom-small"
-              onClick={() => dispatch(addPostToDraft({ postData }))}
+              onClick={() => {
+                dispatch(addPostToDraft({ postData }));
+                setPostData({ content: "" });
+              }}
             >
               Draft
             </button>

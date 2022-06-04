@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
+  archivePosts: [],
 };
 
 export const getPosts = createAsyncThunk("post/getPosts", async () => {
@@ -104,6 +105,18 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const addPostToArchive = createAsyncThunk(
+  "post/addPostToArchive",
+  async (data) => {
+    const { post } = data;
+    try {
+      return post;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -145,6 +158,9 @@ const postSlice = createSlice({
       })
       .addCase(dislikePost.fulfilled, (state, action) => {
         state.posts = action.payload;
+      })
+      .addCase(addPostToArchive.fulfilled, (state, action) => {
+        state.archivePosts.push(action.payload);
       });
   },
 });

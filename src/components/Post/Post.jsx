@@ -102,6 +102,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
             id={_id}
             setIsPostEdit={setIsPostEdit}
             setEditPostId={setEditPostId}
+            post={post}
           />
         )}
         <div className="width-100">

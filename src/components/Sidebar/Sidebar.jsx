@@ -30,6 +30,12 @@ function Sidebar() {
         <li className="videolib-list-item sidebar-list">
           <i className="fa-solid fa-user videolib-drawer-icon"></i> Profile
         </li>
+        <li
+          className="videolib-list-item sidebar-list"
+          onClick={() => navigate("/archive")}
+        >
+          <i className="fa-solid fa-user videolib-drawer-icon"></i> Archive
+        </li>
       </ul>
     </div>
   );

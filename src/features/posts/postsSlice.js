@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   posts: [],
   archivePosts: [],
+  draftPosts: [],
 };
 
 export const getPosts = createAsyncThunk("post/getPosts", async () => {
@@ -107,10 +108,22 @@ export const dislikePost = createAsyncThunk(
 
 export const addPostToArchive = createAsyncThunk(
   "post/addPostToArchive",
-  async (data) => {
+  (data) => {
     const { post } = data;
     try {
       return post;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const addPostToDraft = createAsyncThunk(
+  "post/addPostToDraft",
+  (data) => {
+    const { postData } = data;
+    try {
+      return { ...postData, username };
     } catch (err) {
       console.log(error);
     }
@@ -161,6 +174,9 @@ const postSlice = createSlice({
       })
       .addCase(addPostToArchive.fulfilled, (state, action) => {
         state.archivePosts.push(action.payload);
+      })
+      .addCase(addPostToDraft.fulfilled, (state, action) => {
+        state.draftPosts.push(action.payload);
       });
   },
 });

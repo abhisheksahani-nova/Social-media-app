@@ -5,5 +5,6 @@ import Bookmark from "./Bookmark/Bookmark";
 import Profile from "./Profile/Profile";
 import Explore from "./Explore/Explore";
 import Archive from "./Archive/Archive";
+import Draft from "./Draft/Draft";
 
-export { HomePage, Login, Signup, Bookmark, Profile, Explore, Archive };
+export { HomePage, Login, Signup, Bookmark, Profile, Explore, Archive, Draft };

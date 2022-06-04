@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./CreatePostBox.css";
 import TextareaAutosize from "react-textarea-autosize";
-import { createNewPost, editPost } from "../../../features/posts/postsSlice";
+import {
+  createNewPost,
+  editPost,
+  addPostToDraft,
+} from "../../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
@@ -23,8 +27,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
       dispatch(editPost({ postData, editPostId, token }));
       setIsPostEdit((prev) => !prev);
     } else {
-      if(postData.content)
-      dispatch(createNewPost({ postData, token }));
+      if (postData.content) dispatch(createNewPost({ postData, token }));
     }
 
     setPostData({ content: "" });
@@ -57,7 +60,14 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           </div>
           <div className="d-flex note-footer justify-cont-right">
             <button
-              className="btn btn-custom-sty btn-custom-small"
+              className="btn pri-outline-btn btn-custom-small"
+              onClick={() => dispatch(addPostToDraft({ postData }))}
+            >
+              Draft
+            </button>
+
+            <button
+              className="btn btn-custom-sty btn-custom-small ml-small"
               onClick={() =>
                 handleCreatePostAndEdit(postData, editPostId, token)
               }

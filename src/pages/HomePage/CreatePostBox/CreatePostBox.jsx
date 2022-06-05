@@ -7,9 +7,11 @@ import {
   addPostToDraft,
 } from "../../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { CreatePollModal } from "../../../components/index";
 
 function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [postData, setPostData] = useState({ content: "" });
+  const [pollModal, setPollModal] = useState(false);
 
   const postObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -52,11 +54,17 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           <i className="fa-solid fa-xmark"></i>
         </div>
 
+        {pollModal && <CreatePollModal setPollModal={setPollModal} />}
+
         <div className="d-flex note-footer mt-2">
           <div className="d-flex note-footer create-note-footer-icons-container">
             <i className="fa-solid fa-image"></i>
             <i className="fa-brands fa-youtube"></i>
             <i className="fa-solid fa-face-grin-wide"></i>
+            <i
+              className="fa-solid fa-signal"
+              onClick={() => setPollModal((prev) => !prev)}
+            ></i>
           </div>
           <div className="d-flex note-footer justify-cont-right">
             <button

@@ -1,4 +1,5 @@
-.poll-modal-container {
+.poll-modalbody-container {
   height: 18rem;
   overflow-y: scroll;
+  padding-right: 1rem;
 }

@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import "./CreatePollModal.css";
 import TextareaAutosize from "react-textarea-autosize";
 
-function CreatePollModal({ setPollModal }) {
+function CreatePollModal({ setPollModal, pollData, setPollData }) {
   const [pollModalOptionNum, setPollModalOptionNum] = useState(2);
-  const [pollData, setPollData] = useState({
-    question: "",
-    option1: "",
-    option2: "",
-    option3: "",
-    option4: "",
-    showPoll: false,
-  });
 
   function handleAddOption() {
     setPollModalOptionNum((prev) => prev + 1);
+  }
+
+  function handleSavePollData() {
+    if (pollData.question && pollData.option1 && pollData.option2) {
+      setPollData({ ...pollData, showPoll: true });
+      setPollModal((prev) => !prev);
+    }
   }
 
   return (
@@ -111,7 +110,12 @@ function CreatePollModal({ setPollModal }) {
         </div>
 
         <div className="d-flex justify-cont-right mt-1">
-          <button className="btn btn-custom-sty btn-custom-small">Save</button>
+          <button
+            className="btn btn-custom-sty btn-custom-small"
+            onClick={() => handleSavePollData()}
+          >
+            Done
+          </button>
         </div>
       </div>
     </div>

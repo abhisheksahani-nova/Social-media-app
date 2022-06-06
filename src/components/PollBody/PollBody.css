@@ -2,6 +2,7 @@
   border: 1px solid var(--gray-shade5);
   border-radius: 6px;
   padding: 1rem;
+  margin-top: 8px;
 }
 
 .pollbody-close-icon {
@@ -11,5 +12,9 @@
 
 .pollbody-question {
   color: var(--gray-shade2);
-  font-size: 0.97rem;
+  font-size: 0.96rem;
+}
+
+.btn-content-fontsize {
+  font-size: 0.8rem;
 }

@@ -115,7 +115,6 @@ export const editUserDetails = createAsyncThunk(
 
 export const followUser = createAsyncThunk("user/followUser", async (data) => {
   const { id, token } = data;
-  console.log(data);
 
   try {
     const response = await axios.post(

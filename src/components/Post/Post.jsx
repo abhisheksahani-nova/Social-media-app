@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
-import { PostDropdown, Comment } from "../index";
+import { PostDropdown, Comment, PollBody } from "../index";
 import {
   likePost,
   dislikePost,
@@ -18,10 +18,11 @@ import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 
 function Post({ post, setIsPostEdit, setEditPostId }) {
-  const { _id, content, username, name, likes, comments } = post;
+  const { _id, content, pollData, username, name, likes, comments } = post;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  // const [hidePollCloseIcon, setHidePollCloseIcon] = useState(false);
   const [commentData, setCommentData] = useState({ text: "" });
   const [editCommentData, setEditCommentData] = useState({
     postId: "",
@@ -117,7 +118,12 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             ></i>
           </div>
-          <small>{content}</small>
+          {content && <small>{content}</small>}
+
+          {pollData?.showPoll && (
+            <PollBody pollData={pollData} showCloseIcon={false} />
+          )}
+
           <div className="d-flex justify-cont-between mt-2">
             {isPostLikedBy ? (
               <i

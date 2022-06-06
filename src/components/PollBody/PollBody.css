@@ -1,0 +1,15 @@
+.poll-body-container {
+  border: 1px solid var(--gray-shade5);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.pollbody-close-icon {
+  font-size: 1.4rem;
+  color: var(--gray-shade3);
+}
+
+.pollbody-question {
+  color: var(--gray-shade2);
+  font-size: 0.97rem;
+}

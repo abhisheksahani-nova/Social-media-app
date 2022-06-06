@@ -7,7 +7,7 @@ import {
   addPostToDraft,
 } from "../../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { CreatePollModal } from "../../../components/index";
+import { CreatePollModal, PollBody } from "../../../components/index";
 
 function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [postData, setPostData] = useState({ content: "" });
@@ -53,6 +53,8 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           />
           <i className="fa-solid fa-xmark"></i>
         </div>
+
+        <PollBody />
 
         {pollModal && <CreatePollModal setPollModal={setPollModal} />}
 

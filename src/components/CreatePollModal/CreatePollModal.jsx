@@ -10,6 +10,7 @@ function CreatePollModal({ setPollModal }) {
     option2: "",
     option3: "",
     option4: "",
+    showPoll: false,
   });
 
   function handleAddOption() {

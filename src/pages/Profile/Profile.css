@@ -29,3 +29,15 @@
 .mb-small {
   margin-bottom: 0.5rem;
 }
+
+.select-img-icon {
+  position: absolute;
+  bottom: 0.2rem;
+  left: 4.2rem;
+  font-size: 1.2rem;
+  color: var(--custom-dark-clr);
+}
+
+.object-fit-cover{
+  object-fit: cover;
+}

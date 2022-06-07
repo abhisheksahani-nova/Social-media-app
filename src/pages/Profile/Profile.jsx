@@ -29,10 +29,16 @@ function Profile() {
       }
     };
     reader.readAsDataURL(e.target.files[0]);
-
-    const userData = { ...user, avatar: profileImg };
-    dispatch(editUserDetails({ userData, token }));
   };
+
+  useEffect(() => {
+    if (profileImg) {
+      const userData = { ...user, avatar: profileImg };
+      console.log(userData, "1st");
+      dispatch(editUserDetails({ userData, token }));
+      dispatch(getUserById({ id }));
+    }
+  }, [profileImg]);
 
   return (
     <div>
@@ -51,13 +57,7 @@ function Profile() {
                 <div className="d-flex mb-2 p-relative">
                   <img
                     className="avatar md object-fit-cover"
-                    src={
-                      user.username !== signInUser
-                        ? user.avatar
-                        : profileImg
-                        ? profileImg
-                        : user.avatar
-                    }
+                    src={user.avatar}
                     alt="user avatar"
                   />
 

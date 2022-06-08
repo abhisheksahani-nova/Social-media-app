@@ -21,3 +21,15 @@
 .follow-btn-link {
   color: var(--info-dark-clr);
 }
+
+@media screen and (max-width: 960px) {
+  .follow-unfollow-container {
+    width: 19rem;
+    padding: 0.8rem;
+  }
+
+  .follow-container-title {
+    margin-left: 0.5rem;
+    font-size: 1.05rem;
+  }
+}

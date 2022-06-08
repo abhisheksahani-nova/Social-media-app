@@ -8,8 +8,23 @@ import { getPosts } from "../../features/posts/postsSlice";
 function HomePage() {
   const [isPostEdit, setIsPostEdit] = useState(false);
   const [editPostId, setEditPostId] = useState("");
+  const [showSidebar, setShowSidebar] = useState(false);
   const postsObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+
+  const [windowWidth, setWindowWidth] = useState();
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -23,14 +38,15 @@ function HomePage() {
         post.username == "msDhoni"
     );
 
-    return homePagePost
+    return homePagePost;
   }
 
   return (
     <div>
-      <Navbar />
-      <section className="d-flex gap-4">
-        <Sidebar />
+      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      {console.log(windowWidth)}
+      <section className="d-flex gap-4 responsive-gap">
+        {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div>
           <CreatePostBox
             isPostEdit={isPostEdit}

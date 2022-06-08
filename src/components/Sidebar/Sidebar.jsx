@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({}) {
   const navigate = useNavigate();
 
   return (

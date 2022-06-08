@@ -16,3 +16,21 @@
 .btn-custom-sty {
   background-color: var(--custom-sec-clr);
 }
+
+@media screen and (max-width: 960px) {
+  .nav-input-container{
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .nav-title-container{
+    width: 14rem;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .nav-title-container{
+    width: 14rem;
+  }
+}

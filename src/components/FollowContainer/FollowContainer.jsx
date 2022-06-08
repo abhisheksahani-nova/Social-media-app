@@ -17,7 +17,7 @@ function FollowContainer() {
 
   return (
     <div className="follow-unfollow-container mt-2">
-      <h4 className="mb-1 ml-1">Who to follow?</h4>
+      <h4 className="follow-container-title mb-1 ml-1">Who to follow?</h4>
 
       <ul className="follow-list-container list-style-none">
         {users.map((user) => {

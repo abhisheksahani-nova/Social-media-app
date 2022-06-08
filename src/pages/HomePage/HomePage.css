@@ -29,3 +29,15 @@
 .font-size-small {
   font-size: 0.7rem;
 }
+
+@media screen and (max-width: 900px) {
+  .responsive-gap {
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .responsive-gap {
+    gap: 2rem;
+  }
+}

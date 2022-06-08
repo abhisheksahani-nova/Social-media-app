@@ -60,3 +60,10 @@
   background-color: var(--custom-pri-clr);
   border-radius: 0 20px 20px 0;
 }
+
+@media screen and (max-width: 810px) {
+  .videolib-drawer-container {
+    position: absolute;
+    z-index: 2;
+  }
+}

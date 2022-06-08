@@ -34,6 +34,14 @@
   padding: 1rem 1rem 0.5rem;
 }
 
-.mb-small{
+.mb-small {
   margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+  .user-post-container {
+    width: 32rem;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
 }

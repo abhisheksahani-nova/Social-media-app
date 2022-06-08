@@ -107,3 +107,22 @@
 .ml-small{
   margin-left: 0.5rem; 
 }
+
+@media screen and (max-width: 960px) {
+  .create-note-container {
+    width: 32rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .responsive-gap {
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .responsive-gap {
+    gap: 2rem;
+  }
+}

@@ -47,7 +47,7 @@ function HomePage() {
       {console.log(windowWidth)}
       <section className="d-flex gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
-        <div>
+        <div className="postbox-main-container">
           <CreatePostBox
             isPostEdit={isPostEdit}
             setIsPostEdit={setIsPostEdit}

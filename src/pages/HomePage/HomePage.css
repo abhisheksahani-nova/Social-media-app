@@ -41,3 +41,9 @@
     gap: 2rem;
   }
 }
+
+@media screen and (max-width: 810px) {
+  .postbox-main-container{
+    margin-left: 2rem;
+  }
+}

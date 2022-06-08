@@ -1,41 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./FollowContainer.css";
+import {
+  getAllUsers,
+} from "../../features/users/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
+
+import {FollowUserBox} from "../index";
 
 function FollowContainer() {
+  const users = useSelector((state) => state.users.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+
   return (
     <div className="follow-unfollow-container mt-2">
       <h4 className="mb-1 ml-1">Who to follow?</h4>
 
       <ul className="follow-list-container list-style-none">
-        <li className="d-flex justify-cont-between li-item border-none">
-          <div className="d-flex">
-            <img
-              className="avatar xs"
-              src="https://semantic-ui.com/images/avatar2/large/matthew.png"
-              alt="avatar"
-            />
-            <div className="d-flex list-content">
-              <h4>Jammy Sharma</h4>
-              <small>@jammySharma</small>
-            </div>
-          </div>
-          <button className="btn btn-text mb-1 follow-btn-link">Follow +</button>
-        </li>
-
-        <li className="d-flex justify-cont-between li-item border-none">
-          <div className="d-flex">
-            <img
-              className="avatar xs"
-              src="https://semantic-ui.com/images/avatar2/large/kristy.png"
-              alt="avatar"
-            />
-            <div className="d-flex list-content">
-              <h4>Rishi Mehta</h4>
-              <small>@rishiMehta</small>
-            </div>
-          </div>
-          <button className="btn btn-text mb-1 follow-btn-link">Follow +</button>
-        </li>
+        {users.map((user) => {
+          return <FollowUserBox key={user._id} user={user} />
+        })}
       </ul>
     </div>
   );

@@ -97,6 +97,31 @@ function Profile() {
               </div>
             </section>
 
+            <div
+              className={`d-flex j-content-right p-relative ${
+                showFollowContainer && "mb-4"
+              }`}
+            >
+              {windowWidth <= 560 && !showFollowContainer ? (
+                <div
+                  className="d-flex gap-2 follow-title-container"
+                  onClick={() => setShowFollowContainer((prev) => !prev)}
+                >
+                  <h4 className="follow-container-title ml-1">
+                    Who to follow?
+                  </h4>
+                  <i class="fa-solid fa-angle-down"></i>
+                </div>
+              ) : (
+                windowWidth <= 560 &&
+                showFollowContainer && (
+                  <FollowContainer
+                    setShowFollowContainer={setShowFollowContainer}
+                  />
+                )
+              )}
+            </div>
+
             <div>
               {posts
                 .filter((post) => post.username == user.username)
@@ -106,7 +131,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <FollowContainer />
+        {windowWidth > 560 && <FollowContainer />}
       </section>
     </div>
   );

@@ -1,8 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { v4 as uuid } from "uuid";
+import { useSelector } from "react-redux";
 
 const initialState = {
   posts: [],
+  archivePosts: [],
+  draftPosts: [],
 };
 
 export const getPosts = createAsyncThunk("post/getPosts", async () => {
@@ -104,6 +108,44 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const addPostToArchive = createAsyncThunk(
+  "post/addPostToArchive",
+  (data) => {
+    const { post } = data;
+    try {
+      return post;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const addPostToDraft = createAsyncThunk(
+  "post/addPostToDraft",
+  (data) => {
+    const { postData } = data;
+    try {
+      return { ...postData, id: uuid() };
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
+export const deletePostFromDraft = createAsyncThunk(
+  "post/deletePostFromDraft",
+  (data) => {
+    const { id, draftPosts } = data;
+
+    try {
+      const updatedraftPosts = draftPosts.filter((post) => post.id !== id);
+      return updatedraftPosts;
+    } catch (err) {
+      console.log(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -145,6 +187,15 @@ const postSlice = createSlice({
       })
       .addCase(dislikePost.fulfilled, (state, action) => {
         state.posts = action.payload;
+      })
+      .addCase(addPostToArchive.fulfilled, (state, action) => {
+        state.archivePosts.push(action.payload);
+      })
+      .addCase(addPostToDraft.fulfilled, (state, action) => {
+        state.draftPosts.push(action.payload);
+      })
+      .addCase(deletePostFromDraft.fulfilled, (state, action) => {
+        state.draftPosts = action.payload;
       });
   },
 });

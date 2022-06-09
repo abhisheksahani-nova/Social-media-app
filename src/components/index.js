@@ -7,6 +7,8 @@ import Comment from "./Comment/Comment";
 import FilterDropdown from "./FilterDropdown/FilterDropdown";
 import ProfileEditModal from "./ProfileEditModal/ProfileEditModal";
 import FollowUserBox from "./FollowUserBox/FollowUserBox";
+import CreatePollModal from "./CreatePollModal/CreatePollModal";
+import PollBody from "./PollBody/PollBody";
 
 export {
   Navbar,
@@ -18,4 +20,6 @@ export {
   FilterDropdown,
   ProfileEditModal,
   FollowUserBox,
+  CreatePollModal,
+  PollBody,
 };

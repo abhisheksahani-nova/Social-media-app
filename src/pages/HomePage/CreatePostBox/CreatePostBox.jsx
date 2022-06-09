@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./CreatePostBox.css";
 import TextareaAutosize from "react-textarea-autosize";
-import { createNewPost, editPost } from "../../../features/posts/postsSlice";
+import {
+  createNewPost,
+  editPost,
+  addPostToDraft,
+} from "../../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { CreatePollModal, PollBody } from "../../../components/index";
 
 function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [postData, setPostData] = useState({ content: "" });
+  const [pollModal, setPollModal] = useState(false);
+  const [pollData, setPollData] = useState({
+    question: "",
+    option1: "",
+    option2: "",
+    option3: "",
+    option4: "",
+    showPoll: false,
+  });
 
   const postObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -18,16 +32,27 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
     }
   }, [isPostEdit]);
 
-  function handleCreatePostAndEdit(postData, editPostId, token) {
+  function handleCreatePostAndEdit(postInfo, editPostId, token) {
+    const postData = { ...postInfo, pollData: { ...pollData } };
+
     if (isPostEdit) {
       dispatch(editPost({ postData, editPostId, token }));
       setIsPostEdit((prev) => !prev);
     } else {
-      if(postData.content)
-      dispatch(createNewPost({ postData, token }));
+      if (postData.content || pollData.showPoll) {
+        dispatch(createNewPost({ postData, token }));
+      }
     }
 
     setPostData({ content: "" });
+    setPollData({
+      question: "",
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      showPoll: false,
+    });
   }
 
   return (
@@ -49,15 +74,45 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           <i className="fa-solid fa-xmark"></i>
         </div>
 
+        {pollData.showPoll && (
+          <PollBody
+            pollData={pollData}
+            setPollData={setPollData}
+            showCloseIcon={true}
+          />
+        )}
+
+        {pollModal && (
+          <CreatePollModal
+            setPollModal={setPollModal}
+            pollData={pollData}
+            setPollData={setPollData}
+          />
+        )}
+
         <div className="d-flex note-footer mt-2">
           <div className="d-flex note-footer create-note-footer-icons-container">
             <i className="fa-solid fa-image"></i>
             <i className="fa-brands fa-youtube"></i>
             <i className="fa-solid fa-face-grin-wide"></i>
+            <i
+              className="fa-solid fa-signal"
+              onClick={() => setPollModal((prev) => !prev)}
+            ></i>
           </div>
           <div className="d-flex note-footer justify-cont-right">
             <button
-              className="btn btn-custom-sty btn-custom-small"
+              className="btn pri-outline-btn btn-custom-small"
+              onClick={() => {
+                dispatch(addPostToDraft({ postData }));
+                setPostData({ content: "" });
+              }}
+            >
+              Draft
+            </button>
+
+            <button
+              className="btn btn-custom-sty btn-custom-small ml-small"
               onClick={() =>
                 handleCreatePostAndEdit(postData, editPostId, token)
               }

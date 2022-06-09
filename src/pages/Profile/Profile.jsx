@@ -3,21 +3,42 @@ import { Navbar, Sidebar, FollowContainer, Post } from "../../components/index";
 import "./Profile.css";
 import { ProfileEditModal } from "../../components/index";
 import { useParams } from "react-router-dom";
-import { getUserById } from "../../features/users/usersSlice";
+import { getUserById, editUserDetails } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Profile() {
   const [showModal, setShowModal] = useState(false);
+  const [profileImg, setProfileImg] = useState("");
   const [userPosts, setUserPosts] = useState();
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
   let { id } = useParams();
   const signInUser = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     dispatch(getUserById({ id }));
   }, [id, showModal]);
+
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    if (profileImg) {
+      const userData = { ...user, avatar: profileImg };
+      console.log(userData, "1st");
+      dispatch(editUserDetails({ userData, token }));
+      dispatch(getUserById({ id }));
+    }
+  }, [profileImg]);
 
   return (
     <div>
@@ -33,11 +54,25 @@ function Profile() {
           <div className="d-flex flex-direction-col gap-1 ">
             <section className="d-flex justify-cont-center ">
               <div className="profile-page-container card-basic profile-card">
-                <div className="d-flex mb-2">
+                <div className="d-flex mb-2 p-relative">
                   <img
-                    className="avatar md"
+                    className="avatar md object-fit-cover"
                     src={user.avatar}
                     alt="user avatar"
+                  />
+
+                  {user.username == signInUser && (
+                    <label htmlFor="input-img">
+                      <i className="fa-solid fa-camera select-img-icon"></i>
+                    </label>
+                  )}
+
+                  <input
+                    className="d-none"
+                    type="file"
+                    accept="image/*"
+                    id="input-img"
+                    onChange={(e) => imageHandler(e)}
                   />
                 </div>
                 <div className="d-flex flex-direction-col">

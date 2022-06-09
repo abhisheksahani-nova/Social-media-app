@@ -6,6 +6,8 @@ import {
   Bookmark,
   Profile,
   Explore,
+  Archive,
+  Draft,
 } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
@@ -19,6 +21,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/bookmarks" element={<Bookmark />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/archive" element={<Archive />} />
+        <Route path="/draft" element={<Draft />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/mock" element={<Mockman />} />
       </Routes>

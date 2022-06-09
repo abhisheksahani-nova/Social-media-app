@@ -1,6 +1,10 @@
 import React from "react";
 import "./PostDropdown.css";
-import { deletePost, getPosts } from "../../features/posts/postsSlice.js";
+import {
+  deletePost,
+  getPosts,
+  addPostToArchive,
+} from "../../features/posts/postsSlice.js";
 import { deleteCommentOfPost } from "../../features/comments/commentsSlice";
 import { useDispatch } from "react-redux";
 
@@ -16,6 +20,7 @@ function PostDropdown({
   editCommentData,
   setEditCommentData,
   commentUsername,
+  post,
 }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -103,6 +108,19 @@ function PostDropdown({
           }`}</small>
           <i class="fa-solid fa-trash post-dropdown-icon"></i>
         </li>
+
+        {!isCommentDropdownOpen && signInUser == post.username && (
+          <li
+            className="d-flex playlist-li-item cursor-p j-space-between"
+            onClick={() => {
+              dispatch(addPostToArchive({ post }));
+              handleDelete(id, token, postId, commentId);
+            }}
+          >
+            <small className="break-word">Archive post</small>
+            <i class="fa-solid fa-box-archive post-dropdown-icon"></i>
+          </li>
+        )}
       </ul>
     </div>
   );

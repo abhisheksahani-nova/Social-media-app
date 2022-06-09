@@ -34,7 +34,7 @@
 }
 
 .create-note-footer-icons-container {
-  width: 6rem;
+  width: 7rem;
 }
 
 .note-priority-dropdown {
@@ -102,4 +102,8 @@
 
 .border-none {
   border: none;
+}
+
+.ml-small{
+  margin-left: 0.5rem; 
 }

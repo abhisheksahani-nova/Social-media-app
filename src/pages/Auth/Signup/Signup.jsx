@@ -52,6 +52,7 @@ function Signup() {
               className={`inp login_inp_resize ecommerce-login-inp `}
               id="inp-email"
               placeholder="Enter your first name"
+              type="text"
               value={userSignupData.firstName}
               onChange={(e) =>
                 setUserSignupData({
@@ -70,6 +71,7 @@ function Signup() {
               className={`inp login_inp_resize ecommerce-login-inp`}
               id="inp-email"
               placeholder="Enter your last name"
+              type="text"
               value={userSignupData.lastName}
               onChange={(e) =>
                 setUserSignupData({
@@ -87,6 +89,7 @@ function Signup() {
             <input
               className={`inp login_inp_resize ecommerce-login-inp`}
               id="inp-email"
+              type="text"
               placeholder="Enter your username"
               value={userSignupData.username}
               onChange={(e) =>

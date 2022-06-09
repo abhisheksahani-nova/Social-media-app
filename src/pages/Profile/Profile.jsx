@@ -5,11 +5,13 @@ import { ProfileEditModal } from "../../components/index";
 import { useParams } from "react-router-dom";
 import { getUserById, editUserDetails } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useWindowWidth } from "../HomePage/HomePage";
 
 function Profile() {
   const [showModal, setShowModal] = useState(false);
   const [profileImg, setProfileImg] = useState("");
-  const [userPosts, setUserPosts] = useState();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const { windowWidth } = useWindowWidth();
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
@@ -41,15 +43,15 @@ function Profile() {
 
   return (
     <div>
-      <Navbar />
-      <section className="d-flex gap-4">
-        <Sidebar />
+      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <section className="d-flex page-main-container gap-4 responsive-gap">
+        {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
 
         {showModal && (
           <ProfileEditModal setShowModal={setShowModal} user={user} />
         )}
 
-        <div className="user-profile-middle-container p-2">
+        <div className="mt-2 postbox-main-container">
           <div className="d-flex flex-direction-col gap-1 ">
             <section className="d-flex justify-cont-center ">
               <div className="profile-page-container card-basic profile-card">

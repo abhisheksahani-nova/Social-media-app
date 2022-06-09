@@ -22,7 +22,6 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  // const [hidePollCloseIcon, setHidePollCloseIcon] = useState(false);
   const [commentData, setCommentData] = useState({ text: "" });
   const [editCommentData, setEditCommentData] = useState({
     postId: "",

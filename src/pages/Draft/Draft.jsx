@@ -14,7 +14,7 @@ function Draft() {
       <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
       <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
-        <div>
+        <div className="postbox-main-container">
           <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
             {draftPosts.map((draftPost, index) => {
               return <DraftPost key={index} draftPost={draftPost} />;

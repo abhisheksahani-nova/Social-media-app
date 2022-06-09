@@ -65,5 +65,8 @@
   .videolib-drawer-container {
     position: absolute;
     z-index: 2;
+    width: 13rem;
+    height: 38rem;
+    left: 0;
   }
 }

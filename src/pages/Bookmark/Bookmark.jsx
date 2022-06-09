@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Sidebar, FollowContainer, Post } from "../../components/index";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers } from "../../features/users/usersSlice";
 import { updateBookmarks } from "../../features/users/usersSlice";
+import { useWindowWidth } from "../HomePage/HomePage";
 
 function Bookmark() {
+  const [showSidebar, setShowSidebar] = useState(false);
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const posts = useSelector((state) => state.posts.posts);
-  const comments = useSelector(state => state.comments.comments)
+  const comments = useSelector((state) => state.comments.comments);
   const dispatch = useDispatch();
+  const { windowWidth } = useWindowWidth();
 
   useEffect(() => {
-
     const updatedBookmarks = posts.filter((post) =>
       bookmarks.some((bookmark) => bookmark._id == post._id)
     );
@@ -21,9 +22,9 @@ function Bookmark() {
 
   return (
     <div>
-      <Navbar />
-      <section className="d-flex gap-4">
-        <Sidebar />
+      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <section className="d-flex page-main-container gap-4 responsive-gap">
+        {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div>
           <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
             {bookmarks?.map((post) => {

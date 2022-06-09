@@ -11,20 +11,7 @@ function HomePage() {
   const [showSidebar, setShowSidebar] = useState(false);
   const postsObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-
-  const [windowWidth, setWindowWidth] = useState();
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { windowWidth } = useWindowWidth();
 
   useEffect(() => {
     dispatch(getPosts());
@@ -72,3 +59,21 @@ function HomePage() {
 }
 
 export default HomePage;
+
+export function useWindowWidth() {
+  const [windowWidth, setWindowWidth] = useState();
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return { windowWidth };
+}

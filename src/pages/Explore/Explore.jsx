@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Sidebar, Post, FollowContainer } from "../../components/index";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../features/posts/postsSlice";
+import { useWindowWidth } from "../HomePage/HomePage";
 
 function Explore() {
+  const [showSidebar, setShowSidebar] = useState(false);
   const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
+  const { windowWidth } = useWindowWidth();
 
   useEffect(() => {
     dispatch(getPosts());
@@ -13,9 +16,9 @@ function Explore() {
 
   return (
     <div>
-      <Navbar />
-      <section className="d-flex gap-4">
-        <Sidebar />
+      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <section className="d-flex page-main-container gap-4 responsive-gap">
+        {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div>
           <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
             {posts.map((post) => {

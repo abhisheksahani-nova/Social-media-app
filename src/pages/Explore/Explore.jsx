@@ -6,9 +6,9 @@ import { useWindowWidth } from "../HomePage/HomePage";
 
 function Explore() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const { windowWidth } = useWindowWidth();
   const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
-  const { windowWidth } = useWindowWidth();
 
   useEffect(() => {
     dispatch(getPosts());

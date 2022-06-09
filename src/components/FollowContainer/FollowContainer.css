@@ -36,6 +36,11 @@
 
 @media screen and (max-width: 560px) {
   .follow-unfollow-container {
-    display: none;
+    width: 21rem;
+    position: absolute;
+    background-color: var(--light-clr);
+    z-index: 3;
+    right: 0;
+    border: 1px solid var(--gray-shade5);
   }
 }

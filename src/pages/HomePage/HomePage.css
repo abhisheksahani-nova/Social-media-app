@@ -30,6 +30,21 @@
   font-size: 0.7rem;
 }
 
+.gap-2 {
+  gap: 2rem;
+}
+
+.mb-4{
+  margin-bottom: 4rem;
+}
+
+.follow-title-container {
+  background-color: var(--light-clr);
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--gray-shade5);
+}
+
 @media screen and (max-width: 900px) {
   .responsive-gap {
     gap: 3rem;

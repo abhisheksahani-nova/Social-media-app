@@ -11,6 +11,7 @@ function Profile() {
   const [showModal, setShowModal] = useState(false);
   const [profileImg, setProfileImg] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showFollowContainer, setShowFollowContainer] = useState(false);
   const { windowWidth } = useWindowWidth();
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.posts.posts);

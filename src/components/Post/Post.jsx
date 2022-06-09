@@ -91,7 +91,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   return (
     <div className="d-flex flex-direction-col bg-white ">
-      <div className="d-flex  user-post-container">
+      <div className="d-flex user-post-container">
         <img
           className="avatar xs"
           src="https://semantic-ui.com/images/avatar2/large/kristy.png"

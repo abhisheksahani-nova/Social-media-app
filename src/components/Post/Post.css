@@ -67,3 +67,27 @@
     width: 32rem;
   }
 }
+
+@media screen and (max-width: 560px) {
+  .user-post-container {
+    width: 42rem;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .user-post-container {
+    width: 36rem;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .user-post-container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .user-post-container {
+    width: 26rem;
+  }
+}

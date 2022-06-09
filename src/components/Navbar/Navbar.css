@@ -18,19 +18,110 @@
 }
 
 @media screen and (max-width: 960px) {
-  .nav-input-container{
+  .nav-input-container {
     width: 40%;
   }
 }
 
 @media screen and (max-width: 940px) {
-  .nav-title-container{
+  .nav-title-container {
     width: 14rem;
   }
 }
 
 @media screen and (max-width: 810px) {
-  .nav-title-container{
+  .nav-title-container {
     width: 14rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .nav-icon-container {
+    width: 24%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav_searchBar {
+    width: 14rem;
+    padding: 0.3rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 4px;
+  }
+
+  .nav-title-container {
+    width: 12.5rem;
+  }
+
+  .nav-input-container {
+    width: 14rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .nav_searchBar {
+    width: 11rem;
+    padding: 0.1rem;
+  }
+
+  .btn {
+    padding: 0.5rem 0.7rem;
+    border-radius: 3px;
+  }
+
+  .nav-input-container {
+    width: 11rem;
+  }
+
+  .searchBar_icon{
+    padding: 0.3rem;
+  }
+
+  .nav-search-icon{
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .nav_searchBar {
+    width: 9rem;
+  }
+
+  .nav-input-container {
+    width: 9rem;
+  }
+
+  .nav-title-container {
+    width: 12rem;
+  }
+
+  .nav-icon-container {
+    width: 28%;
+    margin-left: 2rem;
+  }
+
+  .btn {
+    padding: 0.4rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+  }
+
+  .nav-theme-title {
+    font-size: 0.6rem;
+  }
+}
+
+
+@media screen and (max-width: 360px) {
+  .nav_searchBar {
+    width: 7rem;
+  }
+
+  .nav-input-container {
+    width: 7rem;
   }
 }

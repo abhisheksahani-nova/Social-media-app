@@ -34,7 +34,6 @@ function Profile() {
   useEffect(() => {
     if (profileImg) {
       const userData = { ...user, avatar: profileImg };
-      console.log(userData, "1st");
       dispatch(editUserDetails({ userData, token }));
       dispatch(getUserById({ id }));
     }

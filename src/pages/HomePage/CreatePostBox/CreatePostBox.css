@@ -153,3 +153,27 @@
     width: 32rem;
   }
 }
+
+@media screen and (max-width: 560px) {
+  .create-note-container {
+    width: 42rem;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .create-note-container {
+    width: 36rem;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .create-note-container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .create-note-container {
+    width: 28rem;
+  }
+}

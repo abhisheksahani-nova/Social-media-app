@@ -33,3 +33,9 @@
     font-size: 1.05rem;
   }
 }
+
+@media screen and (max-width: 560px) {
+  .follow-unfollow-container {
+    display: none;
+  }
+}

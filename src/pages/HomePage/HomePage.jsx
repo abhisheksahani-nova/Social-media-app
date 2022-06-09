@@ -44,8 +44,7 @@ function HomePage() {
   return (
     <div>
       <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
-      {console.log(windowWidth)}
-      <section className="d-flex gap-4 responsive-gap">
+      <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div className="postbox-main-container">
           <CreatePostBox

@@ -10,6 +10,7 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+  const [checkSignup, setCheckSignup] = useState(false);
   const [passwordInputType, setPasswordInputType] = useState("password");
   const [confirmPasswordInputType, setConfirmPasswordInputType] =
     useState("password");
@@ -17,25 +18,37 @@ function Signup() {
   const navigate = useNavigate();
 
   function handleSignup() {
+    setCheckSignup(true);
+
     const userData = {
       username: userSignupData.username,
       password: userSignupData.password,
     };
 
-    (async () => {
-      try {
-        const response = await axios.post("/api/auth/signup", userData);
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem(
-          "username",
-          `${userSignupData.firstName} ${userSignupData.lastName}`
-        );
-        localStorage.setItem("username", userSignupData.username);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    if (
+      userSignupData.firstName &&
+      userSignupData.lastName &&
+      userSignupData.username &&
+      userSignupData.password &&
+      userSignupData.confirmPassword
+    ) {
+      (async () => {
+        try {
+          const response = await axios.post("/api/auth/signup", userData);
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem(
+            "username",
+            `${userSignupData.firstName} ${userSignupData.lastName}`
+          );
+          localStorage.setItem("username", userSignupData.username);
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }else{
+      
+    }
   }
 
   return (
@@ -54,13 +67,23 @@ function Signup() {
               placeholder="Enter your first name"
               type="text"
               value={userSignupData.firstName}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   firstName: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
+
+            {!userSignupData.firstName && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your first name
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -73,13 +96,23 @@ function Signup() {
               placeholder="Enter your last name"
               type="text"
               value={userSignupData.lastName}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   lastName: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
+
+            {!userSignupData.lastName && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your last name
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -92,17 +125,23 @@ function Signup() {
               type="text"
               placeholder="Enter your username"
               value={userSignupData.username}
-              onChange={(e) =>
-                setUserSignupData({ ...userSignupData, username: e.target.value })
-              }
+              onChange={(e) => {
+                setUserSignupData({
+                  ...userSignupData,
+                  username: e.target.value,
+                });
+                setCheckSignup(false);
+              }}
             />
 
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-                email address!
-              </span>
-            </div>
+            {!userSignupData.username && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your username
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1 p-relative">
@@ -115,12 +154,13 @@ function Signup() {
               id="inp-password"
               placeholder="Enter password"
               value={userSignupData.password}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   password: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
 
             {passwordInputType == "password" ? (
@@ -135,12 +175,14 @@ function Signup() {
               ></i>
             )}
 
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-                password!
-              </span>
-            </div>
+            {!userSignupData.password && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your password
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
@@ -153,12 +195,13 @@ function Signup() {
               id="inp-email"
               placeholder="Enter your password again"
               value={userSignupData.confirmPassword}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUserSignupData({
                   ...userSignupData,
                   confirmPassword: e.target.value,
-                })
-              }
+                });
+                setCheckSignup(false);
+              }}
             />
             {confirmPasswordInputType == "password" ? (
               <i
@@ -171,21 +214,23 @@ function Signup() {
                 onClick={() => setConfirmPasswordInputType("password")}
               ></i>
             )}
+
+            {!userSignupData.confirmPassword && checkSignup && (
+              <div className="err-msg-container">
+                <span>
+                  <i className="fa fa-exclamation-circle err-icon"></i>Enter
+                  your confirm password
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="inp-container mb-1">
             <div className="d-flex login_checkbox_inp_container">
               <input type="checkbox" id="checkbox-termsPolicy" />
-              <label className="inp-label inp-label-required login-checkbox-label-size inherit-clr">
+              <label className="inp-label login-checkbox-label-size inherit-clr">
                 I accept all Terms & Conditions
               </label>
-            </div>
-
-            <div className="err-msg-container d-none">
-              <span>
-                <i className="fa fa-exclamation-circle err-icon"></i>Accept our
-                terms & policy before going forward!
-              </span>
             </div>
           </div>
 

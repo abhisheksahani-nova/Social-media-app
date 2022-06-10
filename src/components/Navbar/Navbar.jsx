@@ -6,6 +6,16 @@ import { FilterDropdown } from "../index";
 function Navbar({ setShowSidebar, windowWidth }) {
   const navigate = useNavigate();
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
+  const token = localStorage.getItem("token");
+
+  function handleAuth() {
+    if (token) {
+      localStorage.clear();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }
 
   return (
     <nav className="nav-bar navbar-container mb-0">
@@ -48,11 +58,8 @@ function Navbar({ setShowSidebar, windowWidth }) {
         </div>
 
         <div className="flex-col-center">
-          <button
-            className="btn btn-custom-sty"
-            onClick={() => navigate("/login")}
-          >
-            Login
+          <button className="btn btn-custom-sty" onClick={() => handleAuth()}>
+            {token ? "Logout" : "Login"}
           </button>
         </div>
       </div>

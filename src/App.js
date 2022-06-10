@@ -11,8 +11,13 @@ import {
 } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <div>
       <Routes>

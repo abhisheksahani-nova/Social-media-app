@@ -5,24 +5,28 @@ import "./Login.css";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
-    username: "adarshbalika",
-    password: "adarshBalika123",
+    username: "",
+    password: "",
   });
+  const [checkLogin, setCheckLogin] = useState(false);
   const [passwordInputType, setPasswordInputType] = useState("password");
 
   const navigate = useNavigate();
 
   function handleUserLogin() {
-    (async () => {
-      try {
-        const response = await axios.post("/api/auth/login", userLoginData);
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem("username", userLoginData.username);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    setCheckLogin(true);
+    if (userLoginData.username && userLoginData.password) {
+      (async () => {
+        try {
+          const response = await axios.post("/api/auth/login", userLoginData);
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem("username", userLoginData.username);
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
   }
 
   return (
@@ -39,17 +43,20 @@ function Login() {
             id="inp-email"
             placeholder="Enter your username"
             value={userLoginData.username}
-            onChange={(e) =>
-              setUserLoginData({ ...userLoginData, username: e.target.value })
-            }
+            onChange={(e) => {
+              setUserLoginData({ ...userLoginData, username: e.target.value });
+              setCheckLogin(false);
+            }}
           />
 
-          <div className="err-msg-container d-none">
-            <span>
-              <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-              username!
-            </span>
-          </div>
+          {!userLoginData.username && checkLogin && (
+            <div className="err-msg-container ">
+              <span>
+                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
+                username!
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="inp-container mb-1">
@@ -62,9 +69,10 @@ function Login() {
             id="inp-password"
             placeholder="Enter your password"
             value={userLoginData.password}
-            onChange={(e) =>
-              setUserLoginData({ ...userLoginData, password: e.target.value })
-            }
+            onChange={(e) => {
+              setUserLoginData({ ...userLoginData, password: e.target.value });
+              setCheckLogin(false);
+            }}
           />
 
           {passwordInputType == "password" ? (
@@ -79,12 +87,14 @@ function Login() {
             ></i>
           )}
 
-          <div className="err-msg-container d-none">
-            <span>
-              <i className="fa fa-exclamation-circle err-icon"></i>Enter your
-              password!
-            </span>
-          </div>
+          {!userLoginData.password && checkLogin && (
+            <div className="err-msg-container">
+              <span>
+                <i className="fa fa-exclamation-circle err-icon"></i>Enter your
+                password!
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="inp-container mb-1">
@@ -93,13 +103,6 @@ function Login() {
             <label className="inp-label login-checkbox-label-size inherit-clr">
               Remember Me
             </label>
-          </div>
-
-          <div className="err-msg-container d-none">
-            <span>
-              <i className="fa fa-exclamation-circle err-icon"></i>Accept our
-              terms & policy before going forward!
-            </span>
           </div>
         </div>
 

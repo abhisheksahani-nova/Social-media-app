@@ -48,6 +48,12 @@
   font-size: 0.9rem;
 }
 
+.guest-login-btn {
+  width: 90%;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
 @media screen and (max-width: 800px) {
   input[type="text"] {
     font-size: 0.9rem;

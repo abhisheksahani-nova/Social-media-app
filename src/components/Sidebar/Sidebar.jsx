@@ -1,9 +1,16 @@
 import React from "react";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
-function Sidebar({}) {
+function Sidebar() {
   const navigate = useNavigate();
+  const users = useSelector((state) => state.users.users);
+  const signInUser = localStorage.getItem("username");
+
+  const currentUser = users.filter((user) => user.username == signInUser);
 
   return (
     <div className="videolib-drawer-container viewport-height-100">
@@ -27,9 +34,14 @@ function Sidebar({}) {
           <i className="fa-solid fa-bookmark videolib-drawer-icon"></i>{" "}
           Bookmarks
         </li>
-        <li className="videolib-list-item sidebar-list">
+
+        <li
+          className="videolib-list-item sidebar-list"
+          onClick={() => navigate(`/profile/${currentUser[0]._id}`)}
+        >
           <i className="fa-solid fa-user videolib-drawer-icon"></i> Profile
         </li>
+
         <li
           className="videolib-list-item sidebar-list"
           onClick={() => navigate("/archive")}

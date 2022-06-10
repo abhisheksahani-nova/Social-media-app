@@ -7,6 +7,9 @@ import { getUserById, editUserDetails } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useWindowWidth } from "../HomePage/HomePage";
 
+const defaultProfilePic =
+  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+
 function Profile() {
   const [showModal, setShowModal] = useState(false);
   const [profileImg, setProfileImg] = useState("");
@@ -59,7 +62,7 @@ function Profile() {
                 <div className="d-flex mb-2 p-relative">
                   <img
                     className="avatar md object-fit-cover"
-                    src={user.avatar}
+                    src={user.avatar ? user.avatar : defaultProfilePic}
                     alt="user avatar"
                   />
 

@@ -34,6 +34,60 @@
   padding: 1rem 1rem 0.5rem;
 }
 
-.mb-small{
+.mb-small {
   margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 960px) {
+  .user-post-container {
+    width: 32rem;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .user-post-container {
+    width: 34rem;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .user-post-container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .user-post-container {
+    width: 38rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .user-post-container {
+    width: 32rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .user-post-container {
+    width: 42rem;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .user-post-container {
+    width: 36rem;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .user-post-container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .user-post-container {
+    width: 26rem;
+  }
 }

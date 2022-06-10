@@ -22,7 +22,6 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  // const [hidePollCloseIcon, setHidePollCloseIcon] = useState(false);
   const [commentData, setCommentData] = useState({ text: "" });
   const [editCommentData, setEditCommentData] = useState({
     postId: "",
@@ -91,7 +90,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
   return (
     <div className="d-flex flex-direction-col bg-white ">
-      <div className="d-flex  user-post-container">
+      <div className="d-flex user-post-container">
         <img
           className="avatar xs"
           src="https://semantic-ui.com/images/avatar2/large/kristy.png"

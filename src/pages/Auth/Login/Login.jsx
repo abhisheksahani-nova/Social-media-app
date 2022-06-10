@@ -34,6 +34,7 @@ function Login() {
             Username
           </label>
           <input
+            type="text"
             className={`inp login_inp_resize ecommerce-login-inp `}
             id="inp-email"
             placeholder="Enter your username"

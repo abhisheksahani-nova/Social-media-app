@@ -9,17 +9,19 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { CreatePollModal, PollBody } from "../../../components/index";
 
+const initialPollState = {
+  question: "",
+  option1: "",
+  option2: "",
+  option3: "",
+  option4: "",
+  showPoll: false,
+};
+
 function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [postData, setPostData] = useState({ content: "" });
   const [pollModal, setPollModal] = useState(false);
-  const [pollData, setPollData] = useState({
-    question: "",
-    option1: "",
-    option2: "",
-    option3: "",
-    option4: "",
-    showPoll: false,
-  });
+  const [pollData, setPollData] = useState(initialPollState);
 
   const postObj = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -45,14 +47,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
     }
 
     setPostData({ content: "" });
-    setPollData({
-      question: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      option4: "",
-      showPoll: false,
-    });
+    setPollData(initialPollState);
   }
 
   return (

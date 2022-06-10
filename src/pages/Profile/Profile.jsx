@@ -5,11 +5,14 @@ import { ProfileEditModal } from "../../components/index";
 import { useParams } from "react-router-dom";
 import { getUserById, editUserDetails } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useWindowWidth } from "../HomePage/HomePage";
 
 function Profile() {
   const [showModal, setShowModal] = useState(false);
   const [profileImg, setProfileImg] = useState("");
-  const [userPosts, setUserPosts] = useState();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [showFollowContainer, setShowFollowContainer] = useState(false);
+  const { windowWidth } = useWindowWidth();
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
@@ -34,7 +37,6 @@ function Profile() {
   useEffect(() => {
     if (profileImg) {
       const userData = { ...user, avatar: profileImg };
-      console.log(userData, "1st");
       dispatch(editUserDetails({ userData, token }));
       dispatch(getUserById({ id }));
     }
@@ -42,15 +44,15 @@ function Profile() {
 
   return (
     <div>
-      <Navbar />
-      <section className="d-flex gap-4">
-        <Sidebar />
+      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <section className="d-flex page-main-container gap-4 responsive-gap">
+        {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
 
         {showModal && (
           <ProfileEditModal setShowModal={setShowModal} user={user} />
         )}
 
-        <div className="user-profile-middle-container p-2">
+        <div className="mt-2 postbox-main-container">
           <div className="d-flex flex-direction-col gap-1 ">
             <section className="d-flex justify-cont-center ">
               <div className="profile-page-container card-basic profile-card">
@@ -95,6 +97,31 @@ function Profile() {
               </div>
             </section>
 
+            <div
+              className={`d-flex j-content-right p-relative ${
+                showFollowContainer && "mb-4"
+              }`}
+            >
+              {windowWidth <= 560 && !showFollowContainer ? (
+                <div
+                  className="d-flex gap-2 follow-title-container"
+                  onClick={() => setShowFollowContainer((prev) => !prev)}
+                >
+                  <h4 className="follow-container-title ml-1">
+                    Who to follow?
+                  </h4>
+                  <i class="fa-solid fa-angle-down"></i>
+                </div>
+              ) : (
+                windowWidth <= 560 &&
+                showFollowContainer && (
+                  <FollowContainer
+                    setShowFollowContainer={setShowFollowContainer}
+                  />
+                )
+              )}
+            </div>
+
             <div>
               {posts
                 .filter((post) => post.username == user.username)
@@ -104,7 +131,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <FollowContainer />
+        {windowWidth > 560 && <FollowContainer />}
       </section>
     </div>
   );

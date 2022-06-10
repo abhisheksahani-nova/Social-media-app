@@ -6,6 +6,7 @@ import {
   UnfollowUser,
   getAllUsers,
 } from "../../features/users/usersSlice";
+import "./FollowUserBox.css";
 
 function FollowUserBox({ user }) {
   const { _id, avatar, lastName, firstName, username } = user;

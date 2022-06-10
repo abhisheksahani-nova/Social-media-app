@@ -48,6 +48,12 @@
   font-size: 0.9rem;
 }
 
+@media screen and (max-width: 800px) {
+  input[type="text"] {
+    font-size: 0.9rem;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .ecommerce-login-inp::placeholder {
     font-size: 1.3rem;

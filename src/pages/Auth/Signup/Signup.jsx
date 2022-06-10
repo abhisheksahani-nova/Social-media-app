@@ -20,21 +20,17 @@ function Signup() {
   function handleSignup() {
     setCheckSignup(true);
 
-    const userData = {
-      username: userSignupData.username,
-      password: userSignupData.password,
-    };
-
     if (
       userSignupData.firstName &&
       userSignupData.lastName &&
       userSignupData.username &&
       userSignupData.password &&
-      userSignupData.confirmPassword
+      userSignupData.confirmPassword &&
+      userSignupData.password == userSignupData.confirmPassword
     ) {
       (async () => {
         try {
-          const response = await axios.post("/api/auth/signup", userData);
+          const response = await axios.post("/api/auth/signup", userSignupData);
           localStorage.setItem("token", response.data.encodedToken);
           localStorage.setItem(
             "username",
@@ -46,8 +42,6 @@ function Signup() {
           console.log(error);
         }
       })();
-    }else{
-      
     }
   }
 

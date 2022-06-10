@@ -15,16 +15,18 @@ function Login() {
 
   function handleUserLogin() {
     setCheckLogin(true);
-    (async () => {
-      try {
-        const response = await axios.post("/api/auth/login", userLoginData);
-        localStorage.setItem("token", response.data.encodedToken);
-        localStorage.setItem("username", userLoginData.username);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    if (userLoginData.username && userLoginData.password) {
+      (async () => {
+        try {
+          const response = await axios.post("/api/auth/login", userLoginData);
+          localStorage.setItem("token", response.data.encodedToken);
+          localStorage.setItem("username", userLoginData.username);
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+    }
   }
 
   return (

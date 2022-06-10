@@ -8,6 +8,9 @@ import {
 } from "../../features/users/usersSlice";
 import "./FollowUserBox.css";
 
+const defaultProfilePic =
+  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+
 function FollowUserBox({ user }) {
   const { _id, avatar, lastName, firstName, username } = user;
   const following = useSelector((state) => state.users.following);
@@ -42,7 +45,7 @@ function FollowUserBox({ user }) {
   return (
     <li key={_id} className="d-flex justify-cont-between li-item border-none">
       <div className="d-flex" onClick={() => navigate(`/profile/${_id}`)}>
-        <img className="avatar xs" src={avatar} alt="avatar" />
+        <img className="avatar xs" src={avatar ? avatar : defaultProfilePic} alt="avatar" />
         <div className="d-flex list-content">
           <h4>{`${firstName} ${lastName}`}</h4>
           <small>@{username}</small>

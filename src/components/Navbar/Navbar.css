@@ -1,5 +1,5 @@
 .navbar-container {
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
   height: 4rem;
   border-bottom: 1px solid var(--custom-pri-clr);
 }

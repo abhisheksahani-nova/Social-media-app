@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { FilterDropdown } from "../index";
+import { toggleTheme } from "../../features/users/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Navbar({ setShowSidebar, windowWidth }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.users.theme);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
   const token = localStorage.getItem("token");
 
@@ -18,7 +22,7 @@ function Navbar({ setShowSidebar, windowWidth }) {
   }
 
   return (
-    <nav className="nav-bar navbar-container mb-0">
+    <nav className={`nav-bar navbar-container mb-0 ${theme == "dark" && "text-dark-theme-clr"}`}>
       <div className="nav-innerContainer align-item-center nav-title-container font-clr">
         {windowWidth <= 810 && (
           <i
@@ -41,11 +45,13 @@ function Navbar({ setShowSidebar, windowWidth }) {
       </div>
 
       <div className="nav-innerContainer align-item-center nav-icon-container width-reset inherit-clr mr-1">
-        <div className="flex-col-center">
-          <a className="font-clr" href="/">
-            <i class="fa-solid fa-moon"></i>
-          </a>
-          <small className="nav-theme-title">Theme</small>
+        <div
+          className="flex-col-center"
+          onClick={() => dispatch(toggleTheme())}
+        >
+          <i class={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}></i>
+
+          <small className="nav-theme-title">{theme == "light" ? "dark" : "light"}</small>
         </div>
 
         <div className="flex-col-center">

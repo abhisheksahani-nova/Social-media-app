@@ -1,9 +1,16 @@
 :root {
   --social-bg-clr: #f3f2ef;
   --social-comment-bg-clr: #f2f2f2;
+  --social-light-bg-clr: var(--light-bg-clr);
+  --text-light-clr: var(--light-bg-clr);
 }
 
-body {
+[data-theme="dark"] {
+  --social-bg-clr: #3e3b65;
+  --social-light-bg-clr: #3a2f58;
+}
+
+.app {
   background-color: var(--social-bg-clr);
 }
 

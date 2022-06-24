@@ -3,7 +3,7 @@
   border: 1px solid var(--gray-shade5);
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
 }
 
 .title-inp-container {

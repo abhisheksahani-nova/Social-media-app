@@ -19,3 +19,7 @@
 .vote-count {
   font-size: 0.8rem;
 }
+
+.dark-bg-light {
+  background-color: var(--social-bg-clr);
+}

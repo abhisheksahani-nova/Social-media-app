@@ -108,13 +108,8 @@
   margin-left: 0.5rem;
 }
 
-.textarea-dark-clr {
-  background-color: var(--social-light-bg-clr);
-  color: var(--light-bg-clr);
-}
-
 .dark-theme-bg-clr {
-  background-color: var(--social-bg-clr);
+  background-color: var(--social-light-bg-clr);
   color: var(--light-bg-clr);
 }
 
@@ -126,8 +121,16 @@
   border: 1px solid var(--gray-shade4);
 }
 
-.border-white{
+.border-white {
   border: 1px solid var(--custom-pri-clr);
+}
+
+.dark-bg-light {
+  background-color: var(--social-bg-clr);
+}
+
+.white-clr{
+  color: var(--light-bg-clr);
 }
 
 @media screen and (max-width: 960px) {

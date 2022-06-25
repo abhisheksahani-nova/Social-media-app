@@ -69,7 +69,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
         <div className="d-flex title-inp-container mb-2">
           <TextareaAutosize
             className={`note-title-inp ${
-              theme == "dark" && "textarea-dark-clr"
+              theme == "dark" && "dark-theme-bg-clr"
             }`}
             placeholder="What do you want to talk about?"
             value={postData.content}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Comment.css";
 import { PostDropdown } from "../index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   upvoteCommentOfPost,
   downvoteCommentOfPost,
@@ -21,6 +21,7 @@ function Comment({
 
   const signInUser = localStorage.getItem("username");
   const token = localStorage.getItem("token");
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
 
   function handleCommentUpVote(postId, commentId, token) {
@@ -54,7 +55,11 @@ function Comment({
       )}
 
       <div className="width-100">
-        <div className="comment-content-container">
+        <div
+          className={`comment-content-container ${
+            theme == "dark" && "dark-bg-light"
+          }`}
+        >
           <div className="d-flex justify-cont-between mb-1">
             <div>
               <h5>{name}</h5>

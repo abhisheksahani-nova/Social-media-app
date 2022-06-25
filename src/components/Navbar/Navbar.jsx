@@ -50,7 +50,7 @@ function Navbar({ setShowSidebar, windowWidth }) {
       <div className="nav-innerContainer font-clr width-auto nav-input-container">
         <input
           className={`nav_searchBar ${
-            theme == "dark" && "textarea-dark-clr border-gray3-dark"
+            theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
           }`}
           type="text"
         />

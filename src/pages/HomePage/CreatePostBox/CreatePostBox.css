@@ -113,12 +113,20 @@
   color: var(--light-bg-clr);
 }
 
+.white-bg-clr {
+  background-color: var(--light-bg-clr);
+}
+
 .border-gray3-dark {
   border: 1px solid var(--gray-shade3);
 }
 
 .border-gray4-dark {
   border: 1px solid var(--gray-shade4);
+}
+
+.dark-theme-bg-clr::placeholder {
+  color: var(--gray-shade5);
 }
 
 .border-white {
@@ -129,7 +137,7 @@
   background-color: var(--social-bg-clr);
 }
 
-.white-clr{
+.white-clr {
   color: var(--light-bg-clr);
 }
 

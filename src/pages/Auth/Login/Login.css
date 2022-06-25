@@ -7,6 +7,7 @@
 .login_form {
   width: 27rem;
   padding-left: 2.3rem;
+  min-height: fit-content;
 }
 
 .login_inp_resize {
@@ -46,6 +47,10 @@
 
 .ecommerce-login-inp::placeholder {
   font-size: 0.9rem;
+}
+
+.outline-none {
+  outline: none;
 }
 
 .guest-login-btn {

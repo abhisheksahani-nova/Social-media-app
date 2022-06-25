@@ -18,6 +18,7 @@ function Profile() {
   const { windowWidth } = useWindowWidth();
   const user = useSelector((state) => state.users.user);
   const posts = useSelector((state) => state.posts.posts);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   let { id } = useParams();
   const signInUser = localStorage.getItem("username");
@@ -58,7 +59,11 @@ function Profile() {
         <div className="mt-2 postbox-main-container">
           <div className="d-flex flex-direction-col gap-1 ">
             <section className="d-flex justify-cont-center ">
-              <div className="profile-page-container card-basic profile-card">
+              <div
+                className={`profile-page-container card-basic profile-card ${
+                  theme == "dark" && "dark-theme-bg-clr"
+                }`}
+              >
                 <div className="d-flex mb-2 p-relative">
                   <img
                     className="avatar md object-fit-cover"
@@ -85,7 +90,14 @@ function Profile() {
                   <p className="profile-para-text mb-1">@{user.username}</p>
                   <p className="profile-para-text mb-small">{user.bio}</p>
                   <p className="profile-para-text mb-2">
-                    <a href={user.portfolio}>{user.portfolio}</a>
+                    <a
+                      className={`${
+                        theme == "dark" && "portfolio-url-dark-clr"
+                      }`}
+                      href={user.portfolio}
+                    >
+                      {user.portfolio}
+                    </a>
                   </p>
                 </div>
 
@@ -107,7 +119,9 @@ function Profile() {
             >
               {windowWidth <= 560 && !showFollowContainer ? (
                 <div
-                  className="d-flex gap-2 follow-title-container"
+                  className={`d-flex gap-2 follow-title-container ${
+                    theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+                  }`}
                   onClick={() => setShowFollowContainer((prev) => !prev)}
                 >
                   <h4 className="follow-container-title ml-1">

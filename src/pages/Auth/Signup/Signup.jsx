@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Signup() {
   const [userSignupData, setUserSignupData] = useState({
@@ -16,6 +17,7 @@ function Signup() {
     useState("password");
 
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.users.theme);
 
   function handleSignup() {
     setCheckSignup(true);
@@ -48,7 +50,11 @@ function Signup() {
   return (
     <>
       <section className="login_form_container d-flex">
-        <div className="card-basic login_form app">
+        <div
+          className={`card-basic login_form app ${
+            theme == "dark" ? "dark-theme-bg-clr" : "white-bg-clr"
+          }`}
+        >
           <h2 className="t-align-center mt-2 mb-2">Signup</h2>
 
           <div className="inp-container mb-1">
@@ -56,7 +62,9 @@ function Signup() {
               First name
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp `}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               id="inp-email"
               placeholder="Enter your first name"
               type="text"
@@ -85,7 +93,9 @@ function Signup() {
               Last name
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               id="inp-email"
               placeholder="Enter your last name"
               type="text"
@@ -114,7 +124,9 @@ function Signup() {
               Username
             </label>
             <input
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               id="inp-email"
               type="text"
               placeholder="Enter your username"
@@ -144,7 +156,9 @@ function Signup() {
             </label>
             <input
               type={passwordInputType}
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               id="inp-password"
               placeholder="Enter password"
               value={userSignupData.password}
@@ -185,7 +199,9 @@ function Signup() {
             </label>
             <input
               type={confirmPasswordInputType}
-              className={`inp login_inp_resize ecommerce-login-inp`}
+              className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               id="inp-email"
               placeholder="Enter your password again"
               value={userSignupData.confirmPassword}
@@ -230,7 +246,7 @@ function Signup() {
 
           <div className="inp-container ml-1 mb-1">
             <button
-              className="btn cta-btn login_custom_btn"
+              className="btn login_custom_btn btn-custom-sty"
               type="button"
               onClick={() => handleSignup()}
             >
@@ -240,7 +256,13 @@ function Signup() {
 
           <div className="inp-container t-align-center mb-2">
             <NavLink to="/login" className="t-decoration-none">
-              <small className="create_acc_link">Already have an account</small>
+              <small
+                className={`create_acc_link ${
+                  theme == "dark" && "portfolio-url-dark-clr"
+                }`}
+              >
+                Already have an account
+              </small>
             </NavLink>
           </div>
         </div>

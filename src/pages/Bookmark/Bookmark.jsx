@@ -10,6 +10,7 @@ function Bookmark() {
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const posts = useSelector((state) => state.posts.posts);
   const comments = useSelector((state) => state.comments.comments);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const { windowWidth } = useWindowWidth();
 
@@ -34,7 +35,9 @@ function Bookmark() {
           >
             {windowWidth <= 560 && !showFollowContainer ? (
               <div
-                className="d-flex gap-2 follow-title-container"
+                className={`d-flex gap-2 follow-title-container ${
+                  theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+                }`}
                 onClick={() => setShowFollowContainer((prev) => !prev)}
               >
                 <h4 className="follow-container-title ml-1">Who to follow?</h4>

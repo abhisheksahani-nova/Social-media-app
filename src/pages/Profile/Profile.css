@@ -42,6 +42,10 @@
   object-fit: cover;
 }
 
+.portfolio-url-dark-clr {
+  color: var(--sky-blue);
+}
+
 @media screen and (max-width: 960px) {
   .profile-card {
     width: 32rem;

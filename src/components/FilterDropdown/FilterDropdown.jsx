@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 function FilterDropdown({ setIsFilterDropdownOpen }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
+  const theme = useSelector((state) => state.users.theme);
 
   function handleMostLikedPost() {
     dispatch(sortByMostLiked({ posts }));
@@ -21,7 +22,9 @@ function FilterDropdown({ setIsFilterDropdownOpen }) {
   return (
     <div className="playlist-dropdown-container">
       <ul
-        className={`stacked-list list-style-none playlist-stacklist add-new-label-dropdown p-small`}
+        className={`stacked-list list-style-none playlist-stacklist add-new-label-dropdown p-small ${
+          theme == "dark" && "dark-theme-bg-clr"
+        }`}
       >
         <li
           className={`d-flex playlist-li-item videolib-list-container border-bottom j-space-between mb-small`}

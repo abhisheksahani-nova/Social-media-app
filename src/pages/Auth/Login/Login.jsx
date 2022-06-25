@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
+import { useSelector } from "react-redux";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
@@ -10,6 +11,7 @@ function Login() {
   });
   const [checkLogin, setCheckLogin] = useState(false);
   const [passwordInputType, setPasswordInputType] = useState("password");
+  const theme = useSelector((state) => state.users.theme);
 
   const navigate = useNavigate();
 
@@ -31,7 +33,11 @@ function Login() {
 
   return (
     <section className="login_form_container d-flex">
-      <div className="card-basic login_form app">
+      <div
+        className={`card-basic login_form app ${
+          theme == "dark" ? "dark-theme-bg-clr" : "white-bg-clr"
+        }`}
+      >
         <h2 className="t-align-center mt-2 mb-2">Login</h2>
         <div className="inp-container mb-1">
           <label className="inp-label d-block inp-label-required login_inp_label_resize inherit-clr">
@@ -39,7 +45,9 @@ function Login() {
           </label>
           <input
             type="text"
-            className={`inp login_inp_resize ecommerce-login-inp `}
+            className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+              theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+            }`}
             id="inp-email"
             placeholder="Enter your username"
             value={userLoginData.username}
@@ -65,7 +73,9 @@ function Login() {
           </label>
           <input
             type={passwordInputType}
-            className={`inp login_inp_resize ecommerce-login-inp`}
+            className={`inp login_inp_resize ecommerce-login-inp outline-none ${
+              theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+            }`}
             id="inp-password"
             placeholder="Enter your password"
             value={userLoginData.password}
@@ -108,7 +118,7 @@ function Login() {
 
         <div className="inp-container ml-1 mb-1">
           <button
-            className="btn cta-btn login_custom_btn"
+            className="btn login_custom_btn btn-custom-sty"
             type="button"
             onClick={() => handleUserLogin()}
           >
@@ -118,7 +128,13 @@ function Login() {
 
         <div className="inp-container t-align-center mb-2">
           <NavLink className="t-decoration-none" to="/signup">
-            <small className="create_acc_link">Create New Account</small>
+            <small
+              className={`create_acc_link ${
+                theme == "dark" && "portfolio-url-dark-clr"
+              }`}
+            >
+              Create New Account
+            </small>
           </NavLink>
         </div>
       </div>

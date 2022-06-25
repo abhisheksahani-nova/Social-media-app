@@ -8,7 +8,7 @@ import { useWindowWidth } from "../../pages/HomePage/HomePage";
 
 function FollowContainer({ setShowFollowContainer }) {
   const users = useSelector((state) => state.users.users);
-  const theme = useSelector(state => state.users.theme);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const { windowWidth } = useWindowWidth();
 
@@ -17,7 +17,11 @@ function FollowContainer({ setShowFollowContainer }) {
   }, []);
 
   return (
-    <div className={`follow-unfollow-container ${theme == "dark" && "text-dark-theme-clr"} ${windowWidth > 560 && "mt-2"}`}>
+    <div
+      className={`follow-unfollow-container ${
+        theme == "dark" && "text-dark-theme-clr"
+      } ${windowWidth > 560 && "mt-2"}`}
+    >
       <div
         className="d-flex justify-cont-between follow-heading-container"
         onClick={() =>

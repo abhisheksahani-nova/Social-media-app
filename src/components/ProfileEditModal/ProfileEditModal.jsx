@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./ProfileEditModal.css";
 import { editUserDetails } from "../../features/users/usersSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProfileEditModal({ setShowModal, user }) {
   const [editUserData, setEditUserData] = useState({ bio: "", portfolio: "" });
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const theme = useSelector((state) => state.users.theme);
 
   function handleEditUserData(token) {
     const userData = { ...user, ...editUserData };
@@ -17,7 +18,9 @@ function ProfileEditModal({ setShowModal, user }) {
   return (
     <div className="playlist-dropdown-container">
       <div
-        className={`stacked-list list-style-none playlist-stacklist profile-edit-modal p-1`}
+        className={`stacked-list list-style-none playlist-stacklist profile-edit-modal p-1 ${
+          theme == "dark" && "dark-theme-bg-clr"
+        }`}
       >
         <div
           className={`d-flex playlist-li-item videolib-list-container border-bottom j-space-between mb-1`}
@@ -34,7 +37,9 @@ function ProfileEditModal({ setShowModal, user }) {
           <input
             type="text"
             placeholder="Enter your bio"
-            className="profile-edit-modal-inp"
+            className={`profile-edit-modal-inp ${
+              theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+            }`}
             onChange={(e) =>
               setEditUserData({ ...editUserData, bio: e.target.value })
             }
@@ -46,7 +51,9 @@ function ProfileEditModal({ setShowModal, user }) {
           <input
             type="text"
             placeholder="Enter your portfolio"
-            className="profile-edit-modal-inp"
+            className={`profile-edit-modal-inp ${
+              theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+            }`}
             onChange={(e) =>
               setEditUserData({ ...editUserData, portfolio: e.target.value })
             }

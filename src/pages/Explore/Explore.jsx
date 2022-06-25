@@ -9,6 +9,7 @@ function Explore() {
   const [showFollowContainer, setShowFollowContainer] = useState(false);
   const { windowWidth } = useWindowWidth();
   const posts = useSelector((state) => state.posts.posts);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +29,9 @@ function Explore() {
           >
             {windowWidth <= 560 && !showFollowContainer ? (
               <div
-                className="d-flex gap-2 follow-title-container"
+                className={`d-flex gap-2 follow-title-container ${
+                  theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+                }`}
                 onClick={() => setShowFollowContainer((prev) => !prev)}
               >
                 <h4 className="follow-container-title ml-1">Who to follow?</h4>

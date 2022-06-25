@@ -19,7 +19,7 @@ function FollowContainer({ setShowFollowContainer }) {
   return (
     <div
       className={`follow-unfollow-container ${
-        theme == "dark" && "text-dark-theme-clr"
+        theme == "dark" && "dark-theme-bg-clr"
       } ${windowWidth > 560 && "mt-2"}`}
     >
       <div

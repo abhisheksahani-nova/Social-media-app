@@ -17,7 +17,7 @@ function FollowUserBox({ user }) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const token = localStorage.getItem("token");
-  const theme = useSelector(state => state.users.theme);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

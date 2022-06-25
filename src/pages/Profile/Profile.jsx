@@ -139,7 +139,7 @@ function Profile() {
               )}
             </div>
 
-            <div>
+            <div className="d-flex flex-direction-col gap-1">
               {posts
                 .filter((post) => post.username == user.username)
                 .map((post) => {

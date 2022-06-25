@@ -35,6 +35,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const dispatch = useDispatch();
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const postsCommentsArray = useSelector((state) => state.comments.comments);
+  const theme = useSelector((state) => state.users.theme);
 
   const isPostLikedBy = likes.likedBy.some(
     (user) => user.username == activeUsername
@@ -89,7 +90,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   }
 
   return (
-    <div className="d-flex flex-direction-col bg-white ">
+    <div
+      className={`d-flex flex-direction-col bg-white ${
+        theme == "dark" && "text-dark-theme-clr"
+      }`}
+    >
       <div className="d-flex user-post-container">
         <img
           className="avatar xs"

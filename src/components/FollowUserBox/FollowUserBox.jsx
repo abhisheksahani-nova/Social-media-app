@@ -17,6 +17,7 @@ function FollowUserBox({ user }) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const token = localStorage.getItem("token");
+  const theme = useSelector(state => state.users.theme);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,7 +46,11 @@ function FollowUserBox({ user }) {
   return (
     <li key={_id} className="d-flex justify-cont-between li-item border-none">
       <div className="d-flex" onClick={() => navigate(`/profile/${_id}`)}>
-        <img className="avatar xs" src={avatar ? avatar : defaultProfilePic} alt="avatar" />
+        <img
+          className="avatar xs"
+          src={avatar ? avatar : defaultProfilePic}
+          alt="avatar"
+        />
         <div className="d-flex list-content">
           <h4>{`${firstName} ${lastName}`}</h4>
           <small>@{username}</small>
@@ -53,7 +58,9 @@ function FollowUserBox({ user }) {
       </div>
 
       <button
-        className="btn btn-text mb-1 follow-btn-link"
+        className={`btn btn-text mb-1 follow-btn-link ${
+          theme == "dark" && "text-dark-theme-clr"
+        }`}
         onClick={() => handleFollowUser(_id, token)}
       >
         {isFollowing ? "Unfollow" : "Follow"}

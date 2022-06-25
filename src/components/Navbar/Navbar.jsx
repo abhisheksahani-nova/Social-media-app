@@ -22,7 +22,11 @@ function Navbar({ setShowSidebar, windowWidth }) {
   }
 
   return (
-    <nav className={`nav-bar navbar-container mb-0 ${theme == "dark" && "text-dark-theme-clr"}`}>
+    <nav
+      className={`nav-bar navbar-container mb-0 ${
+        theme == "dark" && "text-dark-theme-clr border-gray4-dark"
+      }`}
+    >
       <div className="nav-innerContainer align-item-center nav-title-container font-clr">
         {windowWidth <= 810 && (
           <i
@@ -30,7 +34,13 @@ function Navbar({ setShowSidebar, windowWidth }) {
             onClick={() => setShowSidebar((prev) => !prev)}
           ></i>
         )}
-        <h2 className="nav-heading mr-4 nav-custom-sty">Social Cloud.</h2>
+        <h2
+          className={`nav-heading mr-4 nav-custom-sty ${
+            theme == "dark" && "text-dark-theme-clr"
+          }`}
+        >
+          Social Cloud.
+        </h2>
       </div>
 
       {isFilterDropdownOpen && (
@@ -38,8 +48,15 @@ function Navbar({ setShowSidebar, windowWidth }) {
       )}
 
       <div className="nav-innerContainer font-clr width-auto nav-input-container">
-        <input className="nav_searchBar" type="text" />
-        <span className="searchBar_icon">
+        <input
+          className={`nav_searchBar ${
+            theme == "dark" && "textarea-dark-clr border-gray3-dark"
+          }`}
+          type="text"
+        />
+        <span
+          className={`searchBar_icon ${theme == "dark" && "btn-custom-sty"}`}
+        >
           <i className="fa-solid fa-magnifying-glass nav-search-icon"></i>
         </span>
       </div>
@@ -51,12 +68,16 @@ function Navbar({ setShowSidebar, windowWidth }) {
         >
           <i class={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}></i>
 
-          <small className="nav-theme-title">{theme == "light" ? "dark" : "light"}</small>
+          <small className="nav-theme-title">
+            {theme == "light" ? "dark" : "light"}
+          </small>
         </div>
 
         <div className="flex-col-center">
           <button
-            className="btn pri-outline-btn"
+            className={`btn pri-outline-btn ${
+              theme == "dark" && "dark-theme-bg-clr border-white"
+            }`}
             onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
           >
             Filter

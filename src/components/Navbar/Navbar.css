@@ -77,11 +77,11 @@
     width: 11rem;
   }
 
-  .searchBar_icon{
+  .searchBar_icon {
     padding: 0.3rem;
   }
 
-  .nav-search-icon{
+  .nav-search-icon {
     font-size: 0.8rem;
   }
 }
@@ -114,7 +114,6 @@
     font-size: 0.6rem;
   }
 }
-
 
 @media screen and (max-width: 360px) {
   .nav_searchBar {

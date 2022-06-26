@@ -13,7 +13,7 @@ function DraftPost({ draftPost }) {
       <small>{content}</small>
       <div className="d-flex draft-post-footer">
         <div className="cursor-pointer" onClick={() => dispatch(deletePostFromDraft({ id, draftPosts }))}>
-          <i class="fa-solid fa-trash-can"></i>
+          <i className="fa-solid fa-trash-can"></i>
           <small className="ml-small">Delete</small>
         </div>
       </div>

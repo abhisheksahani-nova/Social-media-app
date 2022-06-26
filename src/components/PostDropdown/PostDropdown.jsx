@@ -96,7 +96,7 @@ function PostDropdown({
             <small className="break-word">
               {`Edit ${isCommentDropdownOpen ? "comment" : "post"}`}
             </small>
-            <i class="fa-solid fa-pencil post-dropdown-icon"></i>
+            <i className="fa-solid fa-pencil post-dropdown-icon"></i>
           </li>
         ) : (
           ""
@@ -109,7 +109,7 @@ function PostDropdown({
           <small className="break-word">{`Delete ${
             isCommentDropdownOpen ? "comment" : "post"
           }`}</small>
-          <i class="fa-solid fa-trash post-dropdown-icon"></i>
+          <i className="fa-solid fa-trash post-dropdown-icon"></i>
         </li>
 
         {!isCommentDropdownOpen && signInUser == post.username && (
@@ -121,7 +121,7 @@ function PostDropdown({
             }}
           >
             <small className="break-word">Archive post</small>
-            <i class="fa-solid fa-box-archive post-dropdown-icon"></i>
+            <i className="fa-solid fa-box-archive post-dropdown-icon"></i>
           </li>
         )}
       </ul>

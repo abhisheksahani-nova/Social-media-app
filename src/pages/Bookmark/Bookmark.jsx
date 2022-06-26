@@ -47,7 +47,7 @@ function Bookmark() {
                   <h4 className="follow-container-title ml-1">
                     Who to follow?
                   </h4>
-                  <i class="fa-solid fa-angle-down"></i>
+                  <i className="fa-solid fa-angle-down"></i>
                 </div>
               ) : (
                 windowWidth <= 560 &&

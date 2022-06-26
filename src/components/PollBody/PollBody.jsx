@@ -30,7 +30,7 @@ function PollBody({ pollData, setPollData, showCloseIcon }) {
         )}
         {showCloseIcon && (
           <i
-            class={`fa-solid fa-circle-xmark pollbody-close-icon ${
+            className={`fa-solid fa-circle-xmark pollbody-close-icon ${
               theme == "dark" && "white-clr"
             }`}
             onClick={() => handleClosePollBody()}

@@ -66,7 +66,7 @@ function Navbar({ setShowSidebar, windowWidth }) {
           className="flex-col-center"
           onClick={() => dispatch(toggleTheme())}
         >
-          <i class={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}></i>
+          <i className={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}></i>
 
           <small className="nav-theme-title">
             {theme == "light" ? "dark" : "light"}

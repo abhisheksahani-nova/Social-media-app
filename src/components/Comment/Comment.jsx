@@ -79,7 +79,7 @@ function Comment({
         <div className="d-flex gap-1 comment-icon-container">
           <div>
             <i
-              class="fa-regular fa-thumbs-up comment-like-icon"
+              className="fa-regular fa-thumbs-up comment-like-icon"
               onClick={() => handleCommentUpVote(postId, _id, token)}
             ></i>
             <span className="vote-count"> {votes.upvotedBy.length} </span>
@@ -87,7 +87,7 @@ function Comment({
 
           <div>
             <i
-              class="fa-regular fa-thumbs-down comment-like-icon"
+              className="fa-regular fa-thumbs-down comment-like-icon"
               onClick={() => handleCommentDownVote(postId, _id, token)}
             ></i>
             <span className="vote-count"> {votes.downvotedBy.length} </span>

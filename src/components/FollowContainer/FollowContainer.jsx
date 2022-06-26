@@ -29,7 +29,7 @@ function FollowContainer({ setShowFollowContainer }) {
         }
       >
         <h4 className="follow-container-title mb-1 ml-1">Who to follow?</h4>
-        {windowWidth <= 560 && <i class="fa-solid fa-angle-down"></i>}
+        {windowWidth <= 560 && <i className="fa-solid fa-angle-down"></i>}
       </div>
 
       <ul className="follow-list-container list-style-none">

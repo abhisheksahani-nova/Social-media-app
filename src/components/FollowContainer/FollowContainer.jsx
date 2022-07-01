@@ -8,6 +8,7 @@ import { useWindowWidth } from "../../pages/HomePage/HomePage";
 
 function FollowContainer({ setShowFollowContainer }) {
   const users = useSelector((state) => state.users.users);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const { windowWidth } = useWindowWidth();
 
@@ -16,7 +17,11 @@ function FollowContainer({ setShowFollowContainer }) {
   }, []);
 
   return (
-    <div className={`follow-unfollow-container ${windowWidth > 560 && "mt-2"}`}>
+    <div
+      className={`follow-unfollow-container ${
+        theme == "dark" && "dark-theme-bg-clr"
+      } ${windowWidth > 560 && "mt-2"}`}
+    >
       <div
         className="d-flex justify-cont-between follow-heading-container"
         onClick={() =>
@@ -24,7 +29,7 @@ function FollowContainer({ setShowFollowContainer }) {
         }
       >
         <h4 className="follow-container-title mb-1 ml-1">Who to follow?</h4>
-        {windowWidth <= 560 && <i class="fa-solid fa-angle-down"></i>}
+        {windowWidth <= 560 && <i className="fa-solid fa-angle-down"></i>}
       </div>
 
       <ul className="follow-list-container list-style-none">

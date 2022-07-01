@@ -3,7 +3,7 @@
   border: 1px solid var(--gray-shade5);
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
 }
 
 .title-inp-container {
@@ -106,6 +106,39 @@
 
 .ml-small {
   margin-left: 0.5rem;
+}
+
+.dark-theme-bg-clr {
+  background-color: var(--social-light-bg-clr);
+  color: var(--light-bg-clr);
+}
+
+.white-bg-clr {
+  background-color: var(--light-bg-clr);
+}
+
+.border-gray3-dark {
+  border: 1px solid var(--gray-shade3);
+}
+
+.border-gray4-dark {
+  border: 1px solid var(--gray-shade4);
+}
+
+.dark-theme-bg-clr::placeholder {
+  color: var(--gray-shade5);
+}
+
+.border-white {
+  border: 1px solid var(--custom-pri-clr);
+}
+
+.dark-bg-light {
+  background-color: var(--social-bg-clr);
+}
+
+.white-clr {
+  color: var(--light-bg-clr);
 }
 
 @media screen and (max-width: 960px) {

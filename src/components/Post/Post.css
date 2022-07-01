@@ -1,6 +1,6 @@
 .user-post-container {
   width: 38rem;
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
   padding: 1.5rem;
   gap: 1rem;
 }
@@ -22,7 +22,7 @@
 }
 
 .bg-white {
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
 }
 
 .mr-2 {

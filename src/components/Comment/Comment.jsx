@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Comment.css";
 import { PostDropdown } from "../index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   upvoteCommentOfPost,
   downvoteCommentOfPost,
@@ -21,6 +21,7 @@ function Comment({
 
   const signInUser = localStorage.getItem("username");
   const token = localStorage.getItem("token");
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
 
   function handleCommentUpVote(postId, commentId, token) {
@@ -54,7 +55,11 @@ function Comment({
       )}
 
       <div className="width-100">
-        <div className="comment-content-container">
+        <div
+          className={`comment-content-container ${
+            theme == "dark" && "dark-bg-light"
+          }`}
+        >
           <div className="d-flex justify-cont-between mb-1">
             <div>
               <h5>{name}</h5>
@@ -74,7 +79,7 @@ function Comment({
         <div className="d-flex gap-1 comment-icon-container">
           <div>
             <i
-              class="fa-regular fa-thumbs-up comment-like-icon"
+              className="fa-regular fa-thumbs-up comment-like-icon"
               onClick={() => handleCommentUpVote(postId, _id, token)}
             ></i>
             <span className="vote-count"> {votes.upvotedBy.length} </span>
@@ -82,7 +87,7 @@ function Comment({
 
           <div>
             <i
-              class="fa-regular fa-thumbs-down comment-like-icon"
+              className="fa-regular fa-thumbs-down comment-like-icon"
               onClick={() => handleCommentDownVote(postId, _id, token)}
             ></i>
             <span className="vote-count"> {votes.downvotedBy.length} </span>

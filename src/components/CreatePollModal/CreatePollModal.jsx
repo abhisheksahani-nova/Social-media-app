@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./CreatePollModal.css";
 import TextareaAutosize from "react-textarea-autosize";
+import { useSelector } from "react-redux";
 
 function CreatePollModal({ setPollModal, pollData, setPollData }) {
   const [pollModalOptionNum, setPollModalOptionNum] = useState(2);
+  const theme = useSelector((state) => state.users.theme);
 
   function handleAddOption() {
     setPollModalOptionNum((prev) => prev + 1);
@@ -19,7 +21,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
   return (
     <div className="playlist-dropdown-container">
       <div
-        className={`stacked-list list-style-none playlist-stacklist profile-edit-modal p-1`}
+        className={`stacked-list list-style-none playlist-stacklist profile-edit-modal p-1 ${
+          theme == "dark" && "dark-theme-bg-clr"
+        }`}
       >
         <div
           className={`d-flex playlist-li-item videolib-list-container border-bottom j-space-between mb-small`}
@@ -40,7 +44,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
             <TextareaAutosize
               type="text"
               placeholder="E.g., How do you commute to work?"
-              className="profile-edit-modal-inp"
+              className={`profile-edit-modal-inp ${
+                theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+              }`}
               onChange={(e) =>
                 setPollData({ ...pollData, question: e.target.value })
               }
@@ -52,7 +58,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
             <input
               type="text"
               placeholder="E.g., Public transportation"
-              className="profile-edit-modal-inp"
+              className={`profile-edit-modal-inp ${
+                theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+              }`}
               onChange={(e) =>
                 setPollData({ ...pollData, option1: e.target.value })
               }
@@ -64,7 +72,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
             <input
               type="text"
               placeholder="E.g., Drive myself"
-              className="profile-edit-modal-inp"
+              className={`profile-edit-modal-inp ${
+                theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+              }`}
               onChange={(e) =>
                 setPollData({ ...pollData, option2: e.target.value })
               }
@@ -77,7 +87,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
               <input
                 type="text"
                 placeholder="E.g., Ola or Uber"
-                className="profile-edit-modal-inp"
+                className={`profile-edit-modal-inp ${
+                  theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+                }`}
                 onChange={(e) =>
                   setPollData({ ...pollData, option3: e.target.value })
                 }
@@ -91,7 +103,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
               <input
                 type="text"
                 placeholder="E.g., Other"
-                className="profile-edit-modal-inp"
+                className={`profile-edit-modal-inp ${
+                  theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+                }`}
                 onChange={(e) =>
                   setPollData({ ...pollData, option4: e.target.value })
                 }
@@ -101,7 +115,9 @@ function CreatePollModal({ setPollModal, pollData, setPollData }) {
 
           {pollModalOptionNum !== 4 && (
             <button
-              className="btn pri-outline-btn btn-custom-small mb-small"
+              className={`btn pri-outline-btn btn-custom-small mb-small ${
+                theme == "dark" && "dark-theme-bg-clr border-gray4-dark"
+              }`}
               onClick={() => handleAddOption()}
             >
               + Add option

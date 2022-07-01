@@ -1,6 +1,6 @@
 .videolib-drawer-container {
   width: 18%;
-  background-color: var(--light-bg-clr);
+  background-color: var(--social-light-bg-clr);
 }
 
 .viewport-height-100 {
@@ -59,6 +59,10 @@
 .sidebar-list:hover {
   background-color: var(--custom-pri-clr);
   border-radius: 0 20px 20px 0;
+}
+
+.text-dark-theme-clr {
+  color: var(--text-light-clr);
 }
 
 @media screen and (max-width: 810px) {

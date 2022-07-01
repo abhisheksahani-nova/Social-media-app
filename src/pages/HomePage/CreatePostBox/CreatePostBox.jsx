@@ -24,6 +24,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const [pollData, setPollData] = useState(initialPollState);
 
   const postObj = useSelector((state) => state.posts);
+  const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -51,15 +52,25 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   }
 
   return (
-    <div className="d-flex create-note-container mt-2 mb-2 small-gap">
+    <div
+      className={`d-flex create-note-container mt-2 mb-2 small-gap ${
+        theme == "dark" && "text-dark-theme-clr border-gray3-dark"
+      }`}
+    >
       <img
         className="avatar xs"
         src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
       />
-      <div className="create-note-container">
+      <div
+        className={`create-note-container ${
+          theme == "dark" && "border-gray3-dark"
+        }`}
+      >
         <div className="d-flex title-inp-container mb-2">
           <TextareaAutosize
-            className="note-title-inp"
+            className={`note-title-inp ${
+              theme == "dark" && "dark-theme-bg-clr"
+            }`}
             placeholder="What do you want to talk about?"
             value={postData.content}
             onChange={(e) =>
@@ -97,7 +108,9 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
           </div>
           <div className="d-flex note-footer justify-cont-right">
             <button
-              className="btn pri-outline-btn btn-custom-small"
+              className={`btn pri-outline-btn btn-custom-small ${
+                theme == "dark" && "dark-theme-bg-clr border-white"
+              }`}
               onClick={() => {
                 dispatch(addPostToDraft({ postData }));
                 setPostData({ content: "" });

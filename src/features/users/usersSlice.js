@@ -8,6 +8,7 @@ const initialState = {
   bookmarks: [],
   following: [],
   token: localStorage.getItem("token"),
+  theme: "light",
 };
 
 export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
@@ -160,6 +161,9 @@ const UsersSlice = createSlice({
     updateBookmarks: (state, action) => {
       state.bookmarks = action.payload.updatedBookmarks;
     },
+    toggleTheme: (state, action) => {
+      state.theme = state.theme == "light" ? "dark" : "light";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -209,6 +213,6 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { updateBookmarks } = UsersSlice.actions;
+export const { updateBookmarks, toggleTheme } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

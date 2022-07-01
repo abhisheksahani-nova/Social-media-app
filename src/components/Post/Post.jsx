@@ -35,6 +35,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   const dispatch = useDispatch();
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const postsCommentsArray = useSelector((state) => state.comments.comments);
+  const theme = useSelector((state) => state.users.theme);
 
   const isPostLikedBy = likes.likedBy.some(
     (user) => user.username == activeUsername
@@ -89,7 +90,11 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
   }
 
   return (
-    <div className="d-flex flex-direction-col bg-white ">
+    <div
+      className={`d-flex flex-direction-col bg-white ${
+        theme == "dark" && "text-dark-theme-clr"
+      }`}
+    >
       <div className="d-flex user-post-container">
         <img
           className="avatar xs"
@@ -160,13 +165,15 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
 
       {showCommentBox && (
         <div>
-          <div class="d-flex create-note-container small-gap border-none">
+          <div className="d-flex create-note-container small-gap border-none">
             <img
-              class="avatar xs"
+              className="avatar xs"
               src="https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU"
             />
             <TextareaAutosize
-              class="create-post-input note-title-inp pl-1 comment-textarea"
+              className={`create-post-input note-title-inp pl-1 comment-textarea ${
+                theme == "dark" && "dark-theme-bg-clr border-white"
+              }`}
               type="text"
               placeholder="Add a comment"
               onChange={(e) =>

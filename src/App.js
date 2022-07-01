@@ -12,14 +12,17 @@ import {
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function App() {
+  const theme = useSelector((state) => state.users.theme);
+
   useEffect(() => {
     localStorage.clear();
   }, []);
 
   return (
-    <div>
+    <div className="app" data-theme={theme}>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/login" element={<Login />} />

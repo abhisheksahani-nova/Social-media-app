@@ -1,0 +1,14 @@
+.rocket-icon-container {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
+
+.rocket-icon {
+  font-size: 8rem;
+}
+
+.rocket-icon-dark {
+  color: var(--gray-shade4);
+}

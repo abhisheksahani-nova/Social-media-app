@@ -1,3 +1,7 @@
+.text-dark-theme-clr {
+  color: var(--text-light-clr);
+}
+
 @media screen and (max-width: 960px) {
   .li-item {
     padding: 0.5rem;

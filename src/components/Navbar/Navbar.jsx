@@ -66,7 +66,9 @@ function Navbar({ setShowSidebar, windowWidth }) {
           className="flex-col-center"
           onClick={() => dispatch(toggleTheme())}
         >
-          <i className={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}></i>
+          <i
+            className={`fa-solid ${theme == "light" ? "fa-moon" : "fa-sun"}`}
+          ></i>
 
           <small className="nav-theme-title">
             {theme == "light" ? "dark" : "light"}
@@ -78,7 +80,11 @@ function Navbar({ setShowSidebar, windowWidth }) {
             className={`btn pri-outline-btn ${
               theme == "dark" && "dark-theme-bg-clr border-white"
             }`}
-            onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
+            onClick={() =>
+              token
+                ? setIsFilterDropdownOpen((prev) => !prev)
+                : navigate("/login")
+            }
           >
             Filter
           </button>

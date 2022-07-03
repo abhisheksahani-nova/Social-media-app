@@ -10,6 +10,7 @@ function Sidebar() {
   const users = useSelector((state) => state.users.users);
   const theme = useSelector((state) => state.users.theme);
   const signInUser = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
 
   const currentUser = users.filter((user) => user.username == signInUser);
 
@@ -28,7 +29,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate("/explore")}
+          onClick={() => navigate(token ? "/explore" : "/login")}
         >
           <i className="fa-solid fa-compass videolib-drawer-icon"></i> Explore
         </li>
@@ -36,7 +37,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate("/bookmarks")}
+          onClick={() => navigate(token ? "/bookmarks" : "/login")}
         >
           <i className="fa-solid fa-bookmark videolib-drawer-icon"></i>{" "}
           Bookmarks
@@ -46,7 +47,9 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate(`/profile/${currentUser[0]._id}`)}
+          onClick={() =>
+            navigate(token ? `/profile/${currentUser[0]._id}` : "/login")
+          }
         >
           <i className="fa-solid fa-user videolib-drawer-icon"></i> Profile
         </li>
@@ -55,7 +58,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate("/archive")}
+          onClick={() => navigate(token ? "/archive" : "/login")}
         >
           <i className="fa-solid fa-box-archive videolib-drawer-icon"></i>
           Archive
@@ -64,7 +67,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate("/draft")}
+          onClick={() => navigate(token ? "/draft" : "/login")}
         >
           <i className="fa-solid fa-envelope-open videolib-drawer-icon"></i>
           Draft

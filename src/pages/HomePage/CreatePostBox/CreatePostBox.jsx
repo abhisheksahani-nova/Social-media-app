@@ -8,6 +8,7 @@ import {
 } from "../../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { CreatePollModal, PollBody } from "../../../components/index";
+import { useNavigate } from "react-router-dom";
 
 const initialPollState = {
   question: "",
@@ -27,6 +28,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
   const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isPostEdit) {
@@ -103,7 +105,9 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
             <i className="fa-solid fa-face-grin-wide"></i>
             <i
               className="fa-solid fa-signal"
-              onClick={() => setPollModal((prev) => !prev)}
+              onClick={() =>
+                token ? setPollModal((prev) => !prev) : navigate("/login")
+              }
             ></i>
           </div>
           <div className="d-flex note-footer justify-cont-right">
@@ -122,7 +126,9 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
             <button
               className="btn btn-custom-sty btn-custom-small ml-small"
               onClick={() =>
-                handleCreatePostAndEdit(postData, editPostId, token)
+                token
+                  ? handleCreatePostAndEdit(postData, editPostId, token)
+                  : navigate("/login")
               }
             >
               Post

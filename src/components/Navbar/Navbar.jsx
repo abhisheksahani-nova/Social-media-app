@@ -39,7 +39,7 @@ function Navbar({ setShowSidebar, windowWidth }) {
             theme == "dark" && "text-dark-theme-clr"
           }`}
         >
-          Social Cloud.
+          Social
         </h2>
       </div>
 

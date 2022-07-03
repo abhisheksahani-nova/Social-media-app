@@ -84,6 +84,10 @@
   .nav-search-icon {
     font-size: 0.8rem;
   }
+
+  .hamburger-icon {
+    margin-left: 5px;
+  }
 }
 
 @media screen and (max-width: 360px) {

@@ -30,7 +30,7 @@ function Navbar({ setShowSidebar, windowWidth }) {
       <div className="nav-innerContainer align-item-center nav-title-container font-clr">
         {windowWidth <= 810 && (
           <i
-            className="fa-solid fa-bars"
+            className="fa-solid fa-bars hamburger-icon"
             onClick={() => setShowSidebar((prev) => !prev)}
           ></i>
         )}

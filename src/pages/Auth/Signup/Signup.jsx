@@ -39,7 +39,7 @@ function Signup() {
             `${userSignupData.firstName} ${userSignupData.lastName}`
           );
           localStorage.setItem("username", userSignupData.username);
-          navigate("/");
+          navigate("/home");
         } catch (error) {
           console.log(error);
         }

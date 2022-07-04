@@ -21,7 +21,7 @@ function Sidebar() {
           className={`videolib-list-item sidebar-list ${
             theme == "dark" && "text-dark-theme-clr"
           }`}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         >
           <i className="fa-solid fa-house videolib-drawer-icon"></i> Home
         </li>

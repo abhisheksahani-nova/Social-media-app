@@ -23,7 +23,7 @@ function Login() {
           const response = await axios.post("/api/auth/login", userLoginData);
           localStorage.setItem("token", response.data.encodedToken);
           localStorage.setItem("username", userLoginData.username);
-          navigate("/");
+          navigate("/home");
         } catch (error) {
           console.log(error);
         }
@@ -42,7 +42,7 @@ function Login() {
         const response = await axios.post("/api/auth/login", userLoginData);
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("username", userLoginData.username);
-        navigate("/");
+        navigate("/home");
       } catch (error) {
         console.log(error);
       }

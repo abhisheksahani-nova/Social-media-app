@@ -1,0 +1,17 @@
+.landingpage-main-container {
+  height: 89vh;
+}
+
+.landingpage-content-conatiner {
+  width: 50%;
+}
+
+.landingpage-content {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.camera-icon {
+  font-size: 12rem;
+  color: #ff0063;
+}

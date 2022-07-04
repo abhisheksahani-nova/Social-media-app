@@ -8,6 +8,7 @@ import {
   Explore,
   Archive,
   Draft,
+  LandingPage,
 } from "./pages/index";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
@@ -25,6 +26,7 @@ function App() {
     <div className="app" data-theme={theme}>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/landing" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/bookmarks" element={<Bookmark />} />

@@ -5,7 +5,7 @@ import { FilterDropdown } from "../index";
 import { toggleTheme } from "../../features/users/usersSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-function Navbar({ setShowSidebar, windowWidth }) {
+function Navbar({ setShowSidebar, windowWidth, isLanding }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.users.theme);
@@ -47,23 +47,25 @@ function Navbar({ setShowSidebar, windowWidth }) {
         <FilterDropdown setIsFilterDropdownOpen={setIsFilterDropdownOpen} />
       )}
 
-      <div className="nav-innerContainer font-clr width-auto nav-input-container">
-        <input
-          className={`nav_searchBar ${
-            theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
-          }`}
-          type="text"
-        />
-        <span
-          className={`searchBar_icon ${theme == "dark" && "btn-custom-sty"}`}
-        >
-          <i className="fa-solid fa-magnifying-glass nav-search-icon"></i>
-        </span>
-      </div>
+      {!isLanding && (
+        <div className="nav-innerContainer font-clr width-auto nav-input-container">
+          <input
+            className={`nav_searchBar ${
+              theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
+            }`}
+            type="text"
+          />
+          <span
+            className={`searchBar_icon ${theme == "dark" && "btn-custom-sty"}`}
+          >
+            <i className="fa-solid fa-magnifying-glass nav-search-icon"></i>
+          </span>
+        </div>
+      )}
 
       <div className="nav-innerContainer align-item-center nav-icon-container width-reset inherit-clr mr-1">
         <div
-          className="flex-col-center"
+          className={`flex-col-center ${isLanding && "ml-5"}`}
           onClick={() => dispatch(toggleTheme())}
         >
           <i
@@ -75,20 +77,22 @@ function Navbar({ setShowSidebar, windowWidth }) {
           </small>
         </div>
 
-        <div className="flex-col-center">
-          <button
-            className={`btn pri-outline-btn ${
-              theme == "dark" && "dark-theme-bg-clr border-white"
-            }`}
-            onClick={() =>
-              token
-                ? setIsFilterDropdownOpen((prev) => !prev)
-                : navigate("/login")
-            }
-          >
-            Filter
-          </button>
-        </div>
+        {!isLanding && (
+          <div className="flex-col-center">
+            <button
+              className={`btn pri-outline-btn ${
+                theme == "dark" && "dark-theme-bg-clr border-white"
+              }`}
+              onClick={() =>
+                token
+                  ? setIsFilterDropdownOpen((prev) => !prev)
+                  : navigate("/login")
+              }
+            >
+              Filter
+            </button>
+          </div>
+        )}
 
         <div className="flex-col-center">
           <button className="btn btn-custom-sty" onClick={() => handleAuth()}>

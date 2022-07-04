@@ -7,7 +7,7 @@ function LandingPage() {
     <div>
       <Navbar isLanding={true} />
       <section className="d-flex align-item-center justify-cont-center  landingpage-main-container">
-        <div className="d-flex flex-direction-col gap-2 align-item-center justify-cont-center  landingpage-content-conatiner">
+        <div className="d-flex flex-direction-col gap-2 align-item-center justify-cont-center  landingpage-content-container">
           <i className="fa-solid fa-camera camera-icon"></i>
           <p className="landingpage-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting

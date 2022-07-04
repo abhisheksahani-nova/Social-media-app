@@ -2,7 +2,7 @@
   height: 89vh;
 }
 
-.landingpage-content-conatiner {
+.landingpage-content-container {
   width: 50%;
 }
 
@@ -13,5 +13,5 @@
 
 .camera-icon {
   font-size: 12rem;
-  color: #ff0063;
+  color: var(--dark-pink-clr);
 }

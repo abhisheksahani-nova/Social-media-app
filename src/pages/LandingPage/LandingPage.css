@@ -9,9 +9,22 @@
 .landingpage-content {
   font-size: 1.4rem;
   letter-spacing: 1px;
+  color: var(--gray-shade2);
 }
 
 .camera-icon {
   font-size: 12rem;
   color: var(--dark-pink-clr);
+}
+
+.blue-text-clr {
+  color: var(--sky-blue);
+}
+
+.yellow-text-clr {
+  color: var(--dark-primary-clr);
+}
+
+.pink-text-clr {
+  color: var(--error-sec-clr);
 }

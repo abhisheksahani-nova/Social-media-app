@@ -17,6 +17,10 @@
   background-color: var(--custom-sec-clr);
 }
 
+.ml-5 {
+  margin-left: 5rem;
+}
+
 @media screen and (max-width: 960px) {
   .nav-input-container {
     width: 40%;
@@ -83,6 +87,10 @@
 
   .nav-search-icon {
     font-size: 0.8rem;
+  }
+
+  .hamburger-icon {
+    margin-left: 8px;
   }
 }
 

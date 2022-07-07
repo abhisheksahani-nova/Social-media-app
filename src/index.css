@@ -3,6 +3,7 @@
   --social-comment-bg-clr: #f2f2f2;
   --social-light-bg-clr: var(--light-bg-clr);
   --text-light-clr: var(--light-bg-clr);
+  --dark-pink-clr: #ff0063;
 }
 
 [data-theme="dark"] {

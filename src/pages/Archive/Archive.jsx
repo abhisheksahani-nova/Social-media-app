@@ -64,7 +64,7 @@ function Archive() {
                 className={`btn pri-outline-btn ${
                   theme == "dark" && "dark-bg-light white-clr border-gray4-dark"
                 }`}
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/home")}
               >
                 Add post
               </button>

@@ -8,23 +8,27 @@ import {
   Explore,
   Archive,
   Draft,
+  LandingPage,
 } from "./pages/index";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Mockman from "mockman-js";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function App() {
   const theme = useSelector((state) => state.users.theme);
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.clear();
+    navigate("/");
   }, []);
 
   return (
     <div className="app" data-theme={theme}>
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/bookmarks" element={<Bookmark />} />

@@ -4,6 +4,7 @@
   --social-light-bg-clr: var(--light-bg-clr);
   --text-light-clr: var(--light-bg-clr);
   --dark-pink-clr: #ff0063;
+  --rosybrown-clr: var(--info-pri-clr);;
 }
 
 [data-theme="dark"] {

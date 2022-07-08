@@ -28,3 +28,7 @@
 .pink-text-clr {
   color: var(--error-sec-clr);
 }
+
+.rosybrown-clr {
+  color: var(--rosybrown-clr);
+}

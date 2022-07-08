@@ -19,7 +19,7 @@ function Sidebar() {
       <ul className="videolib-list">
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() => navigate("/home")}
         >
@@ -27,7 +27,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() => navigate(token ? "/explore" : "/login")}
         >
@@ -35,7 +35,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() => navigate(token ? "/bookmarks" : "/login")}
         >
@@ -45,7 +45,7 @@ function Sidebar() {
 
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() =>
             navigate(token ? `/profile/${currentUser[0]._id}` : "/login")
@@ -56,7 +56,7 @@ function Sidebar() {
 
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() => navigate(token ? "/archive" : "/login")}
         >
@@ -65,7 +65,7 @@ function Sidebar() {
         </li>
         <li
           className={`videolib-list-item sidebar-list ${
-            theme == "dark" && "text-dark-theme-clr"
+            theme == "dark" && "text-dark-theme-clr sidebar-list-dark-theme"
           }`}
           onClick={() => navigate(token ? "/draft" : "/login")}
         >

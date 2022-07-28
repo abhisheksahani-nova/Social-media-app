@@ -14,7 +14,9 @@ function Navbar({ setShowSidebar, windowWidth, isLanding }) {
 
   function handleAuth() {
     if (token) {
-      localStorage.clear();
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("name");
       navigate("/");
     } else {
       navigate("/login");

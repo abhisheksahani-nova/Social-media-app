@@ -20,7 +20,9 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("name");
     navigate("/");
   }, []);
 

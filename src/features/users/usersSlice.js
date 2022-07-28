@@ -8,7 +8,7 @@ const initialState = {
   bookmarks: [],
   following: [],
   token: localStorage.getItem("token"),
-  theme: "light",
+  theme: localStorage.getItem("theme") || "light",
 };
 
 export const getAllUsers = createAsyncThunk("users/getAllUsers", async () => {
@@ -163,6 +163,12 @@ const UsersSlice = createSlice({
     },
     toggleTheme: (state, action) => {
       state.theme = state.theme == "light" ? "dark" : "light";
+
+      if (state.theme == "light") {
+        localStorage.setItem("theme", "light");
+      } else {
+        localStorage.setItem("theme", "dark");
+      }
     },
   },
   extraReducers: (builder) => {

@@ -35,7 +35,7 @@ function Signup() {
           const response = await axios.post("/api/auth/signup", userSignupData);
           localStorage.setItem("token", response.data.encodedToken);
           localStorage.setItem(
-            "username",
+            "name",
             `${userSignupData.firstName} ${userSignupData.lastName}`
           );
           localStorage.setItem("username", userSignupData.username);

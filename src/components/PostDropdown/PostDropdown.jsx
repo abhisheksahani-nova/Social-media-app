@@ -21,6 +21,7 @@ function PostDropdown({
   setEditCommentData,
   commentUsername,
   post,
+  isProfile,
 }) {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
@@ -87,8 +88,9 @@ function PostDropdown({
           ></i>
         </li>
 
-        {!isCommentDropdownOpen ||
-        (isCommentDropdownOpen && signInUser == commentUsername) ? (
+        {!isProfile &&
+        (!isCommentDropdownOpen ||
+          (isCommentDropdownOpen && signInUser == commentUsername)) ? (
           <li
             className="d-flex playlist-li-item cursor-p j-space-between"
             onClick={() => handleEdit(id)}

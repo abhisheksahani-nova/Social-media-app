@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import { useNavigate } from "react-router-dom";
 
-function Post({ post, setIsPostEdit, setEditPostId }) {
+function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
   const { _id, content, pollData, username, name, likes, comments } = post;
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -110,6 +110,7 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
             setIsPostEdit={setIsPostEdit}
             setEditPostId={setEditPostId}
             post={post}
+            isProfile={isProfile}
           />
         )}
         <div className="width-100">
@@ -119,12 +120,16 @@ function Post({ post, setIsPostEdit, setEditPostId }) {
               <small> {username} </small>
               <small>. &nbsp;1m</small>
             </div>
-            <i
-              className="fa-solid fa-ellipsis"
-              onClick={() =>
-                token ? setIsDropdownOpen((prev) => !prev) : navigate("/login")
-              }
-            ></i>
+            {activeUsername == username && (
+              <i
+                className="fa-solid fa-ellipsis"
+                onClick={() =>
+                  token
+                    ? setIsDropdownOpen((prev) => !prev)
+                    : navigate("/login")
+                }
+              ></i>
+            )}
           </div>
           {content && <small>{content}</small>}
 

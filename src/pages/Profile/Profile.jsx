@@ -104,7 +104,11 @@ function Profile() {
 
                     {user.username == signInUser && (
                       <label htmlFor="input-img">
-                        <i className="fa-solid fa-camera select-img-icon"></i>
+                        <i
+                          className={`fa-solid fa-camera select-img-icon ${
+                            theme == "dark" && "dark-theme-select-img-icon"
+                          }`}
+                        ></i>
                       </label>
                     )}
 
@@ -178,7 +182,7 @@ function Profile() {
               {posts
                 .filter((post) => post.username == user.username)
                 .map((post) => {
-                  return <Post key={post._id} post={post} />;
+                  return <Post key={post._id} post={post} isProfile={true} />;
                 })}
             </div>
           </div>

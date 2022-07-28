@@ -54,6 +54,10 @@
   font-size: 0.92rem;
 }
 
+.dark-theme-select-img-icon {
+  color: var(--dark-pink-clr);
+}
+
 .float-btn-restyle {
   background-color: var(--gray-shade4);
 }

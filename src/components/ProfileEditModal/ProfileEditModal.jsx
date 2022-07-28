@@ -4,7 +4,10 @@ import { editUserDetails } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProfileEditModal({ setShowModal, user }) {
-  const [editUserData, setEditUserData] = useState({ bio: "", portfolio: "" });
+  const [editUserData, setEditUserData] = useState({
+    bio: user.bio || "",
+    portfolio: user.portfolio || "",
+  });
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const theme = useSelector((state) => state.users.theme);
@@ -40,6 +43,7 @@ function ProfileEditModal({ setShowModal, user }) {
             className={`profile-edit-modal-inp ${
               theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
             }`}
+            value={editUserData.bio}
             onChange={(e) =>
               setEditUserData({ ...editUserData, bio: e.target.value })
             }
@@ -54,6 +58,7 @@ function ProfileEditModal({ setShowModal, user }) {
             className={`profile-edit-modal-inp ${
               theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
             }`}
+            value={editUserData.portfolio}
             onChange={(e) =>
               setEditUserData({ ...editUserData, portfolio: e.target.value })
             }
@@ -65,7 +70,7 @@ function ProfileEditModal({ setShowModal, user }) {
             className="btn btn-custom-sty"
             onClick={() => handleEditUserData(token)}
           >
-            Save
+            Edit
           </button>
         </div>
       </div>

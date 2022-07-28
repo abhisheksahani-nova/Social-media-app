@@ -27,10 +27,9 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar:
-      "https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_100_100/0/1630987867284?e=1657756800&v=beta&t=4IUc0ffA-iWILrgS-rXbYEvU7LAYxCSyi2_Jxa7fdfU",
+      "https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_200_200/0/1630987867284?e=1664409600&v=beta&t=d6uKvEjdpd-jVesvCh-gwCBsQdQ3YEcNr3gtjE31Npw",
     bio: "A Homosapien evolved to do software development, storytelling and art",
-    portfolio:
-      "https://www.lipsum.com/",
+    portfolio: "https://www.lipsum.com/",
   },
   {
     _id: uuid(),

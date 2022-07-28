@@ -46,6 +46,23 @@
   color: var(--sky-blue);
 }
 
+.f-weight-700 {
+  font-weight: 700;
+}
+
+.follow-count {
+  font-size: 0.92rem;
+}
+
+.float-btn-restyle {
+  background-color: var(--gray-shade4);
+}
+
+.follow-btn-solid {
+  background-color: var(--custom-dark-clr);
+  border-radius: 20px;
+}
+
 @media screen and (max-width: 960px) {
   .profile-card {
     width: 32rem;

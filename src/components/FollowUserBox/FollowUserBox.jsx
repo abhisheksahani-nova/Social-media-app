@@ -5,6 +5,7 @@ import {
   followUser,
   UnfollowUser,
   getAllUsers,
+  getUserById,
 } from "../../features/users/usersSlice";
 import "./FollowUserBox.css";
 
@@ -41,6 +42,7 @@ function FollowUserBox({ user }) {
       }
     }
     dispatch(getAllUsers());
+    dispatch(getUserById({ id }));
   }
 
   return (

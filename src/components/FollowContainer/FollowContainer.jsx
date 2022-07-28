@@ -12,6 +12,8 @@ function FollowContainer({ setShowFollowContainer }) {
   const dispatch = useDispatch();
   const { windowWidth } = useWindowWidth();
 
+  const signInUser = localStorage.getItem("username");
+
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
@@ -33,9 +35,11 @@ function FollowContainer({ setShowFollowContainer }) {
       </div>
 
       <ul className="follow-list-container list-style-none">
-        {users.map((user) => {
-          return <FollowUserBox key={user._id} user={user} />;
-        })}
+        {users
+          .filter((user) => user.username !== signInUser)
+          .map((user) => {
+            return <FollowUserBox key={user._id} user={user} />;
+          })}
       </ul>
     </div>
   );

@@ -50,7 +50,6 @@ function Profile() {
         dispatch(followUser({ id, token }));
       }
     }
-    dispatch(getAllUsers());
     dispatch(getUserById({ id }));
   }
 
@@ -98,11 +97,11 @@ function Profile() {
                   <div className="d-flex mb-2 p-relative">
                     <img
                       className="avatar md object-fit-cover"
-                      src={user.avatar ? user.avatar : defaultProfilePic}
+                      src={user?.avatar ? user?.avatar : defaultProfilePic}
                       alt="user avatar"
                     />
 
-                    {user.username == signInUser && (
+                    {user?.username == signInUser && (
                       <label htmlFor="input-img">
                         <i
                           className={`fa-solid fa-camera select-img-icon ${
@@ -121,7 +120,7 @@ function Profile() {
                     />
                   </div>
 
-                  {user.username !== signInUser && (
+                  {user?.username !== signInUser && (
                     <button
                       className={`btn follow-btn-solid ${
                         theme == "dark" && "text-dark-theme-clr"
@@ -134,17 +133,17 @@ function Profile() {
                 </div>
 
                 <div className="d-flex flex-direction-col">
-                  <h2>{`${user.firstName} ${user.lastName}`}</h2>
-                  <p className="profile-para-text mb-1">@{user.username}</p>
-                  <p className="profile-para-text mb-small">{user.bio}</p>
+                  <h2>{`${user?.firstName} ${user?.lastName}`}</h2>
+                  <p className="profile-para-text mb-1">@{user?.username}</p>
+                  <p className="profile-para-text mb-small">{user?.bio}</p>
                   <p className="profile-para-text mb-2">
                     <a
                       className={`${
                         theme == "dark" && "portfolio-url-dark-clr"
                       }`}
-                      href={user.portfolio}
+                      href={user?.portfolio}
                     >
-                      {user.portfolio}
+                      {user?.portfolio}
                     </a>
                   </p>
                 </div>
@@ -166,7 +165,7 @@ function Profile() {
                     </p>
                   </div>
 
-                  {user.username == signInUser && (
+                  {user?.username == signInUser && (
                     <button
                       className="btn btn-float-action float-btn-restyle"
                       onClick={() => setShowModal((prev) => !prev)}
@@ -180,8 +179,8 @@ function Profile() {
 
             <div className="d-flex flex-direction-col gap-1">
               {posts
-                .filter((post) => post.username == user.username)
-                .map((post) => {
+                ?.filter((post) => post?.username == user?.username)
+                ?.map((post) => {
                   return <Post key={post._id} post={post} isProfile={true} />;
                 })}
             </div>

@@ -36,6 +36,7 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
   const dispatch = useDispatch();
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const postsCommentsArray = useSelector((state) => state.comments.comments);
+  const users = useSelector((state) => state.users.users);
   const theme = useSelector((state) => state.users.theme);
   const navigate = useNavigate();
 
@@ -91,6 +92,12 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
     }
   }
 
+  function navigateToProfilePage() {
+    const user = users.filter((user) => user.username == username);
+    const { _id } = user[0];
+    navigate(`/profile/${_id}`);
+  }
+
   return (
     <div
       className={`d-flex flex-direction-col bg-white ${
@@ -102,6 +109,7 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
           className="avatar xs"
           src="https://semantic-ui.com/images/avatar2/large/kristy.png"
           alt="avatar"
+          onClick={() => navigateToProfilePage()}
         />
         {isDropdownOpen && (
           <PostDropdown
@@ -116,8 +124,11 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
         <div className="width-100">
           <div className="d-flex justify-cont-between mb-1">
             <div>
-              <h5>{name}</h5>
-              <small> {username} </small>
+              <h5 onClick={() => navigateToProfilePage()}>{name}</h5>
+              <small onClick={() => navigateToProfilePage()}>
+                {" "}
+                {username}{" "}
+              </small>
               <small>. &nbsp;1m</small>
             </div>
             {activeUsername == username && (

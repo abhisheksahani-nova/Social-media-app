@@ -14,6 +14,7 @@ function HomePage() {
   const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
   const { windowWidth } = useWindowWidth();
+  const signInUser = localStorage.getItem("username");
 
   useEffect(() => {
     dispatch(getPosts());
@@ -24,7 +25,8 @@ function HomePage() {
       (post) =>
         post.username == "adarshbalika" ||
         post.username == "abhishekSahani" ||
-        post.username == "msDhoni"
+        post.username == "msDhoni" ||
+        post.username == signInUser
     );
 
     return homePagePost;

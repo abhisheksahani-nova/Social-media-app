@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 function Bookmark() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showFollowContainer, setShowFollowContainer] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const posts = useSelector((state) => state.posts.posts);
   const comments = useSelector((state) => state.comments.comments);
   const theme = useSelector((state) => state.users.theme);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { windowWidth } = useWindowWidth();
@@ -25,13 +28,34 @@ function Bookmark() {
     dispatch(updateBookmarks({ updatedBookmarks }));
   }, [posts, comments]);
 
+  function getPostFilteredBySearchQuery() {
+    let filterPost = bookmarks;
+
+    filterPost = filterPost.filter((ele) => {
+      if (
+        ele.username.includes(searchQuery) ||
+        ele.content.includes(searchQuery)
+      ) {
+        return ele;
+      }
+    });
+
+    return filterPost;
+  }
+
+  let searchFilterPost = getPostFilteredBySearchQuery();
+
   return (
     <div>
-      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <Navbar
+        setShowSidebar={setShowSidebar}
+        windowWidth={windowWidth}
+        setSearchQuery={setSearchQuery}
+      />
       <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div className="postbox-main-container">
-          {bookmarks?.length > 0 && (
+          {searchFilterPost?.length > 0 && (
             <div
               className={`d-flex j-content-right p-relative mt-1 ${
                 showFollowContainer && "mb-4"
@@ -60,9 +84,9 @@ function Bookmark() {
             </div>
           )}
 
-          {bookmarks?.length > 0 ? (
+          {searchFilterPost?.length > 0 ? (
             <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
-              {bookmarks?.map((post) => {
+              {searchFilterPost?.map((post) => {
                 return <Post key={post._id} post={post} />;
               })}
             </div>
@@ -84,7 +108,9 @@ function Bookmark() {
             </div>
           )}
         </div>
-        {windowWidth > 560 && bookmarks.length > 0 && <FollowContainer />}
+        {windowWidth > 560 && searchFilterPost.length > 0 && (
+          <FollowContainer />
+        )}
       </section>
     </div>
   );

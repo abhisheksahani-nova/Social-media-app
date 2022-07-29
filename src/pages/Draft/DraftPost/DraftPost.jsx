@@ -12,7 +12,10 @@ function DraftPost({ draftPost }) {
     <div className="d-flex flex-direction-col user-post-container mt-1">
       <small>{content}</small>
       <div className="d-flex draft-post-footer">
-        <div className="cursor-pointer" onClick={() => dispatch(deletePostFromDraft({ id, draftPosts }))}>
+        <div
+          className="cursor-pointer"
+          onClick={() => dispatch(deletePostFromDraft({ id, draftPosts }))}
+        >
           <i className="fa-solid fa-trash-can"></i>
           <small className="ml-small">Delete</small>
         </div>

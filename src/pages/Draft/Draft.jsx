@@ -8,18 +8,39 @@ import { useNavigate } from "react-router-dom";
 function Draft() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showFollowContainer, setShowFollowContainer] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const { windowWidth } = useWindowWidth();
+
   const draftPosts = useSelector((state) => state.posts.draftPosts);
   const theme = useSelector((state) => state.users.theme);
   const navigate = useNavigate();
 
+  function getPostFilteredBySearchQuery() {
+    let filterPost = draftPosts;
+
+    filterPost = filterPost.filter((ele) => {
+      if (ele.content.includes(searchQuery)) {
+        return ele;
+      }
+    });
+
+    return filterPost;
+  }
+
+  let searchFilterPost = getPostFilteredBySearchQuery();
+
   return (
     <div>
-      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <Navbar
+        setShowSidebar={setShowSidebar}
+        windowWidth={windowWidth}
+        setSearchQuery={setSearchQuery}
+      />
       <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div className="postbox-main-container">
-          {draftPosts?.length > 0 && (
+          {searchFilterPost?.length > 0 && (
             <div
               className={`d-flex j-content-right p-relative mt-1 ${
                 showFollowContainer && "mb-4"
@@ -48,9 +69,9 @@ function Draft() {
             </div>
           )}
 
-          {draftPosts?.length > 0 ? (
+          {searchFilterPost?.length > 0 ? (
             <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
-              {draftPosts.map((draftPost, index) => {
+              {searchFilterPost.map((draftPost, index) => {
                 return <DraftPost key={index} draftPost={draftPost} />;
               })}
             </div>
@@ -72,7 +93,9 @@ function Draft() {
             </div>
           )}
         </div>
-        {windowWidth > 560 && draftPosts?.length > 0 && <FollowContainer />}
+        {windowWidth > 560 && searchFilterPost?.length > 0 && (
+          <FollowContainer />
+        )}
       </section>
     </div>
   );

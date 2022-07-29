@@ -7,6 +7,7 @@ import {
 } from "../../features/posts/postsSlice.js";
 import { deleteCommentOfPost } from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
 function PostDropdown({
   setIsDropdownOpen,
@@ -24,6 +25,8 @@ function PostDropdown({
   isProfile,
 }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const token = localStorage.getItem("token");
   const signInUser = localStorage.getItem("username");
   const theme = useSelector((state) => state.users.theme);
@@ -88,7 +91,9 @@ function PostDropdown({
           ></i>
         </li>
 
-        {!isProfile &&
+        {location.pathname !== "/bookmarks" &&
+        location.pathname !== "/archive" &&
+        !isProfile &&
         (!isCommentDropdownOpen ||
           (isCommentDropdownOpen && signInUser == commentUsername)) ? (
           <li
@@ -114,18 +119,20 @@ function PostDropdown({
           <i className="fa-solid fa-trash post-dropdown-icon"></i>
         </li>
 
-        {!isCommentDropdownOpen && signInUser == post.username && (
-          <li
-            className="d-flex playlist-li-item cursor-p j-space-between"
-            onClick={() => {
-              dispatch(addPostToArchive({ post }));
-              handleDelete(id, token, postId, commentId);
-            }}
-          >
-            <small className="break-word">Archive post</small>
-            <i className="fa-solid fa-box-archive post-dropdown-icon"></i>
-          </li>
-        )}
+        {!isCommentDropdownOpen &&
+          location.pathname !== "/archive" &&
+          signInUser == post.username && (
+            <li
+              className="d-flex playlist-li-item cursor-p j-space-between"
+              onClick={() => {
+                dispatch(addPostToArchive({ post }));
+                handleDelete(id, token, postId, commentId);
+              }}
+            >
+              <small className="break-word">Archive post</small>
+              <i className="fa-solid fa-box-archive post-dropdown-icon"></i>
+            </li>
+          )}
       </ul>
     </div>
   );

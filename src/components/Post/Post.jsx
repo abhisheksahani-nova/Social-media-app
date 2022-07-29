@@ -16,7 +16,7 @@ import {
 } from "../../features/comments/commentsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
   const { _id, content, pollData, username, name, likes, comments } = post;
@@ -39,6 +39,7 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
   const users = useSelector((state) => state.users.users);
   const theme = useSelector((state) => state.users.theme);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isPostLikedBy = likes.likedBy.some(
     (user) => user.username == activeUsername
@@ -155,56 +156,60 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
             <PollBody pollData={pollData} showCloseIcon={false} />
           )}
 
-          <div className="d-flex justify-cont-between mt-2">
-            {isPostLikedBy ? (
-              <i
-                className="fa-solid fa-heart clr-red user-post-footer-icon"
-                onClick={() =>
-                  token
-                    ? dispatch(dislikePost({ _id, token }))
-                    : navigate("/login")
-                }
-              ></i>
-            ) : (
-              <i
-                className="fa-regular fa-heart user-post-footer-icon"
-                onClick={() =>
-                  token
-                    ? dispatch(likePost({ _id, token }))
-                    : navigate("/login")
-                }
-              ></i>
-            )}
+          {location.pathname !== "/archive" && (
+            <div className="d-flex justify-cont-between mt-2">
+              {isPostLikedBy ? (
+                <i
+                  className="fa-solid fa-heart clr-red user-post-footer-icon"
+                  onClick={() =>
+                    token
+                      ? dispatch(dislikePost({ _id, token }))
+                      : navigate("/login")
+                  }
+                ></i>
+              ) : (
+                <i
+                  className="fa-regular fa-heart user-post-footer-icon"
+                  onClick={() =>
+                    token
+                      ? dispatch(likePost({ _id, token }))
+                      : navigate("/login")
+                  }
+                ></i>
+              )}
 
-            <i
-              className="fa-regular fa-message user-post-footer-icon"
-              onClick={() =>
-                token ? setShowCommentBox((prev) => !prev) : navigate("/login")
-              }
-            ></i>
-
-            <i className="fa-solid fa-share-nodes user-post-footer-icon"></i>
-
-            {isPostBookmark ? (
               <i
-                className="fa-solid fa-bookmark user-post-footer-icon"
+                className="fa-regular fa-message user-post-footer-icon"
                 onClick={() =>
                   token
-                    ? dispatch(removePostFromBookmark({ _id, token }))
+                    ? setShowCommentBox((prev) => !prev)
                     : navigate("/login")
                 }
               ></i>
-            ) : (
-              <i
-                className="fa-regular fa-bookmark user-post-footer-icon"
-                onClick={() =>
-                  token
-                    ? dispatch(bookmarkPost({ _id, token }))
-                    : navigate("/login")
-                }
-              ></i>
-            )}
-          </div>
+
+              <i className="fa-solid fa-share-nodes user-post-footer-icon"></i>
+
+              {isPostBookmark ? (
+                <i
+                  className="fa-solid fa-bookmark user-post-footer-icon"
+                  onClick={() =>
+                    token
+                      ? dispatch(removePostFromBookmark({ _id, token }))
+                      : navigate("/login")
+                  }
+                ></i>
+              ) : (
+                <i
+                  className="fa-regular fa-bookmark user-post-footer-icon"
+                  onClick={() =>
+                    token
+                      ? dispatch(bookmarkPost({ _id, token }))
+                      : navigate("/login")
+                  }
+                ></i>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

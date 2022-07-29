@@ -131,7 +131,7 @@ function CreatePostBox({ isPostEdit, setIsPostEdit, editPostId }) {
                   : navigate("/login")
               }
             >
-              Post
+              {isPostEdit ? "Edit" : "Post"}
             </button>
           </div>
         </div>

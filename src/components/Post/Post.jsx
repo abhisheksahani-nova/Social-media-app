@@ -88,7 +88,9 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
 
       setCommentData({ text: "" });
     } else {
-      handleCommentPost(commentData, _id, token);
+      if (commentData.text !== "") {
+        handleCommentPost(commentData, _id, token);
+      }
     }
   }
 
@@ -231,7 +233,7 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
               className="btn btn-custom-sty btn-custom-small"
               onClick={() => postHandler(commentData, _id, token)}
             >
-              Post
+              {editCommentData.isEditComment ? "Edit" : "Comment"}
             </button>
           </div>
 

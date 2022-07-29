@@ -124,7 +124,12 @@ function Post({ post, setIsPostEdit, setEditPostId, isProfile }) {
         <div className="width-100">
           <div className="d-flex justify-cont-between mb-1">
             <div>
-              <h5 onClick={() => navigateToProfilePage()}>{name}</h5>
+              <h5
+                className="text-hover-underline"
+                onClick={() => navigateToProfilePage()}
+              >
+                {name}
+              </h5>
               <small onClick={() => navigateToProfilePage()}>
                 {" "}
                 {username}{" "}

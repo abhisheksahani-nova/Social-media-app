@@ -7,6 +7,7 @@ import {
   downvoteCommentOfPost,
 } from "../../features/comments/commentsSlice";
 import { getPosts } from "../../features/posts/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 function Comment({
   comment,
@@ -19,10 +20,14 @@ function Comment({
 
   const [isCommentDropdownOpen, setIsCommentDropdownOpen] = useState(false);
 
+  const users = useSelector((state) => state.users.users);
+  const theme = useSelector((state) => state.users.theme);
+
   const signInUser = localStorage.getItem("username");
   const token = localStorage.getItem("token");
-  const theme = useSelector((state) => state.users.theme);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleCommentUpVote(postId, commentId, token) {
     dispatch(upvoteCommentOfPost({ postId, commentId, token }));
@@ -34,12 +39,19 @@ function Comment({
     dispatch(getPosts());
   }
 
+  function navigateToProfilePage() {
+    const user = users.filter((user) => user.username == username);
+    const { _id } = user[0];
+    navigate(`/profile/${_id}`);
+  }
+
   return (
     <div className="d-flex user-post-container gap-small">
       <img
         className="avatar xs"
         src="https://semantic-ui.com/images/avatar2/large/kristy.png"
         alt="avatar"
+        onClick={() => navigateToProfilePage()}
       />
 
       {isCommentDropdownOpen && (
@@ -62,8 +74,16 @@ function Comment({
         >
           <div className="d-flex justify-cont-between mb-1">
             <div>
-              <h5>{name}</h5>
-              <small> @{username} </small>
+              <h5
+                className="text-hover-underline"
+                onClick={() => navigateToProfilePage()}
+              >
+                {name}
+              </h5>
+              <small onClick={() => navigateToProfilePage()}>
+                {" "}
+                {username}{" "}
+              </small>
               <small>. &nbsp;1m</small>
             </div>
             {(postUsername == signInUser || username == signInUser) && (

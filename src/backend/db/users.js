@@ -78,7 +78,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Time is precious, waste it wisely.",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -115,7 +115,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Your life does not get better by chance. It gets better by a change",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -127,7 +127,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Creating my own sunshine",
     portfolio: "https://semantic-soni.web.app",
   },
 
@@ -140,7 +140,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "I practice what I post",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -152,7 +152,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "We have tomorrows for reason",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -164,7 +164,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Captivated from life, showing it here",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -176,7 +176,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "In a world of worriers, be a warrior",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -188,7 +188,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Simplicity is the key to happiness",
     portfolio: "https://semantic-soni.web.app",
   },
   {
@@ -200,7 +200,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
-    bio: "Dreamer",
+    bio: "Creating a life, I love",
     portfolio: "https://semantic-soni.web.app",
   },
 ];

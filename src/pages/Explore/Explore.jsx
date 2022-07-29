@@ -3,22 +3,48 @@ import { Navbar, Sidebar, Post, FollowContainer } from "../../components/index";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../features/posts/postsSlice";
 import { useWindowWidth } from "../HomePage/HomePage";
+import { useNavigate } from "react-router-dom";
 
 function Explore() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showFollowContainer, setShowFollowContainer] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const { windowWidth } = useWindowWidth();
   const posts = useSelector((state) => state.posts.posts);
   const theme = useSelector((state) => state.users.theme);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPosts());
   }, []);
 
+  function getPostFilteredBySearchQuery() {
+    let filterPost = posts;
+
+    filterPost = filterPost.filter((ele) => {
+      if (
+        ele.username.includes(searchQuery) ||
+        ele.content.includes(searchQuery)
+      ) {
+        return ele;
+      }
+    });
+
+    return filterPost;
+  }
+
+  let searchFilterPost = getPostFilteredBySearchQuery();
+
   return (
     <div>
-      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <Navbar
+        setShowSidebar={setShowSidebar}
+        windowWidth={windowWidth}
+        setSearchQuery={setSearchQuery}
+      />
       <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div className="postbox-main-container">
@@ -46,13 +72,34 @@ function Explore() {
               )
             )}
           </div>
-          <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
-            {posts.map((post) => {
-              return <Post key={post._id} post={post} />;
-            })}
-          </div>
+
+          {searchFilterPost?.length > 0 ? (
+            <div className="d-flex flex-direction-col gap-1 mt-1 mb-1">
+              {searchFilterPost.map((post) => {
+                return <Post key={post._id} post={post} />;
+              })}
+            </div>
+          ) : (
+            <div className="d-flex flex-direction-col gap-1 rocket-icon-container mt-1 mb-1">
+              <i
+                className={`fa-solid fa-rocket rocket-icon ${
+                  theme == "dark" && "rocket-icon-dark"
+                }`}
+              ></i>
+              <button
+                className={`btn pri-outline-btn ${
+                  theme == "dark" && "dark-bg-light white-clr border-gray4-dark"
+                }`}
+                onClick={() => navigate("/home")}
+              >
+                Add post
+              </button>
+            </div>
+          )}
         </div>
-        {windowWidth > 560 && <FollowContainer />}
+        {windowWidth > 560 && searchFilterPost?.length > 0 && (
+          <FollowContainer />
+        )}
       </section>
     </div>
   );

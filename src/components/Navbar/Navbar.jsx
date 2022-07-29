@@ -5,7 +5,7 @@ import { FilterDropdown } from "../index";
 import { toggleTheme } from "../../features/users/usersSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-function Navbar({ setShowSidebar, windowWidth, isLanding }) {
+function Navbar({ setShowSidebar, windowWidth, isLanding, setSearchQuery }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.users.theme);
@@ -56,6 +56,7 @@ function Navbar({ setShowSidebar, windowWidth, isLanding }) {
               theme == "dark" && "dark-theme-bg-clr border-gray3-dark"
             }`}
             type="text"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <span
             className={`searchBar_icon ${theme == "dark" && "btn-custom-sty"}`}

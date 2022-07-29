@@ -10,6 +10,8 @@ function HomePage() {
   const [editPostId, setEditPostId] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
   const [showFollowContainer, setShowFollowContainer] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const postsObj = useSelector((state) => state.posts);
   const theme = useSelector((state) => state.users.theme);
   const dispatch = useDispatch();
@@ -32,9 +34,31 @@ function HomePage() {
     return homePagePost;
   }
 
+  let homepagePost = getHomePagePost();
+
+  function getPostFilteredBySearchQuery(homePagePost) {
+    const searchFilter = homePagePost.filter((ele) => {
+      if (
+        ele.username.includes(searchQuery) ||
+        ele.content.includes(searchQuery)
+      ) {
+        return ele;
+      }
+    });
+
+    return searchFilter;
+  }
+
+  homepagePost = getPostFilteredBySearchQuery(homepagePost);
+
   return (
     <div>
-      <Navbar setShowSidebar={setShowSidebar} windowWidth={windowWidth} />
+      <Navbar
+        setShowSidebar={setShowSidebar}
+        windowWidth={windowWidth}
+        setSearchQuery={setSearchQuery}
+      />
+
       <section className="d-flex page-main-container gap-4 responsive-gap">
         {windowWidth > 810 || showSidebar ? <Sidebar /> : null}
         <div className="postbox-main-container">
@@ -71,7 +95,7 @@ function HomePage() {
               )}
             </div>
 
-            {getHomePagePost().map((post) => {
+            {homepagePost.map((post) => {
               return (
                 <Post
                   key={post._id}

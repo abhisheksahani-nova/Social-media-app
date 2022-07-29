@@ -36,7 +36,7 @@ function FollowContainer({ setShowFollowContainer }) {
 
       <ul className="follow-list-container list-style-none">
         {users
-          .filter((user) => user.username !== signInUser)
+          .filter((user) => user.username !== signInUser && user.celeb)
           .map((user) => {
             return <FollowUserBox key={user._id} user={user} />;
           })}

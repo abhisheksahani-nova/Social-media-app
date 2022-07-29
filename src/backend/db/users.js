@@ -17,6 +17,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Sharing my happy thoughts",
     portfolio: "https://www.lipsum.com/",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -30,6 +31,7 @@ export const users = [
       "https://media-exp1.licdn.com/dms/image/C5603AQEqEDNWTDG0UQ/profile-displayphoto-shrink_200_200/0/1630987867284?e=1664409600&v=beta&t=d6uKvEjdpd-jVesvCh-gwCBsQdQ3YEcNr3gtjE31Npw",
     bio: "A Homosapien evolved to do software development, storytelling and art",
     portfolio: "https://www.lipsum.com/",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -42,6 +44,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/kristy.png",
     bio: "Trying to be a rainbow in someone’s cloud.",
     portfolio: "https://www.lipsum.com/",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -55,6 +58,7 @@ export const users = [
       "https://pbs.twimg.com/profile_images/1513413525187743746/JVdygchC_400x400.jpg",
     bio: "Actor",
     portfolio: "https://www.lipsum.com/",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -68,6 +72,7 @@ export const users = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU6BOwb5LswFo1EPk8hCMdmCPL6F5nyQ5OAw&usqp=CAU",
     bio: "The Finisher",
     portfolio: "https://www.lipsum.com/",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -80,6 +85,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Time is precious, waste it wisely.",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -92,6 +98,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Dreamer",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
 
   {
@@ -105,6 +112,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Archer",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -117,6 +125,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Your life does not get better by chance. It gets better by a change",
     portfolio: "https://semantic-soni.web.app",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -129,6 +138,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Creating my own sunshine",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
 
   {
@@ -142,6 +152,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "I practice what I post",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -154,6 +165,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "We have tomorrows for reason",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -166,6 +178,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Captivated from life, showing it here",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -178,6 +191,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "In a world of worriers, be a warrior",
     portfolio: "https://semantic-soni.web.app",
+    celeb: true,
   },
   {
     _id: uuid(),
@@ -190,6 +204,7 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Simplicity is the key to happiness",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
   {
     _id: uuid(),
@@ -202,5 +217,6 @@ export const users = [
     avatar: "https://semantic-ui.com/images/avatar2/large/matthew.png",
     bio: "Creating a life, I love",
     portfolio: "https://semantic-soni.web.app",
+    celeb: false,
   },
 ];
